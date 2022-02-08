@@ -6,32 +6,34 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 12:35:51 by gmeoli            #+#    #+#              #
-#    Updated: 2022/01/22 22:58:50 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/02/08 17:48:18 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =	libftprintf.a
-SRCS =	*.c
-OBJS =	$(SRCS:.c=.o)
-FLAGS =	-Wall -Wextra -Werror
-LIBFT =	libft.a
+CC  = gcc
+LIBC = ar rc
+CFLAGS  += -Wall -Werror -Wextra
 
-$(NAME):
-		make -C libft
-		cp libft/libft.a $(NAME)
-		gcc -c $(FLAGS) $(SRCS)
-		ar rc $(NAME) $(OBJS)
-		ranlib $(NAME)
+SRC =	ft_printf.c \
+		ft_putchar.c \
+		ft_putstr.c \
+		
+OBJS = $(SRC:.c=.o)
 
-all: 	$(NAME)
+NAME = libftprintf.a
 
-clean:	
-		rm -f $(OBJS)
+.c.o:
+	${CC} ${CFLAGS} -I includes -c $< -o ${<:.c=.o}
+
+$(NAME): ${OBJS}
+	ar rcs ${NAME} ${OBJS}
 	
-fclean:	clean
-		rm -f $(NAME) $(LIBFT)
-		make fclean -C libft
-	
-re:		fclean all
+all: $(NAME)
 
-.PHONY: all clean fclean re
+clean:
+	rm -f $(OBJS) $(BONUS_OBJS)
+
+fclean: clean
+	rm -f *~ $(NAME)
+
+re: fclean all
