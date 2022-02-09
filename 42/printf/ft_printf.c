@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 12:41:23 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/08 18:05:29 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/09 18:46:37 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ void	ft_print_args(int *len, char c, va_list args)
 	{
 		*len += ft_putstr(va_arg(args, char *));
 	}
+	// else if (c == 'p')
+	// {
+	// 	*len += ft_pointer(va_arg(args, unsigned long int));			
+	// }
+	else if (c == 'x')
+	{
+		*len += ft_hexa(va_arg(args, unsigned long int));
+	}
+	// else if (c == '%')
+	// {
+	// 	ft_putchar(va_arg(args, char *));
+	// 	*len = *len + 1;
+	// }
 }
 
 /*int  main()
