@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pointer.c                                       :+:      :+:    :+:   */
+/*   ft_hexa_min.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 14:49:18 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/10 15:45:53 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/02/09 17:01:31 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/02/10 12:52:10 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*reverse(char *str)
+char	*reverse_min(char *str)
 {
 	char	*ritorno;
 	int		i;
@@ -41,7 +41,7 @@ char	*reverse(char *str)
 	return (str);
 }
 
-int	ft_pointer(unsigned long int x)
+int	ft_hexa_min(unsigned int x)
 {
 	int		rest;
 	int		i;
@@ -57,10 +57,9 @@ int	ft_pointer(unsigned long int x)
 	if (x == 0)
 	{
 		free(result);
-		write (1, "0x0", 3);
-		return (3);
+		write (1, "0", 1);
+		return (1);
 	}
-	count += write(1, "0x", 2);
 	while (x > 0)
 	{
 		result[i] = base[x % 16];
@@ -68,7 +67,7 @@ int	ft_pointer(unsigned long int x)
 		i++;
 	}
 	result[i] = 0;
-	count += ft_putstr(reverse(result));
+	count += ft_putstr(reverse_min(result));
 	free(result);
 	return (count);
 }

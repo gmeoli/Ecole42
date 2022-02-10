@@ -6,11 +6,11 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 12:41:23 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/09 18:46:37 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/10 18:29:16 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_printf(const char *str, ...)
 {
@@ -47,27 +47,27 @@ void	ft_print_args(int *len, char c, va_list args)
 		*len = *len + 1;
 	}
 	else if (c == 's')
-	{
 		*len += ft_putstr(va_arg(args, char *));
-	}
-	// else if (c == 'p')
-	// {
-	// 	*len += ft_pointer(va_arg(args, unsigned long int));			
-	// }
+	else if (c == 'p')
+		*len += ft_pointer(va_arg(args, unsigned long int));			
+	else if (c == 'd' || c == 'i')
+		*len += ft_decimal(va_arg(args, int));
 	else if (c == 'x')
+		*len += ft_hexa_min(va_arg(args, unsigned int));
+	else if (c == 'X')
+		*len += ft_hexa_maiu(va_arg(args, unsigned int));
+	else if (c == '%')
 	{
-		*len += ft_hexa(va_arg(args, unsigned long int));
+		ft_putchar('%');
+		*len = *len + 1;
 	}
-	// else if (c == '%')
-	// {
-	// 	ft_putchar(va_arg(args, char *));
-	// 	*len = *len + 1;
-	// }
 }
 
-/*int  main()
+/*
+int  main()
 {
-	ft_printf("MIO -> Ci sono %c\n", '9');
-	printf("ORIGINALE -> Ci sono %c\n", '9');
+	ft_printf("MIO -> %d\n", 4);
+	printf("ORIGINAL -> %d\n", 4);
+	return (0);
 }
 */

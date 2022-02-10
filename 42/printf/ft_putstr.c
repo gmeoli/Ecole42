@@ -6,11 +6,11 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:14:16 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/08 18:12:23 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/10 11:47:48 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_putstr(char *str)
 {

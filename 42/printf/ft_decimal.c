@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_decimal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/07 16:30:01 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/08 17:17:50 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/02/10 16:02:40 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/02/10 18:27:38 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-void	ft_putchar(char c)
+int	ft_decimal(int x)
 {
-	write(1, &c, 1);
+	int	count;
+
+	count = 0;
+	if (x == -2147483648)
+	{
+		count = write(1, "-2147483648", 11);
+		return (count);
+	}
+	if (x < 0)
+	{
+		count += write(1, "-", 1);
+		x *= -1;
+	}
+	if (x < 10)
+		ft_putchar(x + 48);
+	if (x >= 10)
+	{
+		count += ft_decimal(x / 10);
+		x = x % 10;
+	}
+	return (count + 1);
 }

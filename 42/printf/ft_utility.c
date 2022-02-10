@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility1.c                                         :+:      :+:    :+:   */
+/*   ft_utility.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 18:41:48 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/09 18:42:12 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/10 16:14:12 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -20,4 +20,9 @@ size_t	ft_strlen(const char *s)
 	while (s[i] != 0)
 		i++;
 	return (i);
+}
+
+void	ft_putchar(char c)
+{
+	write (1, &c, 1);
 }
