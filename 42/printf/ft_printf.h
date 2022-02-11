@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 12:26:41 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/10 17:42:22 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/11 17:07:19 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-#include "printf.h"
 
 int		ft_printf(const char *str, ...);
 void	ft_print_args(int *len, char c, va_list args);
@@ -28,6 +27,6 @@ int		ft_hexa_min(unsigned int x);
 int		ft_hexa_maiu(unsigned int x);
 int		ft_pointer(unsigned long int x);
 int		ft_decimal(int x);
-
+int		ft_unsint(unsigned int x);
 
 #endif

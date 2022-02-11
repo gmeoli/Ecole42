@@ -6,7 +6,7 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 12:35:51 by gmeoli            #+#    #+#              #
-#    Updated: 2022/02/10 16:45:43 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/02/11 17:07:50 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,8 @@ SRC =	ft_printf.c \
 		ft_utility.c \
 		ft_hexa_maiu.c \
 		ft_decimal.c \
-		
-		
-		
+		ft_unsint.c \
+				
 OBJS = $(SRC:.c=.o)
 
 NAME = libftprintf.a

@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 12:38:15 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/10 12:52:16 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/11 17:16:03 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*reverse_maiu(char *str)
 		i++;
 	}
 	ritorno[i] = 0;
-	while (len != i) 
+	while (len != i)
 	{
 		str[len] = ritorno[len];
 		len++;
@@ -57,14 +57,12 @@ int	ft_hexa_maiu(unsigned int x)
 	if (x == 0)
 	{
 		free(result);
-		write (1, "0", 1);
-		return (1);
+		return (write(1, "0", 1));
 	}
 	while (x > 0)
 	{
-		result[i] = base[x % 16];
+		result[i++] = base[x % 16];
 		x = x / 16;
-		i++;
 	}
 	result[i] = 0;
 	count += ft_putstr(reverse_maiu(result));

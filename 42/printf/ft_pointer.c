@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 14:49:18 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/10 15:45:53 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/11 17:44:08 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*reverse(char *str)
 		i++;
 	}
 	ritorno[i] = 0;
-	while (len != i) 
+	while (len != i)
 	{
 		str[len] = ritorno[len];
 		len++;
@@ -46,26 +46,22 @@ int	ft_pointer(unsigned long int x)
 	int		rest;
 	int		i;
 	char	*result;
-	char	*base;
 	int		count;
 
 	i = 0;
 	rest = 0;
 	count = 0;
 	result = malloc(sizeof(char) * 35);
-	base = "0123456789abcdef";
 	if (x == 0)
 	{
 		free(result);
-		write (1, "0x0", 3);
-		return (3);
+		return (write (1, "0x0", 3));
 	}
 	count += write(1, "0x", 2);
 	while (x > 0)
 	{
-		result[i] = base[x % 16];
+		result[i++] = "0123456789abcdef"[x % 16];
 		x = x / 16;
-		i++;
 	}
 	result[i] = 0;
 	count += ft_putstr(reverse(result));

@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 12:41:23 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/10 18:29:16 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/11 17:14:53 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ void	ft_print_args(int *len, char c, va_list args)
 	else if (c == 's')
 		*len += ft_putstr(va_arg(args, char *));
 	else if (c == 'p')
-		*len += ft_pointer(va_arg(args, unsigned long int));			
+		*len += ft_pointer(va_arg(args, unsigned long int));
 	else if (c == 'd' || c == 'i')
 		*len += ft_decimal(va_arg(args, int));
+	else if (c == 'u')
+		*len += ft_unsint(va_arg(args, unsigned int));
 	else if (c == 'x')
 		*len += ft_hexa_min(va_arg(args, unsigned int));
 	else if (c == 'X')
