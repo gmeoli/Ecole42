@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 12:41:23 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/11 17:14:53 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:55:05 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,3 @@ void	ft_print_args(int *len, char c, va_list args)
 		*len = *len + 1;
 	}
 }
-
-/*
-int  main()
-{
-	ft_printf("MIO -> %d\n", 4);
-	printf("ORIGINAL -> %d\n", 4);
-	return (0);
-}
-*/

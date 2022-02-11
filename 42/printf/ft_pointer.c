@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 14:49:18 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/11 17:44:08 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:50:30 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ char	*reverse(char *str)
 
 int	ft_pointer(unsigned long int x)
 {
-	int		rest;
 	int		i;
 	char	*result;
 	int		count;
 
 	i = 0;
-	rest = 0;
 	count = 0;
 	result = malloc(sizeof(char) * 35);
 	if (x == 0)

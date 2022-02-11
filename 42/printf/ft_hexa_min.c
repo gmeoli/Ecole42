@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 17:01:31 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/11 17:18:25 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:51:36 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ char	*reverse_min(char *str)
 
 int	ft_hexa_min(unsigned int x)
 {
-	int		rest;
 	int		i;
 	char	*result;
 	char	*base;
 	int		count;
 
 	i = 0;
-	rest = 0;
 	count = 0;
 	result = malloc(sizeof(char) * 35);
 	base = "0123456789abcdef";

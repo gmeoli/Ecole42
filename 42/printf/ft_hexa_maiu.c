@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 12:38:15 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/11 17:16:03 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:41:40 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ char	*reverse_maiu(char *str)
 
 int	ft_hexa_maiu(unsigned int x)
 {
-	int		rest;
 	int		i;
 	char	*result;
 	char	*base;
 	int		count;
 
 	i = 0;
-	rest = 0;
 	count = 0;
 	result = malloc(sizeof(char) * 35);
 	base = "0123456789ABCDEF";
