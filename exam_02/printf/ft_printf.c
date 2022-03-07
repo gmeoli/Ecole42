@@ -6,13 +6,15 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 09:30:50 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/02/22 17:58:40 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/07 10:17:09 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdio.h>
+
 
 int	ft_putstr(char *str)
 {
@@ -44,7 +46,7 @@ int ft_decimal(int x)
 	count = 0;
 	if (x == -2147483648)
 	{
-		count = write(1, "-2147483648", 12);
+		count = write(1, "-2147483648", 11);
 		return (count);
 	}
 	if (x < 0)
@@ -54,55 +56,34 @@ int ft_decimal(int x)
 	}
 	if (x >= 10)
 	{
-		count += ft_decimal( x / 10);
-		x = x % 10;
+		count += ft_decimal(x / 10);
+		x %= 10;
 	}
 	if (x < 10)
 		ft_putchar(x + 48);
-	return (count);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	return (count + 1);
 }
 
 int	ft_hexa(unsigned int x)
 {
 	int		i;
 	char	*base;
-	char	*result;
+	char	result[35];
 	int		count;
-	int		len;
 
 	i = 0;
-	len = 0;
 	count = 0;
 	base = "0123456789abcdef";
-	result = (char *)malloc(sizeof(char) * 35);
 	if (x == 0)
-	{
-		free(result);
-		return(write(1, "0", 1));
-	}
+		return (write(1, "0", 1));
 	while (x > 0)
 	{
 		result[i] = base[x % 16];
 		x /= 16;
 		i++;
 	}
-	len = ft_strlen(result);
-	while (len >= 0)
-	{
-		count += write(1, &result[len], 1);
-		len--;
-	}
-	free(result);
+	while (i-- > 0)
+		count += write(1, &result[i], 1);
 	return (count);
 }
 
@@ -124,7 +105,7 @@ int	ft_printf(const char *str, ...)
 
 	i = 0;
 	len = 0;
-	va_start(args, str);
+	va_start (args, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
@@ -133,12 +114,15 @@ int	ft_printf(const char *str, ...)
 			i++;
 		}
 		else
-		{
-			write(1, &str[i], 1);
-			len++;
-		}
+			len += write(1, &str[i], 1);
 		i++;
 	}
 	va_end (args);
 	return (len);
 }
+
+// int main()
+// {
+// 	printf("%d\n", ft_printf("mio: %x\t", 42949672));
+// 	printf("%d\n", printf("suo: %x\t", 42949672));
+// }
