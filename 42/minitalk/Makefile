@@ -6,34 +6,37 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/12 19:25:21 by gmeoli            #+#    #+#              #
-#    Updated: 2022/02/14 19:54:15 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/03/16 13:43:07 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC  = gcc
-LIBC = ar rc
-CFLAGS  += -Wall -Werror -Wextra
+SRCS_CLIENT = ft_client.c
+SRCS_SERVER = ft_server.c
+LIBFT = ./libft/libft.a
 
-SRC =	ft_client.c \
-		ft_server.c \
-	
+CC = gcc
+FLAGS = -Wall -Wextra -Werror
 
-OBJS = $(SRC:.c=.o)
+all: client server
 
-NAME = minitalk.a
+bonus: client server
 
-.c.o:
-	${CC} ${CFLAGS} -I includes -c $< -o ${<:.c=.o}
+$(LIBFT):
+	$(MAKE) -C ./libft
 
-$(NAME): ${OBJS}
-	ar rcs ${NAME} ${OBJS}
-	
-all: $(NAME)
+client: $(LIBFT)
+	$(CC) $(FLAGS) $(LIBFT) $(SRCS_CLIENT) -o client
+
+server: $(LIBFT)
+	$(CC) $(FLAGS) $(LIBFT) $(SRCS_SERVER) -o server
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	$(MAKE) clean -C ./libft
 
-fclean: clean
-	rm -f *~ $(NAME)
+fclean:	clean
+	rm -f server client
+	$(MAKE) fclean -C ./libft
 
-re: fclean all
+re:			fclean all
+
+.PHONY:		all clean fclean re bonus

@@ -1,20 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/21 04:23:08 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/09 16:35:00 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/01/20 18:17:32 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/01/20 18:59:07 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+char	*ft_strnstr(const char *h, const char *n, size_t len)
 {
-	if (!s)
-		return;
-	write (fd, s, ft_strlen(s));
+	size_t	i;
+	size_t	j;
+	size_t	a;
+
+	i = 0;
+	j = 0;
+	a = 0;
+	if (*n == 0)
+		return ((char *)h);
+	while (h[i] && i < len)
+	{
+		while (h[i] == n[j] && h[i] && i < len && n[j])
+		{
+			i++;
+			j++;
+			if (n[j] == '\0')
+				return ((char *)(h + (i - j)));
+		}
+		j = 0;
+		a++;
+		i = a;
+	}
+	return (NULL);
 }
