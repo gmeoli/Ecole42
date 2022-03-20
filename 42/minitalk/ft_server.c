@@ -6,35 +6,29 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:37:37 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/16 19:50:04 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/18 12:05:01 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "libft/libft.h"
+#include "minitalk.h"
 
 void	ft_print_str(int sig, siginfo_t *info, void *context)
 {
-	char	c;
-	char	d;
-	int		i;
-	
 	(void)context;
-	i = 0;
-	d = 0b10000000;
-	c = 0;
 	if (sig == SIGUSR1)
-		c |= d;
-	if (++uchar == 8)
-	ft_putchar_fd(c, 1);
-		uchar = 0;
-		c = 0;
-	else
-		c <<= 1;
-	d >>= 1;
+		g_stream.c |= g_stream.d;
+	if (!g_stream.d)
+	{
+		if (!g_stream.c)
+			kill(info->si_pid, SIGUSR1);
+		else
+			ft_putchar_fd(g_stream.c, 1);
+		g_stream.c = 0;
+		g_stream.d = 0b10000000;
+	}
+	//c <<= 1;
+	g_stream.d >>= 1;
+	pause();
 }
 
 int	main(void)
@@ -43,10 +37,14 @@ int	main(void)
 	struct	sigaction	sig;
 
 	process_id = getpid();
+	// sigemptyset(&sig.sa_mask);
 	ft_putstr_fd("The server PID: > ", 1);
 	ft_putnbr_fd(process_id, 1);
 	ft_putstr_fd(" <\n", 1);
 	sig.sa_sigaction = &ft_print_str;
+	g_stream.c = 0;
+	g_stream.d = 0b10000000;
+	sig.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sig, NULL);
 	sigaction(SIGUSR2, &sig, NULL);
 	while (1)

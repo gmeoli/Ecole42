@@ -6,15 +6,11 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:37:22 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/16 19:51:15 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/17 20:25:24 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "libft/libft.h"
+#include "minitalk.h"
 
 void	send_string(char *str, int my_pid)
 {
@@ -31,7 +27,7 @@ void	send_string(char *str, int my_pid)
 				kill(my_pid, SIGUSR1);
 			else
 				kill(my_pid, SIGUSR2);
-			usleep(1);
+			usleep(100);
 		}
 		i++;
 	}
