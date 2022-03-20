@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 11:49:04 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/19 14:45:20 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/20 17:45:38 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	ft_width(char *maps)
 	int		fd;
 	char	*result;
 	int		width;
-	
-	result = 0;
+
 	width = 0;
 	fd = open(maps, O_RDONLY);
 	if (!fd)
@@ -35,7 +34,7 @@ int	ft_height(char *maps)
 	int		fd;
 	char	*result;
 	int		height;
-	
+
 	result = 0;
 	height = 0;
 	fd = open(maps, O_RDONLY);
@@ -55,10 +54,20 @@ int	ft_height(char *maps)
 
 int	ft_fill_matrix(char *maps, t_game *guido)
 {
-	int	fd;
+	int	i;
 
-	guido->width = ft_width(maps);
+	i = 0;
 	guido->height = ft_height(maps);
-	guido->matrix = (char **)malloc(sizeof(char *) * guido->height + 1);
-	guido->matrix[guido->height] = NULL;	
+	guido->width = ft_width(maps);	
+	if (!guido->height || !guido->width)
+		return (0);
+	guido->matrix = malloc(sizeof(char **) * guido->height + 1);
+	guido->matrix[guido->height] = NULL;
+	while (i < guido->height)
+	{
+		guido->matrix[i] = malloc(sizeof(char *) * guido->width + 1);
+		guido->matrix[i][guido->width] = '\0';
+		i++;
+	}
+	return(1);
 }

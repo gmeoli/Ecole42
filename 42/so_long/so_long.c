@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 17:18:29 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/19 14:31:19 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/20 20:38:01 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 int	main(int ac, char **av)
 {
-	t_game guido;
+	t_game	guido;
+
 	if (ac == 2)
 	{
-		ft_fill_matrix(av[1], &guido);
-		
+		printf("%d", ft_fill_matrix(av[1], &guido));
+		//printf("%c", guido.matrix);	
 	}
+	write(0, "ERROR!\nNumber of invalid arguments\n", 36);
+	exit (0);
 }
 
 /* MAIN FOR TEST FUNCTION */

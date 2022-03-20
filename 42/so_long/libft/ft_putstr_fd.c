@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 04:23:08 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/09 16:35:00 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/20 11:49:27 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s)
-		return;
+		return ;
 	write (fd, s, ft_strlen(s));
 }

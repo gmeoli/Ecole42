@@ -6,7 +6,7 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 17:54:45 by gmeoli            #+#    #+#              #
-#    Updated: 2022/02/14 14:36:06 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/03/20 15:14:34 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,14 @@ BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
 				ft_lstmap.c ft_lstnew.c ft_lstsize.c
 
 BONUS_OBJS = $(BONUS:.c=.o)
-HDRS =  libft.h
 FLAGS = -Wall -Wextra -Werror
+GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+G_OBJ = get_next_line.o get_next_line_utils.o
+G_FLAG = -D BUFFER_SIZE=42
 
 $(NAME):
-		gcc -c -I $(HDRS) $(FLAGS) $(SRCS)
-		ar rc $(NAME) $(OBJS)
+		gcc -c -I $(FLAGS) $(SRCS) $(GNL) $(G_FLAG)
+		ar rc $(NAME) $(OBJS) $(G_OBJ)
 		ranlib $(NAME)
 
 bonus:
@@ -41,7 +43,7 @@ bonus:
 all:        $(NAME)
 
 clean:      
-			rm -f $(OBJS) $(BONUS_OBJS)
+			rm -f $(OBJS) $(BONUS_OBJS) $(G_OBJ)
 
 fclean:     clean
 			rm -f $(NAME)
