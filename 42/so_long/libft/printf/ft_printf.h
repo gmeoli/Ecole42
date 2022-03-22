@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 17:55:14 by mpatrini          #+#    #+#             */
-/*   Updated: 2022/03/22 14:37:30 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/01/22 12:26:41 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/03/22 15:04:05 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
+# include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include <stdarg.h>
-# include <string.h>
-# include <fcntl.h>
 
-char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_substr(char *s, unsigned int start, size_t len);
-char	*ft_strchr(const char *s, int c);
-int		ft_strlen(char *c);
-char	*ft_strdup(char *s1);
-char	*ft_ret_line(char *line);
-char	*ft_modify_line(char *line);
+int		ft_printf(const char *str, ...);
+void	ft_print_args(int *len, char c, va_list args);
+void	ft_putchar(char c);
+int		ft_putstr(char *str);
+size_t	ft_strlenp(const char *s);
+int		ft_hexa_min(unsigned int x);
+int		ft_hexa_maiu(unsigned int x);
+int		ft_pointer(unsigned long int x);
+int		ft_decimal(int x);
+int		ft_unsint(unsigned int x);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 11:49:04 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/20 17:45:38 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/22 15:19:42 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_fill_matrix(char *maps, t_game *guido)
 
 	i = 0;
 	guido->height = ft_height(maps);
-	guido->width = ft_width(maps);	
+	guido->width = ft_width(maps);
 	if (!guido->height || !guido->width)
 		return (0);
 	guido->matrix = malloc(sizeof(char **) * guido->height + 1);
@@ -69,5 +69,5 @@ int	ft_fill_matrix(char *maps, t_game *guido)
 		guido->matrix[i][guido->width] = '\0';
 		i++;
 	}
-	return(1);
+	return (1);
 }

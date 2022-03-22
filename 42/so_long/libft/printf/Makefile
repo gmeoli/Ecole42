@@ -5,29 +5,40 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/17 17:18:27 by gmeoli            #+#    #+#              #
-#    Updated: 2022/03/22 14:51:26 by gmeoli           ###   ########.fr        #
+#    Created: 2022/01/22 12:35:51 by gmeoli            #+#    #+#              #
+#    Updated: 2022/03/22 15:02:16 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = so_long
-SRC = so_long.c \
-		read_map.c \
-		check_map.c \
-		open_images.c \
-		utility.c
-		
-FLAG = -Wall -Werror -Wextra 
-LIBFT = libft/libft.a
-MLX_FLAG = -l mlx -framework openGL -framework AppKit
+CC  = gcc
+LIBC = ar rc
+CFLAGS  += -Wall -Werror -Wextra
 
-$(NAME):
-			make re  -C libft
-			gcc $(SRC) -o $(NAME) $(LIBFT) $(MLX_FLAG)
+SRC =	ft_printf.c \
+		ft_putstr.c \
+		ft_pointer.c \
+		ft_hexa_min.c \
+		ft_utilityp.c \
+		ft_hexa_maiu.c \
+		ft_decimal.c \
+		ft_unsint.c \
+				
+OBJS = $(SRC:.c=.o)
+
+NAME = libftprintf.a
+
+.c.o:
+	${CC} ${CFLAGS} -I includes -c $< -o ${<:.c=.o}
+
+$(NAME): ${OBJS}
+	ar rcs ${NAME} ${OBJS}
+	
 all: $(NAME)
+
 clean:
-			rm -f $(NAME)
+	rm -f $(OBJS) $(BONUS_OBJS)
+
 fclean: clean
-			make fclean -C libft
+	rm -f *~ $(NAME)
+
 re: fclean all
-.PHONY:	all clean fclean re
