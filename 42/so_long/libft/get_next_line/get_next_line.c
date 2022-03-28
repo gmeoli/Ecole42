@@ -3,110 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mabasset <mabasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 17:55:19 by mpatrini          #+#    #+#             */
-/*   Updated: 2022/03/20 17:45:01 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/01/24 13:42:45 by mabasset          #+#    #+#             */
+/*   Updated: 2022/02/21 18:31:43 by mabasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_read(int fd, char *line)
+static size_t	ft_strlen(char const *str)
 {
-	char	*buffer;
-	int		i;
+	size_t	i;
 
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return (NULL);
-	i = 1;
-	while (!ft_strchr(line, '\n') && i != 0)
-	{
-		i = read(fd, buffer, BUFFER_SIZE);
-		if (i == -1)
-		{
-			free(buffer);
-			free(line);
-			return (NULL);
-		}
-		buffer[i] = 0;
-		if (!line)
-			line = buffer;
-		else
-			line = ft_strjoin(line, buffer);
-	}
-	free(buffer);
-	return (line);
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
 
-char	*ft_ret_line(char *line)
+static char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*ret;
+	char	*str;
+	int		size;
 	int		i;
+	int		j;
 
 	i = 0;
-	if (!line[i])
+	if (s1 == NULL)
+		size = ft_strlen(s2);
+	else
+		size = ft_strlen(s1) + ft_strlen(s2);
+	if (size == 0)
 		return (NULL);
-	while (line[i] && line[i] != '\n')
-		i++;
-	ret = (char *)malloc(i + 2);
-	if (!ret)
+	str = (char *) malloc (sizeof(char) * (size + 1));
+	if (str == NULL)
 		return (NULL);
-	i = 0;
-	while (line[i] && line[i] != '\n')
+	str[size] = '\0';
+	if (s1 != NULL)
+		i += ft_strcpy(str, s1);
+	j = 0;
+	while (s2[j] != '\0')
 	{
-		ret[i] = line[i];
-		i++;
+		str[i + j] = s2[j];
+		j++;
 	}
-	if (line[i] == '\n')
-	{
-		ret[i] = '\n';
-		i++;
-	}
-	ret[i] = 0;
-	return (ret);
-}
-
-char	*ft_modify_line(char *line)
-{
-	int		i;
-	char	*new;
-	int		in;
-
-	i = 0;
-	while (line[i] && line[i] != '\n')
-		i++;
-	if (!line[i])
-	{
-		free(line);
-		return (NULL);
-	}
-	new = (char *)malloc(ft_strlen(line) - i + 1);
-	if (!new)
-		return (NULL);
-	i += 1;
-	in = 0;
-	while (line[i])
-		new[in++] = line[i++];
-	new[in] = 0;
-	free(line);
-	return (new);
+	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*line[257];
-	char		*ret;
+	char		*buffer;
+	char		*str;
+	static char	*save;
+	int			bytes;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 256)
+	str = save;
+	bytes = 1;
+	if (fd < 0 || fd > 256)
 		return (NULL);
-	if (!line[fd])
-		line[fd] = ft_strdup("");
-	line[fd] = ft_read(fd, line[fd]);
-	if (line[fd] == NULL)
-		return (NULL);
-	ret = ft_ret_line(line[fd]);
-	line[fd] = ft_modify_line(line[fd]);
-	return (ret);
+	buffer = (char *) malloc (sizeof(char) * BUFFER_SIZE + 1);
+	while (ft_findchr(str, '\n') == 0 && bytes > 0)
+	{
+		bytes = read(fd, buffer, BUFFER_SIZE);
+		if (bytes <= 0)
+			break ;
+		buffer[bytes] = '\0';
+		if (bytes < BUFFER_SIZE)
+			bytes = 0;
+		str = ft_strjoin(str, buffer);
+	}
+	free (buffer);
+	save = ft_save(str);
+	return (str);
 }
+
+/*#include <stdio.h>
+#include <fcntl.h>
+
+int	main()
+{
+	int	fd;
+
+	fd = open("asd.txt", O_RDONLY);
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+}*/

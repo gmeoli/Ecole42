@@ -6,7 +6,7 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 17:54:45 by gmeoli            #+#    #+#              #
-#    Updated: 2022/03/22 15:02:09 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/03/28 18:59:08 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ BONUS_OBJS = $(BONUS:.c=.o)
 FLAGS = -Wall -Wextra -Werror
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 G_OBJ = get_next_line.o get_next_line_utils.o
-G_FLAG = -D BUFFER_SIZE=42
+G_FLAG = -D BUFFER_SIZE=1
 
 $(NAME):
 		make -C printf

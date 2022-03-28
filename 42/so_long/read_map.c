@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 11:49:04 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/22 15:19:42 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:59:43 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,38 @@ int	ft_height(char *maps)
 	return (height);
 }
 
-int	ft_fill_matrix(char *maps, t_game *guido)
+static void	ft_strcpy(char *matrix, const char *str)
 {
 	int	i;
 
 	i = 0;
-	guido->height = ft_height(maps);
-	guido->width = ft_width(maps);
-	if (!guido->height || !guido->width)
-		return (0);
-	guido->matrix = malloc(sizeof(char **) * guido->height + 1);
-	guido->matrix[guido->height] = NULL;
-	while (i < guido->height)
+	while (str[i] != '\n' && str[i] != '\0')
 	{
-		guido->matrix[i] = malloc(sizeof(char *) * guido->width + 1);
-		guido->matrix[i][guido->width] = '\0';
+		matrix[i] = str[i];
 		i++;
 	}
-	return (1);
+	matrix[i] = '\0';
+}
+
+void	ft_fill_matrix(char *maps, t_game *guido)
+{
+	int		i;
+	int		fd;
+	char	*str;
+
+	i = 0;
+	guido->height = ft_height(maps);
+	guido->width = ft_width(maps);
+	guido->matrix = (char **)malloc(sizeof(char *) * guido->height + 1);
+	guido->matrix[guido->height] = NULL;
+	fd = open(maps, O_RDONLY);
+	while (i < guido->height)
+	{
+		guido->matrix[i] = (char *)malloc(sizeof(char) * guido->width + 1);
+		str = get_next_line(fd);
+		ft_strcpy(guido->matrix[i], str);
+		free(str);
+		i++;
+	}
+	close (fd);
 }

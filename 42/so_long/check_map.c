@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:44:11 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/22 18:51:56 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/28 19:48:42 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int	ft_check_char(t_game *guido)
 				guido->matrix[x][y] != '1' && \
 				guido->matrix[x][y] != 'C' && \
 				guido->matrix[x][y] != 'E' && \
-				guido->matrix[x][y] != 'P' && \
-				guido->matrix[x][y] != 'M')
+				guido->matrix[x][y] != 'P')
 				return (0);
 			y++;
 		}
@@ -80,7 +79,7 @@ int	ft_check_inside(t_game *guido)
 			else if (guido->matrix[x][y] == 'P')
 			{
 				guido->x_player = x;
-				guido->y_player = y;				
+				guido->y_player = y;
 				guido->p++;
 			}
 		}
