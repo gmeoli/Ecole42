@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 17:18:29 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/28 19:49:23 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/29 16:43:49 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,19 @@ int	ft_exit(char *str)
 	exit (0);
 }
 
+// int	ft_updates(t_game *guido)
+// {
+// 	ft_print_map(guido);
+// 	return (0);
+// }
+
 int	main(int ac, char **av)
 {
 	t_game	guido;
 
 	if (ac == 2)
 	{
-		guido = ft_allocs_struct();
+		ft_allocs_struct(&guido);
 		ft_fill_matrix(av[1], &guido);
 		ft_print_struct(&guido);
 		ft_check_map(&guido);
@@ -53,6 +59,7 @@ int	main(int ac, char **av)
 		mlx_key_hook(guido.win, ft_hooks, &guido);
 		mlx_hook(guido.win, 17, 0, ft_exit, 0);  
 		// mlx_do_key_autorepeaton(guido.mlx);
+		// mlx_loop_hook(guido.mlx, ft_updates, &guido);
 		mlx_loop(guido.mlx);
 	}
 	write(1, "ERROR! --> Invalid number of arguments <-- \n", 45);

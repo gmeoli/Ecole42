@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:44:11 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/28 19:48:42 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/29 16:15:39 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ int	ft_check_char(t_game *guido)
 	int	x;
 	int	y;
 
-	x = 0;
-	while (x < guido->height)
+	y = 0;
+	while (y < guido->height)
 	{
-		y = 0;
-		while (y < guido->width)
+		x = 0;
+		while (x < guido->width)
 		{
-			if (guido->matrix[x][y] != '0' && \
-				guido->matrix[x][y] != '1' && \
-				guido->matrix[x][y] != 'C' && \
-				guido->matrix[x][y] != 'E' && \
-				guido->matrix[x][y] != 'P')
+			if (guido->matrix[y][x] != '0' && \
+				guido->matrix[y][x] != '1' && \
+				guido->matrix[y][x] != 'C' && \
+				guido->matrix[y][x] != 'E' && \
+				guido->matrix[y][x] != 'P')
 				return (0);
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 	return (1);
 }
@@ -41,19 +41,19 @@ int	ft_check_perimeter(t_game *guido)
 	int	x;
 	int	y;
 
-	x = 0;
-	while (x < guido->height)
+	y = 0;
+	while (y < guido->height)
 	{
-		y = 0;
-		while (y < guido->width)
+		x = 0;
+		while (x < guido->width)
 		{
-			if (guido->matrix[x][y] != '1' && \
-				((x == 0 || x == guido->height - 1) || \
-				(y == 0 || y == guido->width - 1)))
+			if (guido->matrix[y][x] != '1' && \
+				((x == 0 || x == guido->width - 1) || \
+				(y == 0 || y == guido->height - 1)))
 				return (0);
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 	return (1);
 }
@@ -66,17 +66,17 @@ int	ft_check_inside(t_game *guido)
 	guido->c = 0;
 	guido->e = 0;
 	guido->p = 0;
-	x = 0;
-	while (x++ < guido->height - 1)
+	y = 0;
+	while (y++ < guido->height - 1)
 	{
-		y = 0;
-		while (y++ < guido->width - 1)
+		x = 0;
+		while (x++ < guido->width - 1)
 		{
-			if (guido->matrix[x][y] == 'C')
+			if (guido->matrix[y][x] == 'C')
 				guido->c++;
-			else if (guido->matrix[x][y] == 'E')
+			else if (guido->matrix[y][x] == 'E')
 				guido->e++;
-			else if (guido->matrix[x][y] == 'P')
+			else if (guido->matrix[y][x] == 'P')
 			{
 				guido->x_player = x;
 				guido->y_player = y;

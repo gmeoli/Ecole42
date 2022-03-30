@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:53:59 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/28 19:43:41 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/29 16:06:53 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,17 @@ void	ft_free_matrix(t_game *guido)
 	free(guido->matrix);
 }
 
-t_game	ft_allocs_struct()
+void	ft_allocs_struct(t_game *guido)
 {
-	t_game	guido;
-
-	guido.c = 0;
-	guido.e = 0;
-	guido.height = 0;
-	guido.matrix = 0;
-	guido.mlx = NULL;
-	guido.move_count = 0;
-	guido.p = 0;
-	guido.width = 0;
-	guido.win = NULL;
-	guido.x_player = 0;
-	guido.y_player = 0;
-
-	return (guido);
+	guido->c = 0;
+	guido->e = 0;
+	guido->height = 0;
+	guido->matrix = 0;
+	guido->mlx = NULL;
+	guido->move_count = 0;
+	guido->p = 0;
+	guido->width = 0;
+	guido->win = NULL;
+	guido->x_player = 0;
+	guido->y_player = 0;
 }

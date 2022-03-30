@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 17:18:31 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/28 19:43:48 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/03/29 16:07:34 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ void	ft_move_right(t_game *guido);
 void	ft_move_left(t_game *guido);
 void	ft_move_down(t_game *guido);
 void	ft_print_map(t_game *guido);
-t_game	ft_allocs_struct();
+void	ft_allocs_struct(t_game *guido);
 
 #endif
