@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:44:11 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/29 16:15:39 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/04 18:23:33 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ int	ft_check_char(t_game *guido)
 				guido->matrix[y][x] != 'C' && \
 				guido->matrix[y][x] != 'E' && \
 				guido->matrix[y][x] != 'P')
+			{
+				ft_error("--> Invalid map <--");
+				end_game(guido);
 				return (0);
+			}
 			x++;
 		}
 		y++;
@@ -50,12 +54,30 @@ int	ft_check_perimeter(t_game *guido)
 			if (guido->matrix[y][x] != '1' && \
 				((x == 0 || x == guido->width - 1) || \
 				(y == 0 || y == guido->height - 1)))
+			{
+				ft_error("--> Invalid map <--");
+				end_game(guido);
 				return (0);
+			}
 			x++;
 		}
 		y++;
 	}
 	return (1);
+}
+
+void	ft_uieeeesy(t_game *guido, int x, int y)
+{
+	if (guido->matrix[y][x] == 'C')
+		guido->c++;
+	else if (guido->matrix[y][x] == 'E')
+		guido->e++;
+	else if (guido->matrix[y][x] == 'P')
+	{
+		guido->x_player = x;
+		guido->y_player = y;
+		guido->p++;
+	}
 }
 
 int	ft_check_inside(t_game *guido)
@@ -71,21 +93,14 @@ int	ft_check_inside(t_game *guido)
 	{
 		x = 0;
 		while (x++ < guido->width - 1)
-		{
-			if (guido->matrix[y][x] == 'C')
-				guido->c++;
-			else if (guido->matrix[y][x] == 'E')
-				guido->e++;
-			else if (guido->matrix[y][x] == 'P')
-			{
-				guido->x_player = x;
-				guido->y_player = y;
-				guido->p++;
-			}
-		}
+			ft_uieeeesy(guido, x, y);
 	}
 	if (guido->c == 0 || guido->e == 0 || guido->p == 0)
+	{
+		ft_error("--> Invalid map <--");
+		end_game(guido);
 		return (0);
+	}
 	return (1);
 }
 

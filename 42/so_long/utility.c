@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:53:59 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/29 16:06:53 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/04 18:10:18 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(char *str)
 {
-	ft_printf("%s ERROR!\n", str);
+	ft_printf("ERROR!\n%s\n", str);
 	exit(0);
 }
 

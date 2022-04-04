@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 16:02:56 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/29 16:43:41 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/04 18:14:40 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	ft_move_up(t_game *guido)
 {
-	if (guido->matrix[guido->y_player - 1][guido->x_player] != '1') /*|| (guido->matrix[guido->y_player][guido->x_player] != 'E' && guido->c == 0))*/
+	if (guido->matrix[guido->y_player - 1][guido->x_player] != '1' \
+		&& (guido->matrix[guido->y_player - 1][guido->x_player] != 'E' \
+			|| guido->c == 0))
 	{
 		if (guido->matrix[guido->y_player - 1][guido->x_player] == 'C')
 			guido->c--;
@@ -29,25 +31,26 @@ void	ft_move_up(t_game *guido)
 
 void	ft_move_right(t_game *guido)
 {
-	if (guido->matrix[guido->y_player][guido->x_player + 1] != '1')
+	if (guido->matrix[guido->y_player][guido->x_player + 1] != '1' \
+		&& (guido->matrix[guido->y_player][guido->x_player + 1] != 'E' \
+			|| guido->c == 0))
 	{
-		// if (guido->matrix[guido->y_player][guido->x_player + 1] == 'C')
-		// 	guido->c--;
-		// if (guido->matrix[guido->y_player][guido->x_player + 1] == 'E')
-		// 	end_game(guido);
+		if (guido->matrix[guido->y_player][guido->x_player + 1] == 'C')
+			guido->c--;
+		if (guido->matrix[guido->y_player][guido->x_player + 1] == 'E')
+			end_game(guido);
 		guido->move_count += 1;
 		guido->matrix[guido->y_player][guido->x_player] = '0';
 		guido->matrix[guido->y_player][guido->x_player + 1] = 'P';
-		printf("MATRIX: %c\n", guido->matrix[guido->y_player][guido->x_player]);
 		guido->x_player += 1;
-		
 	}
 }
 
 void	ft_move_left(t_game *guido)
 {
 	if (guido->matrix[guido->y_player][guido->x_player - 1] != '1' \
-		&& (guido->matrix[guido->y_player][guido->x_player - 1] != '1' || guido->c == 0))
+		&& (guido->matrix[guido->y_player][guido->x_player - 1] != 'E' \
+			|| guido->c == 0))
 	{
 		if (guido->matrix[guido->y_player][guido->x_player - 1] == 'C')
 			guido->c--;
@@ -63,7 +66,8 @@ void	ft_move_left(t_game *guido)
 void	ft_move_down(t_game *guido)
 {
 	if (guido->matrix[guido->y_player + 1][guido->x_player] != '1' \
-		&& (guido->matrix[guido->y_player + 1][guido->x_player] != '1' || guido->c == 0))
+		&& (guido->matrix[guido->y_player + 1][guido->x_player] != 'E' \
+			|| guido->c == 0))
 	{
 		if (guido->matrix[guido->y_player + 1][guido->x_player] == 'C')
 			guido->c--;
@@ -71,7 +75,7 @@ void	ft_move_down(t_game *guido)
 			end_game(guido);
 		guido->move_count += 1;
 		guido->matrix[guido->y_player][guido->x_player] = '0';
-		guido->matrix[guido->y_player - 1][guido->x_player] = 'P';
+		guido->matrix[guido->y_player + 1][guido->x_player] = 'P';
 		guido->y_player += 1;
 	}
 }

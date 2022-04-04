@@ -6,7 +6,7 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 17:18:27 by gmeoli            #+#    #+#              #
-#    Updated: 2022/03/28 17:11:46 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/04/04 18:20:32 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRC = so_long.c \
 		open_images.c \
 		utility.c \
 		print_map.c \
-		movement.c
+		movement.c \
+		utility2.c
 		
 FLAG = -Wall -Werror -Wextra 
 LIBFT = libft/libft.a

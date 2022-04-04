@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 17:18:29 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/29 16:43:49 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/04 17:22:02 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_hooks(int key, t_game *guido)
 		ft_move_right(guido);
 	else if (key == 1)
 		ft_move_down(guido);
-	ft_printf("MOVES --> %d", guido->move_count);
+	ft_printf("MOVES --> %d\n", guido->move_count);
 	ft_print_map(guido);
 	return (0);
 }
@@ -35,32 +35,25 @@ int	ft_exit(char *str)
 	exit (0);
 }
 
-// int	ft_updates(t_game *guido)
-// {
-// 	ft_print_map(guido);
-// 	return (0);
-// }
-
 int	main(int ac, char **av)
 {
 	t_game	guido;
 
-	if (ac == 2)
+	if (ac == 2 && ft_check_ber(av[1]))
 	{
 		ft_allocs_struct(&guido);
 		ft_fill_matrix(av[1], &guido);
-		ft_print_struct(&guido);
 		ft_check_map(&guido);
+		ft_print_struct(&guido);
 		guido.mlx = mlx_init();
 		ft_open_images(&guido);
 		guido.win = mlx_new_window(guido.mlx, guido.width * 64, \
 			guido.height * 64, "Play your game !");
 		ft_print_map(&guido);
-		mlx_key_hook(guido.win, ft_hooks, &guido);
-		mlx_hook(guido.win, 17, 0, ft_exit, 0);  
-		// mlx_do_key_autorepeaton(guido.mlx);
-		// mlx_loop_hook(guido.mlx, ft_updates, &guido);
+		mlx_hook(guido.win, 2, (1 >> 1L), ft_hooks, &guido);
+		mlx_hook(guido.win, 17, 0, ft_exit, 0);
+		mlx_do_key_autorepeaton(guido.mlx);
 		mlx_loop(guido.mlx);
 	}
-	write(1, "ERROR! --> Invalid number of arguments <-- \n", 45);
+	ft_printf("ERROR!\n--> Invalid number of arguments <-- \n");
 }
