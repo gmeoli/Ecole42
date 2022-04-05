@@ -6,13 +6,13 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:37:22 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/03/17 20:25:24 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/05 11:55:08 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	send_string(char *str, int my_pid)
+void	ft_send_string(char *str, int my_pid)
 {
 	int	i;
 	int	bit;
@@ -40,7 +40,7 @@ int	main(int ac, char **av)
 	my_pid = ft_atoi(av[1]);
 	if (ac == 3)
 	{
-		send_string(av[2], my_pid);
+		ft_send_string(av[2], my_pid);
 		return (1);
 	}
 	ft_putstr_fd("--> ERROR! <--\n", 1);
