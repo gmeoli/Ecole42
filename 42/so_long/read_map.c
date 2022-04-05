@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 11:49:04 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/04 18:50:00 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/05 09:49:19 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ int	ft_width(char *maps)
 	if (!fd)
 		return (0);
 	result = get_next_line(fd);
-	width = ft_strlen(result) - 1; 
+	width = ft_strlen(result) - 1;
+	ft_error_line(fd, width);
 	free(result);
 	close(fd);
+	if (width < 3)
+		ft_error("--> Invalid map <--");
 	return (width);
 }
 
@@ -49,6 +52,8 @@ int	ft_height(char *maps)
 	}
 	free(result);
 	close(fd);
+	if (height < 3)
+		ft_error("--> Invalid map <--");
 	return (height);
 }
 
