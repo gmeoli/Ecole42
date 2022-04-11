@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/11 19:24:59 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/01/21 04:28:19 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/01/21 04:28:24 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "libft/libft.h"
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new;
 
-typedef struct s_stack {
-	int	*stack_a;
-	int	*stack_b;
-	int	size_a;
-	int	size_b;
-}	t_stack;
-
-void	ft_allocs_struct(t_stack *guido);
-void	ft_sa(t_stack *guido);
-void	ft_sb(t_stack *guido);
-void	ft_ss(t_stack *guido);
-void	ft_pa(t_stack *guido);
-
-
-#endif
+	new = (t_list *)malloc(sizeof(*new));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
+}

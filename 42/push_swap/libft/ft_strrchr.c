@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/11 19:24:59 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/01/20 16:47:44 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/01/20 16:53:27 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "libft/libft.h"
+char	*ft_strrchr(const char *s, int c)
+{
+	int	i;
 
-typedef struct s_stack {
-	int	*stack_a;
-	int	*stack_b;
-	int	size_a;
-	int	size_b;
-}	t_stack;
-
-void	ft_allocs_struct(t_stack *guido);
-void	ft_sa(t_stack *guido);
-void	ft_sb(t_stack *guido);
-void	ft_ss(t_stack *guido);
-void	ft_pa(t_stack *guido);
-
-
-#endif
+	i = ft_strlen(s);
+	while (i >= 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *) s + i);
+		i--;
+	}
+	return (NULL);
+}

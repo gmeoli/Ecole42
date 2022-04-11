@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_utilityp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/11 19:24:59 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/02/09 18:41:48 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/03/22 15:03:58 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "ft_printf.h"
 
-# include "libft/libft.h"
+size_t	ft_strlenp(const char *s)
+{
+	int	i;
 
-typedef struct s_stack {
-	int	*stack_a;
-	int	*stack_b;
-	int	size_a;
-	int	size_b;
-}	t_stack;
+	i = 0;
+	while (s[i] != 0)
+		i++;
+	return (i);
+}
 
-void	ft_allocs_struct(t_stack *guido);
-void	ft_sa(t_stack *guido);
-void	ft_sb(t_stack *guido);
-void	ft_ss(t_stack *guido);
-void	ft_pa(t_stack *guido);
-
-
-#endif
+void	ft_putchar(char c)
+{
+	write (1, &c, 1);
+}

@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/11 19:24:59 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/01/17 19:08:40 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/01/20 17:39:09 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "libft/libft.h"
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	int	i;
 
-typedef struct s_stack {
-	int	*stack_a;
-	int	*stack_b;
-	int	size_a;
-	int	size_b;
-}	t_stack;
-
-void	ft_allocs_struct(t_stack *guido);
-void	ft_sa(t_stack *guido);
-void	ft_sb(t_stack *guido);
-void	ft_ss(t_stack *guido);
-void	ft_pa(t_stack *guido);
-
-
-#endif
+	i = 0;
+	if (!dst && !src && len > 0)
+		return (NULL);
+	if (dst > src)
+	{
+		i = (int)len - 1;
+		while (i >= 0)
+		{
+			*(char *)(dst + i) = *(char *)(src + i);
+			i--;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < (int)len)
+		{
+			*(char *)(dst + i) = *(char *)(src + i);
+			i++;
+		}
+	}
+	return (dst);
+}

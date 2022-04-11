@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/11 19:24:59 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/01/21 04:30:32 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/01/21 04:30:39 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "libft/libft.h"
+int	ft_lstsize(t_list *lst)
+{
+	size_t	i;
 
-typedef struct s_stack {
-	int	*stack_a;
-	int	*stack_b;
-	int	size_a;
-	int	size_b;
-}	t_stack;
-
-void	ft_allocs_struct(t_stack *guido);
-void	ft_sa(t_stack *guido);
-void	ft_sb(t_stack *guido);
-void	ft_ss(t_stack *guido);
-void	ft_pa(t_stack *guido);
-
-
-#endif
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}

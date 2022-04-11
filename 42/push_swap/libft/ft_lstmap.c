@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 10:40:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/11 17:29:40 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/01/21 04:39:51 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/01/21 04:53:26 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_stack	guido;
+	t_list	*fi;
+	t_list	*n;
 
-	if (ac == 2)
+	if (!f || !del)
+		return (NULL);
+	fi = NULL;
+	while (lst)
 	{
-		guido.stack_a = (int*)malloc(sizeof(int) * ac - 1);
-		guido.stack_b = (int*)malloc(sizeof(int) * ac - 1);
-		guido.size_a = (int)malloc(sizeof(int) * ac - 1);
-		guido.size_b = 0;
+		n = ft_lstnew((*f)(lst->content));
+		if (!n)
+		{
+			while (fi)
+			{
+				n = fi->next;
+				(*del)(fi->content);
+				free(fi);
+				fi = n;
+			}
+			lst = NULL;
+			return (NULL);
+		}
+		ft_lstadd_back(&fi, n);
+		lst = lst->next;
 	}
+	return (fi);
 }

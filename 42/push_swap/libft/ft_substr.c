@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/11 19:24:59 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/01/21 03:59:10 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/01/21 16:27:14 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "libft/libft.h"
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	int		i;
+	int		j;
+	size_t	a;
+	char	*r;
 
-typedef struct s_stack {
-	int	*stack_a;
-	int	*stack_b;
-	int	size_a;
-	int	size_b;
-}	t_stack;
-
-void	ft_allocs_struct(t_stack *guido);
-void	ft_sa(t_stack *guido);
-void	ft_sb(t_stack *guido);
-void	ft_ss(t_stack *guido);
-void	ft_pa(t_stack *guido);
-
-
-#endif
+	if (!s)
+		return (NULL);
+	if (ft_strlen(s) > len)
+		a = len;
+	else
+		a = ft_strlen(s);
+	r = ft_calloc(a + 1, sizeof(char));
+	if (!r)
+		return (NULL);
+	i = -1;
+	j = -1;
+	while (s[++i])
+		if (i >= (int)start && ++j < (int)len)
+			r[j] = s[i];
+	r[j + 1] = 0;
+	return (r);
+}
