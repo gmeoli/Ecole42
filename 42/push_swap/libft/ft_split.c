@@ -6,121 +6,55 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 04:10:20 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/01/21 04:12:22 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/15 11:08:49 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strleng2(char const *str, int count, int i)
+int	get_word(const char *s, char c)
 {
-	int		k;
-	char	*st;
+	int	ret;
 
-	st = (char *)malloc(count + 1);
-	if (!st)
-		return (NULL);
-	k = 0;
-	while ((i - count) < i)
+	ret = 0;
+	while (*s)
 	{
-		st[k] = str[i - count];
-		k++;
-		count--;
+		if (*s != c)
+		{
+			++ret;
+			while (*s && *s != c)
+				++s;
+		}
+		else
+			++s;
 	}
-	st[k] = 0;
-	return (st);
+	return (ret);
 }
 
-static int	ft_strleng(char const *str, char charset, char **mat)
+char	**ft_split(const char *s, char c)
 {
-	int	i;
-	int	j;
-	int	count;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		count = 0;
-		while (str[i] == charset)
-			i++;
-		while (str[i] != charset && str[i])
-		{
-			i++;
-			count++;
-		}
-		if (count > 0)
-		{
-			mat[j] = ft_strleng2(str, count, i);
-			j++;
-		}
-	}
-	mat[j] = 0;
-	return (1);
-}
-
-static	int	ft_strcount(char const *str, char charset)
-{
+	char	**ret;
 	size_t	i;
-	int		count;
-	size_t	h;
+	size_t	len;
 
+	if (!s)
+		return (0);
 	i = 0;
-	count = 0;
-	while (str[i])
+	ret = malloc(sizeof(char *) * (get_word(s, c) + 1));
+	if (!ret)
+		return (0);
+	while (*s)
 	{
-		h = 0;
-		while (str[i] == charset)
-			i++;
-		while (str[i] != charset && str[i])
+		if (*s != c)
 		{
-			i++;
-			h++;
+			len = 0;
+			while (*s && *s != c && ++len)
+				++s;
+			ret[i++] = ft_substr(s - len, 0, len);
 		}
-		count++;
+		else
+			++s;
 	}
-	if (h == 0)
-		count -= 1;
-	return (count + 1);
-}
-
-static char	**ft_split2(char const *str)
-{
-	char	**matrix;
-
-	matrix = (char **)malloc(sizeof(char *) * 2);
-	if (!matrix)
-		return (NULL);
-	matrix[0] = ft_strdup(str);
-	matrix[1] = 0;
-	return (matrix);
-}
-
-char	**ft_split(char const *str, char charset)
-{
-	int		count;
-	char	**matrix;
-
-	if (!str || !*str)
-	{
-		matrix = malloc(sizeof(char *) * 1);
-		if (!matrix)
-			return (NULL);
-		*matrix = (void *)0;
-		return (matrix);
-	}
-	if (ft_strchr(str, charset) == NULL)
-	{
-		matrix = ft_split2(str);
-		if (!matrix)
-			return (NULL);
-		return (matrix);
-	}
-	count = ft_strcount(str, charset);
-	matrix = (char **)malloc(sizeof(char *) * (count));
-	if (!matrix)
-		return (NULL);
-	if (ft_strleng(str, charset, matrix) == 1)
-		return (matrix);
-	return (NULL);
+	ret[i] = 0;
+	return (ret);
 }

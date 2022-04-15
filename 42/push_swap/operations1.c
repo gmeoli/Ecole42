@@ -6,55 +6,58 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 11:58:20 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/13 18:24:52 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/15 11:28:10 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sa(t_stack *guido)
+void	ft_sa(t_stack *guido, int can_print)
 {
 	int	i;
 
 	if (guido->size_a < 2)
-		return;
+		return ;
 	i = guido->stack_a[0];
 	guido->stack_a[0] = guido->stack_a[1];
 	guido->stack_a[1] = i;
-	ft_printf("sa\n");
+	if (can_print)
+		ft_printf("sa\n");
 }
 
-void	ft_sb(t_stack *guido)
+void	ft_sb(t_stack *guido, int can_print)
 {
 	int	i;
 
 	if (guido->size_b < 2)
-		return;
+		return ;
 	i = guido->stack_b[0];
 	guido->stack_b[0] = guido->stack_b[1];
 	guido->stack_b[1] = i;
-	ft_printf("sb\n");
+	if (can_print)
+		ft_printf("sb\n");
 }
 
-void	ft_ss(t_stack *guido)
+void	ft_ss(t_stack *guido, int can_print)
 {
-	ft_sa(guido);
-	ft_sb(guido);
-	ft_printf("ss\n");
+	ft_sa(guido, false);
+	ft_sb(guido, false);
+	if (can_print)
+		ft_printf("ss\n");
 }
 
-void	ft_pa(t_stack *guido)
+void	ft_pa(t_stack *guido)  //DA RIVEDERE
 {
 	if (guido->size_b == 0)
-		return;
+		return ;
 	guido->stack_a[0] = guido->stack_b[0];
 	ft_printf("pa\n");
 }
 
-void	ft_pb(t_stack *guido)
+void	ft_pb(t_stack *guido) //DA RIVEDERE
 {
 	if (guido->size_a == 0)
-		return;
+		return ;
 	guido->stack_b[0] = guido->stack_a[0];
 	ft_printf("pb\n");
 }

@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/13 18:20:02 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/15 12:01:01 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
+
+# define true 1
+# define false 0
 
 typedef struct s_stack {
 	int	*stack_a;
@@ -23,9 +26,9 @@ typedef struct s_stack {
 }	t_stack;
 
 void	ft_allocs_struct(t_stack *guido);
-void	ft_sa(t_stack *guido);
-void	ft_sb(t_stack *guido);
-void	ft_ss(t_stack *guido);
+void	ft_sa(t_stack *guido, int can_print);
+void	ft_sb(t_stack *guido, int can_print);
+void	ft_ss(t_stack *guido, int can_print);
 void	ft_pa(t_stack *guido);
 void	ft_pb(t_stack *guido);
 void	ft_ra(t_stack *guido);
