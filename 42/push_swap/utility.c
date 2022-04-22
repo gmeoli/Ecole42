@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:32:11 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/21 16:32:37 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/22 21:50:23 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_error(void)
 
 void	ft_allocs_stack(t_stack *guido, int ac)
 {
-	guido->stack_a = (int*)malloc(sizeof(int) * ac - 1);
-	guido->stack_b = (int*)malloc(sizeof(int) * ac - 1);
+	guido->stack_a = (int *)malloc(sizeof(int) * ac - 1);
+	guido->stack_b = (int *)malloc(sizeof(int) * ac - 1);
 	guido->size_a = 0;
 	guido->size_b = 0;
 }
@@ -34,10 +34,8 @@ void	ft_fill_stack(t_stack *guido, char **av)
 	while (av[i])
 	{
 		guido->stack_a[i] = ft_atoi(av[i]);
-		//printf("ciao\n");
 		if (!ft_is_nbr_int(guido->stack_a[i]))
 			ft_error();
-		//printf("ciao\n");
 		guido->size_a++;
 		i++;
 	}

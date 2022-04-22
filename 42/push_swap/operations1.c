@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 11:58:20 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/15 11:28:10 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/22 21:58:31 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,52 @@ void	ft_ss(t_stack *guido, int can_print)
 		ft_printf("ss\n");
 }
 
-void	ft_pa(t_stack *guido)  //DA RIVEDERE
+void	ft_pa(t_stack *guido, int can_print)
 {
+	int	i;
+
 	if (guido->size_b == 0)
 		return ;
+	i = guido->size_a;
+	while (i > 0)
+	{
+		guido->stack_a[i] = guido->stack_a[i - 1];
+		i--;
+	}
+	guido->size_a += 1;
 	guido->stack_a[0] = guido->stack_b[0];
-	ft_printf("pa\n");
+	i = 0;
+	while (i < guido->size_b - 1)
+	{
+		guido->stack_b[i] = guido->stack_b[i + 1];
+		i++;
+	}
+	guido->size_b -= 1;
+	if (can_print)
+		ft_printf("pa\n");
 }
 
-void	ft_pb(t_stack *guido) //DA RIVEDERE
+void	ft_pb(t_stack *guido, int can_print)
 {
+	int	i;
+
 	if (guido->size_a == 0)
 		return ;
+	i = guido->size_b;
+	while (i > 0)
+	{
+		guido->stack_b[i] = guido->stack_b[i - 1];
+		i--;
+	}
+	guido->size_b += 1;
 	guido->stack_b[0] = guido->stack_a[0];
-	ft_printf("pb\n");
+	i = 0;
+	while (i < guido->size_a - 1)
+	{
+		guido->stack_a[i] = guido->stack_a[i + 1];
+		i++;
+	}
+	guido->size_a -= 1;
+	if (can_print)
+		ft_printf("pb\n");
 }
