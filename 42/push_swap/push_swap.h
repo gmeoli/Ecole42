@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/22 21:53:12 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/23 01:16:30 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "libft/libft.h"
 
-# define true 1
-# define false 0
+# define TRUE 1
+# define FALSE 0
 
 typedef struct s_stack {
 	int	*stack_a;
@@ -32,6 +32,11 @@ void	ft_ss(t_stack *guido, int can_print);
 void	ft_pa(t_stack *guido, int can_print);
 void	ft_pb(t_stack *guido, int can_print);
 void	ft_ra(t_stack *guido, int can_print);
+void	ft_rb(t_stack *guido, int can_print);
+void	ft_rr(t_stack *guido, int can_print);
+void	ft_rra(t_stack *guido, int can_print);
+void	ft_rrb(t_stack *guido, int can_print);
+void	ft_rrr(t_stack *guido, int can_print);
 void	ft_fill_stack(t_stack *guido, char **av);
 int		ft_is_nbr_dup(t_stack *guido);
 int		ft_is_nbr_int(long long int nbr);

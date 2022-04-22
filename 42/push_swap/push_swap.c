@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 10:40:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/22 22:05:16 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/23 01:18:03 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 		printf("%d	", guido.stack_a[i]);
 		i++;
 	}
-	ft_ra(&guido, true);
+	ft_rra(&guido, TRUE);
 	printf("\n");
 	i = 0;
 	while (i < guido.size_a)
@@ -37,13 +37,6 @@ int	main(int ac, char **av)
 		printf("%d	", guido.stack_a[i]);
 		i++;
 	}
-	// printf("\n");
-	// i = 0;
-	// while (i < guido.size_b)
-	// {
-	// 	printf("%d	", guido.stack_b[i]);
-	// 	i++;
-	// }
 	free(guido.stack_a);
 	free(guido.stack_b);
 }

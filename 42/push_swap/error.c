@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:43:00 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/21 16:29:32 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/23 01:18:26 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	ft_contains_char(char **av)
 		{
 			if ((av[i][j] < '0' || av[i][j] > '9') \
 				&& (av[i][j] != '-' && av[i][j] != '+' && av[i][j] != ' '))
-				return (true);
+				return (TRUE);
 			j++;
 		}
 		i++;
 	}
-	return (false);
+	return (FALSE);
 }
 
 int	ft_is_nbr_int(long long int nbr)
@@ -50,10 +50,10 @@ int	ft_is_nbr_dup(t_stack *guido)
 		while (j < guido->size_a)
 		{
 			if (guido->stack_a[i] == guido->stack_a[j])
-				return (true);
+				return (TRUE);
 			j++;
 		}
 		i++;
 	}
-	return (false);
+	return (FALSE);
 }

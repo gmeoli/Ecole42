@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 11:58:20 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/22 21:58:31 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/23 01:17:03 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	ft_sb(t_stack *guido, int can_print)
 
 void	ft_ss(t_stack *guido, int can_print)
 {
-	ft_sa(guido, false);
-	ft_sb(guido, false);
+	ft_sa(guido, FALSE);
+	ft_sb(guido, FALSE);
 	if (can_print)
 		ft_printf("ss\n");
 }

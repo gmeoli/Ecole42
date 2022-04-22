@@ -1,5 +1,0 @@
-Credentials cache: API:A27D25A9-69AD-44A8-88FE-70BD5313699F
-        Principal: gmeoli@42ROMA.IT
-
-		  Issued                Expires               Principal
-		  Nov 22 16:08:59 2021  Nov 23 02:08:53 2021  krbtgt/42ROMA.IT@42ROMA.IT
