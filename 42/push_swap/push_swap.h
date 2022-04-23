@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/23 01:16:30 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/23 17:30:49 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ int		ft_is_nbr_dup(t_stack *guido);
 int		ft_is_nbr_int(long long int nbr);
 int		ft_contains_char(char **av);
 void	ft_error(void);
+void	ft_renumber_stack(t_stack *guido);
+void	ft_renumber_stack2(t_stack *guido);
+void	ft_print_array(int *array, int len);
 
 #endif

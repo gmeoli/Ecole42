@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 10:40:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/23 01:18:03 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/23 17:15:01 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_print_array(int *array, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		ft_printf("%d	", array[i]);
+		i++;
+	}
+}
 
 int	main(int ac, char **av)
 {
@@ -24,19 +36,7 @@ int	main(int ac, char **av)
 	if (ac < 3 && get_word(av[1], ' ') < 2)
 		return (ft_putstr_fd("Error\n", 2));
 	ft_fill_stack(&guido, &av[1]);
-	while (i < guido.size_a)
-	{
-		printf("%d	", guido.stack_a[i]);
-		i++;
-	}
-	ft_rra(&guido, TRUE);
-	printf("\n");
-	i = 0;
-	while (i < guido.size_a)
-	{
-		printf("%d	", guido.stack_a[i]);
-		i++;
-	}
+	ft_renumber_stack(&guido);
 	free(guido.stack_a);
 	free(guido.stack_b);
 }
