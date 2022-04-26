@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:37:37 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/06 20:53:37 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/26 20:03:18 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,37 @@
 
 void	ft_print_str(int sig, siginfo_t *info, void *context)
 {
-	t_minitalk	g_stream;
+	static char	c = 0;
+	static int	i = 1;
 
 	(void)context;
-	g_stream.i = 8;
-	g_stream.c |= (sig == SIGUSR2);
-	if (g_stream.i++)
+	if (sig == SIGUSR1)
+		c |= 0;
+	else
+		c |= 1;
+	if (i == 8)
 	{
-		if (!g_stream.c)
-		{
-			usleep(300);
+		ft_putchar_fd(c, 1);
+		if (c == 0)
 			kill(info->si_pid, SIGUSR2);
-			g_stream.c = 0;
-			g_stream.i = 0;
-			write(1, "\n", 1);
-			return ;
-		}
-		else
-			ft_putchar_fd(g_stream.c, 1);
-		g_stream.c = 0;
-		g_stream.i = 0;
+		i = 1;
+		c = 0;
+		return ;
 	}
-	g_stream.c <<= 1;
-	pause();
+	i++;
+	c <<= 1;
 }
 
 int	main(void)
 {
 	pid_t				process_id;
 	struct sigaction	sig;
-	t_minitalk			g_stream;
 
 	process_id = getpid();
-	g_stream.c = 0;
-	g_stream.i = 0;
 	ft_putstr_fd("The server PID: > ", 1);
 	ft_putnbr_fd(process_id, 1);
 	ft_putstr_fd(" <\n", 1);
-	sig.sa_sigaction = &ft_print_str;
+	sig.sa_sigaction = ft_print_str;
 	sig.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sig, NULL);
 	sigaction(SIGUSR2, &sig, NULL);

@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:37:22 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/05 11:55:08 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/26 20:02:53 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_send_string(char *str, int my_pid)
 		bit = 8;
 		while (bit--)
 		{
-			if (str[i] >> bit & 1)
+			if (((str[i] >> bit) & 1) == 0)
 				kill(my_pid, SIGUSR1);
 			else
 				kill(my_pid, SIGUSR2);
