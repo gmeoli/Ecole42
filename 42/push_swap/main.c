@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 10:40:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/23 17:15:01 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/27 18:10:53 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,17 @@ void	ft_print_array(int *array, int len)
 int	main(int ac, char **av)
 {
 	t_stack	guido;
-	int	i;
 
-	i = 0;
-	ft_allocs_stack(&guido, ac);
-	if (ac < 2)
-		return (ft_putstr_fd("Error\n", 2));
-	if (ac < 3 && get_word(av[1], ' ') < 2)
-		return (ft_putstr_fd("Error\n", 2));
-	ft_fill_stack(&guido, &av[1]);
-	ft_renumber_stack(&guido);
-	free(guido.stack_a);
-	free(guido.stack_b);
+	if (ac >= 2)
+	{
+		if (ac > 2)
+			ft_allocs_stack(&guido, ac, av);
+		else
+			ft_split_strnbr(&guido, av);
+		ft_renumber_stack(&guido);
+		free(guido.stack_a);
+		free(guido.stack_b);
+	}
+	else
+		ft_error();
 }

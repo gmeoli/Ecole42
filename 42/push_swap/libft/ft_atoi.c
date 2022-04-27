@@ -6,13 +6,13 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 22:32:32 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/01/20 22:33:51 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/27 18:56:29 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_atoi_sign_check(const char *str, int i)
+long long int	ft_atoi_sign_check(const char *str, int i)
 {
 	int	s;
 
@@ -28,11 +28,11 @@ static int	ft_atoi_sign_check(const char *str, int i)
 	return (s);
 }
 
-int	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
-	int					i;
-	int					s;
-	unsigned long long	res;
+	int			i;
+	long long	s;
+	long long	res;
 
 	i = 0;
 	res = 0;
@@ -45,12 +45,12 @@ int	ft_atoi(const char *str)
 		i++;
 	while (str[i] > 47 && str[i] < 58)
 		res = (res * 10) + (str[i++] - 48);
-	if (res >= 9223372036854775808ULL)
+	if (res >= 9223372036854775807)
 	{
 		if (s == 1)
 			return (-1);
 		else
 			return (0);
 	}
-	return ((int)res * s);
+	return (res * s);
 }

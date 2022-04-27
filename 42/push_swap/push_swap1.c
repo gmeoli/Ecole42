@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 16:09:40 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/23 17:43:02 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/04/23 17:45:06 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	ft_renumber_stack(t_stack *guido)
 		i++;
 	}
 	ft_renumber_stack2(guido, backup);
+	ft_print_array(guido->stack_a, guido->size_a);
 	// free(backup);
 }
