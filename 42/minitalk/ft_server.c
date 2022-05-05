@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:37:37 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/27 12:06:29 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/05/05 17:01:38 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	ft_print_str(int sig, siginfo_t *info, void *context)
 		c |= 1;
 	if (i == 8)
 	{
-		ft_putchar_fd(c, 1);
 		if (c == 0)
 			kill(info->si_pid, SIGUSR2);
+		ft_putchar_fd(c, 1);
 		i = 1;
 		c = 0;
 		return ;
