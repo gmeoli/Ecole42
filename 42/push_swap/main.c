@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 10:40:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/05/10 18:03:07 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/05/11 16:11:33 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int ac, char **av)
 		else
 			ft_split_strnbr(&guido, av);
 		ft_renumber_stack(&guido);
+		ft_lis(&guido);
 		free(guido.stack_a);
 		free(guido.stack_b);
 	}

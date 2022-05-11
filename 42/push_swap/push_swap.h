@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/05/10 18:00:44 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/05/11 17:23:48 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	ft_renumber_stack(t_stack *guido);
 void	ft_lis(t_stack *guido);
 int		**ft_init_matrix(t_stack *guido);
 void	ft_free_matrix(int len, int **matrix);
+int		ft_index_min(t_stack *guido);
+int		*ft_extend_matrix(int *m_backup, int *j, int i);
 
 // PUSH_SWAP
 
