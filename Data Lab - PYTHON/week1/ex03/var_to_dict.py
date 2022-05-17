@@ -2,7 +2,4 @@ d=[('Hendrix' , '1942'), ('Allman' , '1946'), ('King' , '1925'), ('Clapton' , '1
 
 a = {}
 
-a.update(d)
-
-for i,j in a.items():
-	print(j,":",i)
+for i in d 

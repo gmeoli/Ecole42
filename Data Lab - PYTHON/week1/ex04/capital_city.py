@@ -13,6 +13,7 @@ capital_cities = {
 "NJ": "Trenton",
 "CO": "Denver"
 }
+
 if(len(sys.argv) != 2):
 	exit()
 if(capital_cities.get(states.get(sys.argv[1])) == None):
