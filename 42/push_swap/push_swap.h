@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/05/11 17:23:48 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/05/22 16:47:05 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 typedef struct s_stack {
 	int	*stack_a;
 	int	*stack_b;
+	int	*lis;
 	int	size_a;
 	int	size_b;
+	int	size_lis;
 }	t_stack;
 
 /***************** ELIMINARE ******************/
@@ -53,13 +55,17 @@ int		ft_contains_char(char **av);
 void	ft_error(void);
 void	ft_split_strnbr(t_stack *guido, char **av);
 
+// UTILITY
+void	ft_free_matrix(int len, int **matrix);
+int		ft_index_min(t_stack *guido);
+int		*ft_ardup(int *array, int size);
+
 // LIS
 void	ft_renumber_stack(t_stack *guido);
 void	ft_lis(t_stack *guido);
 int		**ft_init_matrix(t_stack *guido);
-void	ft_free_matrix(int len, int **matrix);
-int		ft_index_min(t_stack *guido);
-int		*ft_extend_matrix(int *m_backup, int *j, int i);
+int		*ft_two_case(int *m_backup, int *j, int num);
+void	ft_three_case(int **m_backup, int j, int num);
 
 // PUSH_SWAP
 

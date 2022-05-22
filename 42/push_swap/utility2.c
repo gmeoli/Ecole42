@@ -1,39 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lis_utility.c                                      :+:      :+:    :+:   */
+/*   utility2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 15:45:51 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/05/11 17:34:21 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/05/22 15:54:32 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/05/22 16:46:33 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	**ft_init_matrix(t_stack *guido)
-{
-	int	**matrix;
-
-	matrix = (int **)malloc(sizeof(int *) * guido->size_a);
-	matrix[0] = (int *)malloc(sizeof(int) * 1);
-	matrix[0][0] = 1;
-	return (matrix);
-}
-
-void	ft_free_matrix(int len, int **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-}
 
 int	ft_index_min(t_stack *guido)
 {
@@ -49,19 +26,17 @@ int	ft_index_min(t_stack *guido)
 	return (i);
 }
 
-int	*ft_extend_matrix(int *m_backup, int *j, int num)
+int	*ft_ardup(int *array, int size)
 {
 	int	i;
-	int	*array;
+	int	*array2;
 
-	array = (int *)malloc(sizeof(int) * j + 1); //VERIFICARE -> *j <-
+	array2 = malloc(sizeof(int) * size);
 	i = 0;
-	while (i < j) //VERIFICARE -> *j <-
+	while (i < size)
 	{
-		array[i] = m_backup[i];
+		array2[i] = array[i];
 		i++;
 	}
-	array[i] = num;
-	(*j)++;
-	return (array);
+	return (array2);
 }

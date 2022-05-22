@@ -6,7 +6,7 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 10:40:51 by gmeoli            #+#    #+#              #
-#    Updated: 2022/05/11 16:32:49 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/05/22 15:56:36 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = main.c \
 		operations2.c \
 		operations3.c \
 		utility1.c \
-		lis_utility.c \
+		utility2.c \
 		error.c \
 		renumber_stack.c \
 		lis.c \
