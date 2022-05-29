@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:44:11 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/05/22 16:55:51 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/05/29 16:30:35 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_three_case(int **m_backup, int j, int num)
 	x = 0;
 	while (x < j)
 	{
-		if (num > m_backup[x][x])
+		if (num < m_backup[x][x])
 			break ;
 		x++;
 	}
@@ -86,5 +86,5 @@ void	ft_lis(t_stack *guido)
 	}
 	guido->lis = ft_ardup(m_backup[size_m - 1], size_m);
 	guido->size_lis = size_m;
-	ft_free_matrix(guido->size_a, m_backup);
+	ft_free_matrix(size_m, m_backup);
 }

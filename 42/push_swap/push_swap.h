@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/05/22 16:47:05 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/05/29 16:23:44 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_error(void);
 void	ft_split_strnbr(t_stack *guido, char **av);
 
 // UTILITY
+void	ft_free_char_matrix(char **matrix);
 void	ft_free_matrix(int len, int **matrix);
 int		ft_index_min(t_stack *guido);
 int		*ft_ardup(int *array, int size);

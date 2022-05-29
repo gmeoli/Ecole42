@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:43:00 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/27 18:46:05 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/05/29 16:24:53 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ int	ft_is_nbr_dup(t_stack *guido)
 		while (j < guido->size_a)
 		{
 			if (guido->stack_a[i] == guido->stack_a[j])
-			{
-				printf("%d	", guido->stack_a[i]);
 				return (TRUE);
-			}
 			j++;
 		}
 		i++;
