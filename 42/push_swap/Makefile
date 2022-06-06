@@ -6,7 +6,7 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 10:40:51 by gmeoli            #+#    #+#              #
-#    Updated: 2022/05/29 16:41:11 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/06/06 17:01:13 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS = main.c \
 		error.c \
 		renumber_stack.c \
 		lis.c \
-		push_swap1.c \
+		push_stack_b.c \
 		push_swap2.c \
 		push_swap3.c
 

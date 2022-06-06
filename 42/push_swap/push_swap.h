@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/05/29 16:23:44 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/06 18:02:14 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 
 # define TRUE 1
 # define FALSE 0
+
+typedef struct s_best {
+	int	moves;
+	int	ma;
+	int	na;
+	int	nb;
+	int	dir_a;
+	int	dir_b;
+}	t_best;
 
 typedef struct s_stack {
 	int	*stack_a;
@@ -68,6 +77,11 @@ int		**ft_init_matrix(t_stack *guido);
 int		*ft_two_case(int *m_backup, int *j, int num);
 void	ft_three_case(int **m_backup, int j, int num);
 
+// PUSH_STACK_B
+void	ft_push_chunk(t_stack *guido);
+
 // PUSH_SWAP
+void	ft_algorithm(t_stack *guido);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 10:40:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/05/29 16:48:41 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/06 17:05:49 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,9 @@ void	ft_print_array(int *array, int len)
 	i = 0;
 	while (i < len)
 	{
-		ft_printf("%d   ", array[i]);
+		ft_printf("%d\n", array[i]);
 		i++;
 	}
-}
-
-int	is_in_string(char c, char *str)
-{
-	while (*str)
-	{
-		if (*str == c)
-			return (TRUE);
-		str++;
-	}
-	return (FALSE);
 }
 
 int	main(int ac, char **av)
@@ -47,7 +36,11 @@ int	main(int ac, char **av)
 			ft_split_strnbr(&guido, av);
 		ft_renumber_stack(&guido);
 		ft_lis(&guido);
-		ft_print_array(guido.lis, guido.size_lis);
+		ft_push_chunk(&guido);
+		ft_algorithm(&guido);
+		// ft_print_array(guido.stack_a, guido.size_a);
+		// write(1, "\n", 1);
+		// ft_print_array(guido.lis, guido.size_lis);
 		free(guido.stack_a);
 		free(guido.stack_b);
 		free(guido.lis);
