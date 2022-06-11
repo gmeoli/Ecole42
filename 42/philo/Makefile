@@ -6,14 +6,14 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 13:16:44 by gmeoli            #+#    #+#              #
-#    Updated: 2022/06/07 13:41:03 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/06/11 17:50:17 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 SRCS = *.c
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -pthread
 
 $(NAME):
 	gcc $(SRCS) $(FLAGS) -o $(NAME)
