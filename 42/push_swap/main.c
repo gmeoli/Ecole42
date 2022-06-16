@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 10:40:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/06 17:05:49 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/16 20:16:03 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ int	main(int ac, char **av)
 		ft_lis(&guido);
 		ft_push_chunk(&guido);
 		ft_algorithm(&guido);
-		// ft_print_array(guido.stack_a, guido.size_a);
-		// write(1, "\n", 1);
-		// ft_print_array(guido.lis, guido.size_lis);
 		free(guido.stack_a);
 		free(guido.stack_b);
 		free(guido.lis);

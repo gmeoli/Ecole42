@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/06 18:02:14 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/16 20:22:31 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_best {
 	int	moves;
 	int	ma;
+	int	mb;
 	int	na;
 	int	nb;
 	int	dir_a;
@@ -82,6 +83,8 @@ void	ft_push_chunk(t_stack *guido);
 
 // PUSH_SWAP
 void	ft_algorithm(t_stack *guido);
+void	ft_algorithm_2(t_stack *guido);
 
+// SPECIAL CONDITION
 
 #endif

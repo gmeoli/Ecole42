@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 15:54:32 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/05/22 16:46:33 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/16 20:15:41 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,17 @@ int	*ft_ardup(int *array, int size)
 		i++;
 	}
 	return (array2);
+}
+
+void	ft_free_matrix(int len, int **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
 }
