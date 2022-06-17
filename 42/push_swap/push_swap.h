@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/16 20:22:31 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/17 16:27:02 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ void	ft_free_matrix(int len, int **matrix);
 int		ft_index_min(t_stack *guido);
 int		*ft_ardup(int *array, int size);
 
+// SPECIAL CONDITION
+void	ft_special_condition(t_stack *guido);
+
 // LIS
 void	ft_renumber_stack(t_stack *guido);
 void	ft_lis(t_stack *guido);
@@ -85,6 +88,7 @@ void	ft_push_chunk(t_stack *guido);
 void	ft_algorithm(t_stack *guido);
 void	ft_algorithm_2(t_stack *guido);
 
-// SPECIAL CONDITION
+// BONUS
+int		ft_order(int *ar, int size);
 
 #endif

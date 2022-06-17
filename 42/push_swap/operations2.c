@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:51:54 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/04/23 01:17:19 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/17 20:14:18 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ void	ft_ra(t_stack *guido, int can_print)
 	int	i;
 	int	backup;
 
+	if (guido->size_a == 1)
+		return ;
+	else if (guido->size_a == 0)
+		ft_error();
 	backup = guido->stack_a[0];
 	i = 0;
 	while (i < guido->size_a - 1)
@@ -34,6 +38,10 @@ void	ft_rb(t_stack *guido, int can_print)
 	int	i;
 	int	backup;
 
+	if (guido->size_b == 1)
+		return ;
+	else if (guido->size_b == 0)
+		ft_error();
 	backup = guido->stack_b[0];
 	i = 0;
 	while (i < guido->size_b - 1)
@@ -59,6 +67,10 @@ void	ft_rra(t_stack *guido, int can_print)
 	int	i;
 	int	backup;
 
+	if (guido->size_a == 1)
+		return ;
+	else if (guido->size_a == 0)
+		ft_error();
 	i = 0;
 	while (i < guido->size_a)
 	{
@@ -81,6 +93,10 @@ void	ft_rrb(t_stack *guido, int can_print)
 	int	i;
 	int	backup;
 
+	if (guido->size_b == 1)
+		return ;
+	else if (guido->size_b == 0)
+		ft_error();
 	i = 0;
 	while (i < guido->size_b)
 	{

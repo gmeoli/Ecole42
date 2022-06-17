@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:24:55 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/16 19:12:22 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/17 16:26:19 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_push_chunk(t_stack *guido)
 	int	med;
 
 	med = guido->size_a / 4;
-	while (guido->size_a != guido->size_lis)
+	while (guido->size_a != guido->size_lis && med != 0)
 	{
 		i = -1;
 		while (++i < guido->size_a)
@@ -35,7 +35,8 @@ void	ft_push_chunk(t_stack *guido)
 			while (++j < guido->size_lis)
 				if (guido->stack_a[i] == guido->lis[j])
 					break ;
-			if (guido->stack_a[i] != guido->lis[j] && guido->stack_a[i] <= med)
+			if (guido->stack_a[i] != guido->lis[j] && \
+				(guido->stack_a[i] <= med || med < 3))
 			{
 				ft_push_away(guido->stack_a[i], guido);
 				i = -1;
