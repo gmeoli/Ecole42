@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 15:54:32 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/17 17:02:08 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/18 13:11:44 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,18 @@ void	ft_free_matrix(int len, int **matrix)
 		i++;
 	}
 	free(matrix);
+}
+
+int	ft_order(int *ar, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		if (ar[i] > ar[i + 1])
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }

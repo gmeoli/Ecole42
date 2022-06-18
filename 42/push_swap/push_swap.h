@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:32:57 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/17 16:27:02 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/18 13:17:53 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ typedef struct s_stack {
 	int	size_b;
 	int	size_lis;
 }	t_stack;
-
-/***************** ELIMINARE ******************/
-void	ft_print_array(int *array, int len);
-/***************** ELIMINARE ******************/
 
 // INIZIALIZZAZIONE STRUTTURA 
 void	ft_allocs_stack(t_stack *guido, int ac, char **av);

@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:36:28 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/17 20:00:39 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/18 14:43:44 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int ac, char **av)
 {
 	t_stack	guido;
 
-	if (ac >= 2)
+	if (ac >= 2 && av[1][0] != '\0')
 	{
 		if (ac > 2)
 			ft_allocs_stack(&guido, ac, av);
