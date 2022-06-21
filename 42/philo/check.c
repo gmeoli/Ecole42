@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:26:46 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/10 12:23:07 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/21 15:42:33 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	ft_contains_char(char **av)
 		while (av[i][j])
 		{
 			if ((av[i][j] < '0' || av[i][j] > '9') && av[i][j] != '+')
-				return (1);
+				return (TRUE);
 			j++;
 		}
 		i++;
 	}
-	return (0);
+	return (FALSE);
 }
 
 static int	ft_atoi_sign_check(const char *str, int i)
