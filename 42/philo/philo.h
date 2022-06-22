@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:22:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/21 16:54:57 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/22 23:04:59 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_philo {
 	int				end;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
-	pthread_mutex_t	philo_time;
 	pthread_t		thread;
 	struct s_data	*guido;
 }	t_philo;
@@ -42,7 +41,9 @@ typedef struct s_data {
 	long long		n_philosopher_must_eat;
 	long long		start;
 	int				death;
+	pthread_mutex_t	philo_time;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	lock;
 	t_philo			*meoli;
 }	t_data;
 
@@ -54,7 +55,10 @@ int			ft_contains_char(char **av);
 void		ft_error(void);
 long long	ft_get_time(void);
 int			ft_limits(long long nb);
+void		ft_print_msg(t_philo *meoli, int id, char *str);
+void		ft_my_sleep(long long time);
 
 //PHILO
+void		ft_thread(t_data *guido);
 
 #endif
