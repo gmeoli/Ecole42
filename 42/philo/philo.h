@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:22:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/22 23:04:59 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:08:43 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_data {
 	int				death;
 	pthread_mutex_t	philo_time;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	mutex_death;
+	pthread_mutex_t	mutex_must_eat;
 	pthread_mutex_t	lock;
 	t_philo			*meoli;
 }	t_data;

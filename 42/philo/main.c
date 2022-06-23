@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:23:07 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/22 23:04:30 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:09:05 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	ft_init_mutex(t_data *guido)
 
 	pthread_mutex_init(&guido->lock, NULL);
 	pthread_mutex_init(&guido->philo_time, NULL);
+	pthread_mutex_init(&guido->mutex_must_eat, NULL);
+	pthread_mutex_init(&guido->mutex_death, NULL);
 	guido->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) \
 		* guido->n);
 	if (guido->forks == NULL)
@@ -86,7 +88,9 @@ int	main(int ac, char **av)
 		if (ft_init_data(&guido, av, ac) == TRUE)
 			ft_error();
 		ft_init_philo(&guido);
-		// ft_thread(&guido);
+		ft_thread(&guido);
+		free(guido.forks);
+		free(guido.meoli);
 	}
 	else
 		ft_error();
