@@ -6,24 +6,11 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:46:44 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/23 15:37:08 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/27 17:35:09 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_take_fork(t_philo *ph)
-{
-	pthread_mutex_lock(&ph->right);
-	if (ft_check_death(ph))
-		ft_print_msg(ph, ph->id, "has taken a fork\n");
-	if (ph->guido->n == 1)
-		return (FALSE);
-	pthread_mutex_lock(&ph->left);
-	if (ft_check_death(ph))
-		ft_print_msg(ph, ph->id, "has taken a fork\n");
-	return (TRUE);
-}
 
 int	ft_check_death(t_philo *ph)
 {
@@ -33,6 +20,19 @@ int	ft_check_death(t_philo *ph)
 	temp = ph->guido->death;
 	pthread_mutex_unlock(&ph->guido->mutex_death);
 	return (temp);
+}
+
+int	ft_take_fork(t_philo *ph)
+{
+	pthread_mutex_lock(ph->right);
+	if (ft_check_death(ph))
+		ft_print_msg(ph, ph->id, "has taken a fork\n");
+	if (ph->guido->n == 1)
+		return (FALSE);
+	pthread_mutex_lock(ph->left);
+	if (ft_check_death(ph))
+		ft_print_msg(ph, ph->id, "has taken a fork\n");
+	return (TRUE);
 }
 
 void	ft_starving(t_philo *ph)
@@ -53,6 +53,7 @@ void	*ft_meal(void *meoli)
 		if (ft_take_fork(ph) == FALSE)
 			break ;
 	}
+	return (NULL);
 }
 
 void	ft_thread(t_data *guido)
@@ -65,6 +66,12 @@ void	ft_thread(t_data *guido)
 	{
 		pthread_create(&guido->meoli[i].thread, NULL, ft_meal, \
 			&guido->meoli[i]);
+		i++;
+	}
+	i = 0;
+	while (i < guido->n)
+	{
+		pthread_join(guido->meoli[i].thread, NULL);
 		i++;
 	}
 }
