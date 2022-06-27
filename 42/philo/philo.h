@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:22:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/23 15:08:43 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/27 18:55:12 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ void		ft_my_sleep(long long time);
 
 //PHILO
 void		ft_thread(t_data *guido);
+int			ft_check_death(t_philo *ph);
+void		ft_starving(t_philo *ph);
 
 #endif

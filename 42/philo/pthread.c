@@ -6,21 +6,11 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:46:44 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/27 17:35:09 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/27 19:07:40 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_check_death(t_philo *ph)
-{
-	int	temp;
-
-	pthread_mutex_lock(&ph->guido->mutex_death);
-	temp = ph->guido->death;
-	pthread_mutex_unlock(&ph->guido->mutex_death);
-	return (temp);
-}
 
 int	ft_take_fork(t_philo *ph)
 {
@@ -33,13 +23,6 @@ int	ft_take_fork(t_philo *ph)
 	if (ft_check_death(ph))
 		ft_print_msg(ph, ph->id, "has taken a fork\n");
 	return (TRUE);
-}
-
-void	ft_starving(t_philo *ph)
-{
-	pthread_mutex_lock(&ph->guido->philo_time);
-	ph->last_meal = ft_get_time() - ph->guido->start;
-	pthread_mutex_unlock(&ph->guido->philo_time);
 }
 
 void	*ft_meal(void *meoli)
@@ -56,6 +39,41 @@ void	*ft_meal(void *meoli)
 	return (NULL);
 }
 
+int	ft_finish(t_philo *meoli, int tmp, int i, int check)
+{
+	while (i < meoli->guido->n)
+	{
+		pthread_mutex_lock(&meoli->guido->philo_time);
+		tmp = ft_get_time() - meoli->guido->start - meoli[i].last_meal;
+		pthread_mutex_unlock(&meoli->guido->philo_time);
+		if (tmp > meoli->guido->t_death)
+		{
+			ft_check_death(meoli);
+			usleep(2000);
+			ft_print_msg(&meoli, meoli[i].id, "died");
+			return (TRUE);
+		}
+		///////////////////////////////////////////////////
+		i++;
+	}
+}
+
+void	ft_monitoring(t_data *guido)
+{
+	int	tmp;
+	int	i;
+	int	check;
+
+	tmp = 0;
+	i = 0;
+	check = 0;
+	while (TRUE)
+	{
+		if (ft_finish(guido->meoli, tmp, i, check))
+			break ;
+	}
+}
+
 void	ft_thread(t_data *guido)
 {
 	int	i;
@@ -69,6 +87,7 @@ void	ft_thread(t_data *guido)
 		i++;
 	}
 	i = 0;
+	ft_monitoring(guido);
 	while (i < guido->n)
 	{
 		pthread_join(guido->meoli[i].thread, NULL);
