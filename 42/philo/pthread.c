@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:46:44 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/27 19:07:40 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/28 18:24:15 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	ft_take_fork(t_philo *ph)
 {
 	pthread_mutex_lock(ph->right);
-	if (ft_check_death(ph))
+	if (ft_check_mutex(0, ph))
 		ft_print_msg(ph, ph->id, "has taken a fork\n");
 	if (ph->guido->n == 1)
-		return (FALSE);
+		return (TRUE);
 	pthread_mutex_lock(ph->left);
-	if (ft_check_death(ph))
+	if (ft_check_mutex(0, ph))
 		ft_print_msg(ph, ph->id, "has taken a fork\n");
-	return (TRUE);
+	return (FALSE);
 }
 
 void	*ft_meal(void *meoli)
@@ -31,10 +31,23 @@ void	*ft_meal(void *meoli)
 
 	ph = meoli;
 	ft_starving(ph);
-	while (ft_check_death(ph))
+	if (ph->id % 2 == 0)
+		ft_my_sleep(ph->guido->t_eat);
+	while (ft_check_mutex(0, ph))
 	{
-		if (ft_take_fork(ph) == FALSE)
+		if (ft_take_fork(ph))
 			break ;
+		if (ft_check_mutex(0, ph))
+			ft_print_msg(ph, ph->id, "is eating\n");
+		ph->n_to_eat++;
+		if (ph->n_to_eat == ph->guido->n_philosopher_must_eat)
+		{
+			pthread_mutex_lock(&ph->guido->mutex_must_eat);
+			ph->end = 1;
+			pthread_mutex_unlock(&ph->guido->mutex_must_eat);
+		}
+		ft_starving(ph);
+		ft_routine(ph);
 	}
 	return (NULL);
 }
@@ -50,28 +63,35 @@ int	ft_finish(t_philo *meoli, int tmp, int i, int check)
 		{
 			ft_check_death(meoli);
 			usleep(2000);
-			ft_print_msg(&meoli, meoli[i].id, "died");
+			ft_print_msg(&meoli[i], meoli[i].id, "died\n");
 			return (TRUE);
 		}
-		///////////////////////////////////////////////////
+		if (ft_check_mutex(1, &meoli[i]))
+			check++;
 		i++;
 	}
+	if (check == meoli->guido->n)
+	{
+		ft_check_death(meoli);
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
-void	ft_monitoring(t_data *guido)
+void	ft_exit(t_data *guido)
 {
-	int	tmp;
 	int	i;
-	int	check;
 
-	tmp = 0;
 	i = 0;
-	check = 0;
-	while (TRUE)
+	while (i < guido->n)
 	{
-		if (ft_finish(guido->meoli, tmp, i, check))
-			break ;
+		pthread_mutex_destroy(&guido->forks[i]);
+		pthread_mutex_destroy(&guido->philo_time);
+		i++;
 	}
+	pthread_mutex_destroy(&guido->lock);
+	pthread_mutex_destroy(&guido->mutex_death);
+	pthread_mutex_destroy(&guido->mutex_must_eat);
 }
 
 void	ft_thread(t_data *guido)
@@ -93,4 +113,5 @@ void	ft_thread(t_data *guido)
 		pthread_join(guido->meoli[i].thread, NULL);
 		i++;
 	}
+	ft_exit(guido);
 }

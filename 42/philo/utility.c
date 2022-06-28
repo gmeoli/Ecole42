@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 17:54:58 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/27 17:23:03 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/06/28 17:36:44 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(void)
 {
-	printf("Error\n");
+	write(2, "Error\n", 6);
 	exit(0);
 }
 
@@ -36,8 +36,7 @@ int	ft_limits(long long nb)
 void	ft_print_msg(t_philo *meoli, int id, char *str)
 {
 	pthread_mutex_lock(&meoli->guido->lock);
-	printf("%lld ", ft_get_time() - meoli->guido->start);
-	printf("%d %s", id, str);
+	printf("%lld %d %s", ft_get_time() - meoli->guido->start, id, str);
 	pthread_mutex_unlock(&meoli->guido->lock);
 }
 
