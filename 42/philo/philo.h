@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:22:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/28 18:23:00 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/04 16:25:42 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ int			ft_contains_char(char **av);
 void		ft_error(void);
 long long	ft_get_time(void);
 int			ft_limits(long long nb);
-void		ft_print_msg(t_philo *meoli, int id, char *str);
+void		ft_print_msg(t_philo *ph, int id, char *str);
 void		ft_my_sleep(long long time);
 
 //PHILO
 void		ft_thread(t_data *guido);
 void		ft_check_death(t_philo *ph);
 void		ft_starving(t_philo *ph);
-int			ft_check_mutex(int flag, t_philo *meoli);
-void		ft_monitoring(t_data *guido);
-int			ft_finish(t_philo *meoli, int tmp, int i, int check);
-void		ft_routine(t_philo *meoli);
+int			ft_check_mutex(int flag, t_philo *ph);
+void		ft_monitoring(void *philo);
+int			ft_finish(t_philo *ph, int tmp, int i, int check);
+void		ft_routine(t_philo *ph);
 
 #endif

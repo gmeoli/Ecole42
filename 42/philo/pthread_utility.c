@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 18:53:46 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/28 18:26:33 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/04 16:19:58 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,40 @@ void	ft_starving(t_philo *ph)
 	pthread_mutex_unlock(&ph->guido->philo_time);
 }
 
-int	ft_check_mutex(int flag, t_philo *meoli)
+int	ft_check_mutex(int flag, t_philo *ph)
 {
 	int	tmp;
 
 	tmp = 0;
 	if (flag == 0)
 	{
-		pthread_mutex_lock(&meoli->guido->mutex_death);
-		tmp = meoli->guido->death;
-		pthread_mutex_unlock(&meoli->guido->mutex_death);
+		pthread_mutex_lock(&ph->guido->mutex_death);
+		tmp = ph->guido->death;
+		pthread_mutex_unlock(&ph->guido->mutex_death);
 	}
-	else
+	else if (flag == 1)
 	{
-		pthread_mutex_lock(&meoli->guido->mutex_must_eat);
-		tmp = meoli->end;
-		pthread_mutex_unlock(&meoli->guido->mutex_must_eat);
+		pthread_mutex_lock(&ph->guido->mutex_must_eat);
+		tmp = ph->end;
+		pthread_mutex_unlock(&ph->guido->mutex_must_eat);
 	}
 	return (tmp);
 }
 
-void	ft_monitoring(t_data *guido)
+void	ft_monitoring(void *philo)
 {
-	int	tmp;
-	int	i;
-	int	check;
+	t_philo	*ph;
+	int		tmp;
+	int		i;
+	int		check;
 
 	tmp = 0;
 	i = 0;
 	check = 0;
+	ph = philo;
 	while (TRUE)
 	{
-		if (ft_finish(guido->meoli, tmp, i, check) == TRUE)
+		if (ft_finish(ph, tmp, i, check) == TRUE)
 			break ;
 	}
 }
