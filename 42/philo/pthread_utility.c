@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 18:53:46 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/04 16:19:58 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:57:07 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_check_mutex(int flag, t_philo *ph)
 	return (tmp);
 }
 
-void	ft_monitoring(void *philo)
+void	ft_monitoring(t_philo *philo)
 {
 	t_philo	*ph;
 	int		tmp;
@@ -66,7 +66,6 @@ void	ft_monitoring(void *philo)
 
 void	ft_routine(t_philo *ph)
 {
-	ft_my_sleep(ph->guido->t_eat);
 	pthread_mutex_unlock(ph->right);
 	pthread_mutex_unlock(ph->left);
 	if (ft_check_mutex(0, ph))

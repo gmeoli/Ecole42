@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:22:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/04 16:25:42 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:20:07 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		ft_thread(t_data *guido);
 void		ft_check_death(t_philo *ph);
 void		ft_starving(t_philo *ph);
 int			ft_check_mutex(int flag, t_philo *ph);
-void		ft_monitoring(void *philo);
+void		ft_monitoring(t_philo *philo);
 int			ft_finish(t_philo *ph, int tmp, int i, int check);
 void		ft_routine(t_philo *ph);
 

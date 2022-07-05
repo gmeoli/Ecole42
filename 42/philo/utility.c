@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 17:54:58 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/06/28 17:36:44 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:32:50 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_my_sleep(long long time)
 	long long	i;
 
 	i = ft_get_time();
-	usleep(i * 1000 - 20000);
+	usleep(time * 1000 - 20000);
 	while (ft_get_time() < i + time)
 		continue ;
 }
