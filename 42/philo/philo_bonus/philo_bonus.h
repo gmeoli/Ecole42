@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:22:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/13 16:49:18 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/15 17:39:59 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data {
 	long long		n_philosopher_must_eat;
 	long long		start;
 	int				death;
+	sem_t			*print;
 	pid_t			*pid;
 	sem_t			*forks;
 	sem_t			*finish;

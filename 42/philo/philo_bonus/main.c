@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:23:07 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/13 16:49:57 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/15 17:41:03 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_init_philo(t_data *guido)
 		guido->meoli[i].n_to_eat = 0;
 		guido->meoli[i].end = 0;
 		guido->meoli[i].guido = guido;
+		guido->meoli[i].last_meal = 0;
 		i++;
 	}
 }
@@ -52,6 +53,7 @@ int	ft_init_data(t_data *guido, char **av, int ac)
 	guido->t_sleep = ft_atoi(av[4]);
 	guido->forks = ft_init_sem(guido->forks, "/forks", guido->n);
 	guido->finish = ft_init_sem(guido->finish, "/finish", 0);
+	guido->print = ft_init_sem(guido->print, "/print", 1);
 	guido->pid = malloc(sizeof(pid_t) * guido->n);
 	if (ac == 6)
 	{

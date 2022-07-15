@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 17:54:58 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/13 17:02:10 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/15 17:25:38 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ void	ft_my_sleep(long long time)
 
 void	ft_print_msg(t_philo *meoli, int id, char *str)
 {
+	sem_wait(meoli->guido->print);
 	printf("%lld %d %s", ft_get_time() - meoli->guido->start, id, str);
+	sem_post(meoli->guido->print);
 }

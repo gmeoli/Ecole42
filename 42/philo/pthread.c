@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:46:44 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/05 16:55:23 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/15 16:52:21 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_finish(t_philo *ph, int tmp, int i, int check)
 		if (tmp > ph->guido->t_death)
 		{
 			ft_check_death(ph);
-			usleep(200);
+			usleep(2000);
 			ft_print_msg(&ph[i], ph[i].id, "died\n");
 			return (TRUE);
 		}
