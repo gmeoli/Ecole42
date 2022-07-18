@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:23:07 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/15 17:41:03 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/18 20:38:10 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,55 +21,50 @@ void	ft_init_philo(t_data *guido)
 	{
 		guido->meoli[i].id = i + 1;
 		guido->meoli[i].n_to_eat = 0;
-		guido->meoli[i].end = 0;
 		guido->meoli[i].guido = guido;
-		guido->meoli[i].last_meal = 0;
 		i++;
 	}
 }
 
-sem_t	*ft_init_sem(sem_t *sem, char *str, long long n)
+static sem_t	*ft_init_sem(sem_t *sem, const char *str, unsigned int n)
 {
 	sem_t	*ret;
 
-	if (sem_open(str, O_CREAT | O_EXCL, n) == SEM_FAILED)
-	{
-		sem_unlink(str);
-		sem_close(sem);
-		ret = sem_open(str, O_CREAT | O_EXCL, n);
-	}
-	else
-		ret = sem_open(str, O_CREAT | O_EXCL, n);
-	return (ret);
+	ret = sem_open(str, O_CREAT | O_EXCL, 0644, n);
+	if (ret != SEM_FAILED)
+		return (ret);
+	sem_unlink(str);
+	sem_close(sem);
+	return (sem_open(str, O_CREAT, 0644, n));
 }
 
 int	ft_init_data(t_data *guido, char **av, int ac)
 {
-	if (ft_contains_char(av) == TRUE)
-		return (TRUE);
+	if (ft_contains_char(av) == FALSE)
+		return (FALSE);
 	guido->n = ft_atoi(av[1]);
 	guido->t_death = ft_atoi(av[2]);
 	guido->t_eat = ft_atoi(av[3]);
 	guido->t_sleep = ft_atoi(av[4]);
-	guido->forks = ft_init_sem(guido->forks, "/forks", guido->n);
+	guido->fork = ft_init_sem(guido->fork, "/forks", guido->n);
 	guido->finish = ft_init_sem(guido->finish, "/finish", 0);
 	guido->print = ft_init_sem(guido->print, "/print", 1);
-	guido->pid = malloc(sizeof(pid_t) * guido->n);
+	guido->end = ft_init_sem(guido->end, "/end", 0);
+	// guido->pid = malloc(sizeof(pid_t) * guido->n);
 	if (ac == 6)
 	{
 		guido->n_philosopher_must_eat = ft_atoi(av[5]);
-		if (ft_limits(guido->n_philosopher_must_eat) == TRUE)
-			return (TRUE);
+		if (ft_limits(guido->n_philosopher_must_eat) == FALSE)
+			return (FALSE);
 	}
-	guido->death = 1;
-	if (ft_limits(guido->n) == TRUE || ft_limits(guido->t_death) == TRUE \
-			|| ft_limits(guido->t_eat) == TRUE || ft_limits(guido->t_sleep) \
-			== TRUE)
-		return (TRUE);
+	if (ft_limits(guido->n) == FALSE || ft_limits(guido->t_death) == FALSE \
+			|| ft_limits(guido->t_eat) == FALSE || ft_limits(guido->t_sleep) \
+			== FALSE)
+		return (FALSE);
 	guido->meoli = (t_philo *)malloc(sizeof(t_philo) * guido->n);
 	if (guido->meoli == NULL)
-		return (TRUE);
-	return (FALSE);
+		return (FALSE);
+	return (TRUE);
 }
 
 int	main(int ac, char **av)
@@ -78,7 +73,7 @@ int	main(int ac, char **av)
 
 	if (ac == 5 || ac == 6)
 	{
-		if (ft_init_data(&guido, av, ac) == TRUE)
+		if (ft_init_data(&guido, av, ac) == FALSE)
 			ft_error();
 		ft_init_philo(&guido);
 		ft_fork(&guido);

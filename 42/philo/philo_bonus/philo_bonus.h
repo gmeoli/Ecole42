@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:22:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/15 17:39:59 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/18 20:37:12 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/time.h>
 # include <signal.h>
 # include <semaphore.h>
+# include <fcntl.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -28,7 +29,7 @@ typedef struct s_philo {
 	int				n_to_eat;
 	int				id;
 	long long		last_meal;
-	int				end;
+	pid_t			pid;
 	pthread_t		thread;
 	struct s_data	*guido;
 }	t_philo;
@@ -40,11 +41,10 @@ typedef struct s_data {
 	long long		t_sleep;
 	long long		n_philosopher_must_eat;
 	long long		start;
-	int				death;
 	sem_t			*print;
-	pid_t			*pid;
-	sem_t			*forks;
+	sem_t			*fork;
 	sem_t			*finish;
+	sem_t			*end;
 	t_philo			*meoli;
 }	t_data;
 

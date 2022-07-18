@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 17:54:58 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/15 17:25:38 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/18 20:00:58 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ long long	ft_get_time(void)
 int	ft_limits(long long nb)
 {
 	if (nb <= 0 || nb > 2147483647)
-		return (TRUE);
-	return (FALSE);
+		return (FALSE);
+	return (TRUE);
 }
 
 void	ft_my_sleep(long long time)
@@ -38,9 +38,8 @@ void	ft_my_sleep(long long time)
 	long long	i;
 
 	i = ft_get_time();
-	usleep(time * 1000 - 20000);
-	while (ft_get_time() < i + time)
-		continue ;
+	while (time > ft_get_time() - i)
+		usleep(50);
 }
 
 void	ft_print_msg(t_philo *meoli, int id, char *str)

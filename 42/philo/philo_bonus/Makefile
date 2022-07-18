@@ -6,14 +6,14 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 13:16:44 by gmeoli            #+#    #+#              #
-#    Updated: 2022/07/15 17:15:39 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/07/18 19:04:57 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo_bonus
 SRCS = *.c
 
-FLAGS = -Wall -Wextra -Werror -pthread #-fsanitize=address -g3
+FLAGS = -Wall -Wextra -Werror -pthread
 $(NAME):
 	gcc $(SRCS) $(FLAGS) -o $(NAME)
 

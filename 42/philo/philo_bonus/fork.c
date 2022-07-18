@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 16:19:56 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/15 17:50:58 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/18 20:38:07 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,59 +20,60 @@ void	ft_kill_all(t_data *guido)
 	sem_wait(guido->finish);
 	while (i < guido->n)
 	{
-		kill(guido->pid[i], SIGTERM);
+		kill(guido->meoli[i].pid, SIGTERM);
 		i++;
 	}
 }
 
 void	ft_take_forks(t_philo *meoli)
 {
-	sem_wait(meoli->guido->forks);
+	sem_wait(meoli->guido->fork);
 	ft_print_msg(meoli, meoli->id, "has taken a fork\n");
-	sem_wait(meoli->guido->forks);
+	sem_wait(meoli->guido->fork);
 	ft_print_msg(meoli, meoli->id, "has taken a fork\n");
 }
 
 void	*ft_monitoring(void *meoli)
 {
-	long long		tmp;
-	t_philo	*ph;
+	t_philo		*ph;
+	long long	tmp;
 
 	ph = meoli;
-	tmp  = 0;
-	printf("LAST: %lld\n", ph->last_meal);
+	tmp = 0;
 	while (TRUE)
 	{
-		tmp = (ft_get_time() - ph->guido->start) - ph->last_meal;
-		// printf("TMP: %lld\n", tmp);
+		tmp = ft_get_time() - ph->guido->start - ph->last_meal;
 		if (tmp > ph->guido->t_death)
 		{
-			// ft_print_msg(ph, ph->id, "died\n");
+			ft_print_msg(ph, ph->id, "died\n");
 			exit(0);
 		}
 	}
 	return (NULL);
 }
 
-void	ft_meal(t_philo *meoli)
+void	*ft_meal(t_philo *meoli)
 {
-	pthread_create(&meoli->thread, NULL, ft_monitoring, &meoli);
+	t_data	*guido;
+
+	guido = meoli->guido;
+	meoli->last_meal = ft_get_time() - meoli->guido->start;
+	// pthread_create(&meoli->thread, NULL, ft_monitoring, &meoli);
 	if (meoli->id % 2 == 0)
 		ft_my_sleep(meoli->guido->t_eat);
 	while (TRUE)
 	{
 		ft_take_forks(meoli);
 		meoli->last_meal = ft_get_time() - meoli->guido->start;
-		printf("LAST: %lld\t%lld\n", ft_get_time(), meoli->guido->start);
-		printf("TOT: %lld\n", meoli->last_meal);
 		ft_print_msg(meoli, meoli->id, "is eating\n");
 		ft_my_sleep(meoli->guido->t_eat);
-		sem_post(meoli->guido->forks);
-		sem_post(meoli->guido->forks);
+		// sem_post(meoli->guido->fork);
+		// sem_post(meoli->guido->fork);
 		ft_print_msg(meoli, meoli->id, "is sleeping\n");
 		ft_my_sleep(meoli->guido->t_sleep);
 		ft_print_msg(meoli, meoli->id, "is thinking\n");
 	}
+	return (NULL);
 }
 
 void	ft_fork(t_data *guido)
@@ -83,14 +84,16 @@ void	ft_fork(t_data *guido)
 	guido->start = ft_get_time();
 	while (i < guido->n)
 	{
-		guido->pid[i] = fork();
-		if (guido->pid[i] == 0)
+		guido->meoli[i].pid = fork();
+		if (guido->meoli[i].pid == 0)
 		{
+			// pthread_create(&guido->meoli[i].thread, NULL, ft_monitoring, \
+			// 	&guido->meoli[i]);
 			ft_meal(&guido->meoli[i]);
-			return ;
 		}
 		i++;
 	}
-	waitpid(-1, NULL, 0);
+	// sem_wait(guido->end);
 	ft_kill_all(guido);
+	// waitpid(-1, NULL, 0);
 }
