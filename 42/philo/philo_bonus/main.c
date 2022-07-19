@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:23:07 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/18 20:38:10 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/19 17:07:09 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ int	ft_init_data(t_data *guido, char **av, int ac)
 	guido->t_death = ft_atoi(av[2]);
 	guido->t_eat = ft_atoi(av[3]);
 	guido->t_sleep = ft_atoi(av[4]);
-	guido->fork = ft_init_sem(guido->fork, "/forks", guido->n);
-	guido->finish = ft_init_sem(guido->finish, "/finish", 0);
-	guido->print = ft_init_sem(guido->print, "/print", 1);
-	guido->end = ft_init_sem(guido->end, "/end", 0);
-	// guido->pid = malloc(sizeof(pid_t) * guido->n);
 	if (ac == 6)
 	{
 		guido->n_philosopher_must_eat = ft_atoi(av[5]);
@@ -61,6 +56,10 @@ int	ft_init_data(t_data *guido, char **av, int ac)
 			|| ft_limits(guido->t_eat) == FALSE || ft_limits(guido->t_sleep) \
 			== FALSE)
 		return (FALSE);
+	guido->fork = ft_init_sem(guido->fork, "/forks", guido->n);
+	guido->finish = ft_init_sem(guido->finish, "/finish", 0);
+	guido->print = ft_init_sem(guido->print, "/print", 1);
+	guido->end = ft_init_sem(guido->end, "/end", 0);
 	guido->meoli = (t_philo *)malloc(sizeof(t_philo) * guido->n);
 	if (guido->meoli == NULL)
 		return (FALSE);
