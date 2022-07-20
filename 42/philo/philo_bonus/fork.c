@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 16:19:56 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/20 18:17:57 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/21 00:18:08 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	ft_kill_all(t_data *guido)
 	sem_unlink("/message");
 	sem_close(guido->end);
 	sem_unlink("/end");
-	sem_close(guido->must_eat);
-	sem_unlink("/must_eat");
 }
 
 void	ft_take_forks(t_philo *meoli)
@@ -57,11 +55,6 @@ void	*ft_monitoring(void *meoli)
 			sem_post(ph->guido->end);
 			exit(0);
 		}
-		// if (ph->n_to_eat == ph->guido->n_philosopher_must_eat)
-		// {
-		// 	sem_post(ph->guido->must_eat);
-		// 	return (NULL);
-		// }
 	}
 	return (NULL);
 }
@@ -78,12 +71,6 @@ void	*ft_check_must_eat(void *guido)
 		sem_wait(data->must_eat);
 		i++;
 	}
-	i = 0;
-	while (i < data->n)
-	{
-		kill(data->meoli[i].pid, SIGKILL);
-		i++;
-	}
 	sem_post(data->end);
 	return (NULL);
 }
@@ -95,16 +82,14 @@ void	*ft_meal(void *meoli)
 	ph = meoli;
 	ph->last_meal = ft_get_time() - ph->guido->start;
 	pthread_create(&ph->thread, NULL, ft_monitoring, ph);
-	if (ph->id % 2 == 0)
-		ft_my_sleep(ph->guido->t_eat);
 	while (TRUE)
 	{
 		ft_take_forks(ph);
 		ph->last_meal = ft_get_time() - ph->guido->start;
 		ft_print_msg(ph, ph->id, "is eating\n");
 		ph->n_to_eat++;
-		// if (ph->n_to_eat == ph->guido->n_philosopher_must_eat)
-		// 	sem_post(ph->guido->must_eat);
+		if (ph->n_to_eat == ph->guido->n_philosopher_must_eat)
+			sem_post(ph->guido->must_eat);
 		ph->last_meal = ft_get_time() - ph->guido->start;
 		ft_my_sleep(ph->guido->t_eat);
 		sem_post(ph->guido->fork);
@@ -123,11 +108,6 @@ void	ft_fork(t_data *guido)
 	i = 0;
 	guido->start = ft_get_time();
 	pthread_create(&guido->eat, NULL, ft_check_must_eat, guido);
-	// if (fork() == 0)
-	// {
-	// 	ft_check_must_eat(guido);
-	// 	return ;
-	// }
 	while (i < guido->n)
 	{
 		guido->meoli[i].pid = fork();

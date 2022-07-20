@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:23:07 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/20 18:04:18 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/21 00:17:36 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static sem_t	*ft_init_sem(sem_t *sem, const char *str, unsigned int n)
 {
 	sem_t	*ret;
 
+	(void)sem;
 	ret = sem_open(str, O_CREAT | O_EXCL, 0644, n);
 	if (ret != SEM_FAILED)
 		return (ret);
 	sem_unlink(str);
-	sem_close(sem);
 	return (sem_open(str, O_CREAT, 0644, n));
 }
 
