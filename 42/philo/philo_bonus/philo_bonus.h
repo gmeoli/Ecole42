@@ -6,7 +6,7 @@
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:22:53 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/07/20 16:07:23 by gmeoli           ###   ########.fr       */
+/*   Updated: 2022/07/21 13:09:19 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		ft_print_msg(t_philo *guido, int id, char *str);
 void		ft_my_sleep(long long time);
 
 //PHILO
+void		ft_kill_all(t_data *guido);
 void		ft_fork(t_data *guido);
 
 #endif
