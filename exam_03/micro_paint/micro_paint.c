@@ -21,7 +21,7 @@ int main(int ac, char **av)
         return (str_error("Error: Operation file corrupted\n", 1));
     scan_ret = fscanf(fd,"%d %d %c\n", &width, &height, &background);
     if (scan_ret != 3)
-        return (1);
+        return (str_error("Error: Operation file corrupted\n", 1));
     if (width <= 0 || width > 300 || height <= 0 || height > 300)
         return (str_error("Error: Operation file corrupted\n", 1));
     drawing = (char *)malloc(sizeof(char) * (width * height));
