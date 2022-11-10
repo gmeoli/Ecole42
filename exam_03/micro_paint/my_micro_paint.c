@@ -33,6 +33,8 @@ int main(int ac, char **av){
 			}
 			drawing[i] = '\0';
 		}
+		else
+			return (str_error("Error: Operation file corrupted\n", 1));
 	}
 	char	type;
 	float	Y;
@@ -58,7 +60,7 @@ int main(int ac, char **av){
 					if ((x - X) < 1.00000000 || ((X + r_width) - x < 1.00000000) || (y - Y) < 1.00000000 || ((Y + r_height) - y < 1.00000000))
 						drawing[(y * width) + x] = color;
 					else if (type == 'R')
-						drawing[(y * width) + x] = color;
+						drawing[(y * width)] = color;
 				}
 				x++;
 			}
