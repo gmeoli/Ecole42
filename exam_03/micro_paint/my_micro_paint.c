@@ -23,7 +23,7 @@ int main(int ac, char **av){
 	{
 		if (width > 0 && width <= 300 && height > 0 && height <= 300)
 		{
-			drawing = (char *)malloc(sizeof(char) * (width * height));
+			drawing = (char *)malloc(sizeof(char) * (width * height) + 1);
 			if (!drawing)
 				return (1);
 			while (i < (width * height))
