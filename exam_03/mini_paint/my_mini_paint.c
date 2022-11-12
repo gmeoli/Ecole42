@@ -3,33 +3,22 @@
 #include <stdlib.h>
 #include <math.h>
 
-int ft_strlen(const char *str)
-{
-	int	i;
+int ft_strlen(const char *str){int	i;i = 0;while (str[i])i++;return (i);}
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int ft_print_error(const char *str, int ret)
-{
-	write(1, str, ft_strlen(str));
-	return (ret);
-}
+int ft_print_error(const char *str, int ret){write(1, str, ft_strlen(str));return (ret);}
 
 int main(int ac, char **av)
 {
 	int		WIDTH;
 	int		HEIGHT;
 	FILE	*fd;
-	char	*drawing;
+	char	**matrix;
 	char	BACKGROUND;
 	int		scan_ret;
 	int		i;
+	int		j;
 
-	drawing = NULL;
+	matrix = NULL;
 	i = 0;
 	if (ac == 2)
 	{
@@ -37,39 +26,77 @@ int main(int ac, char **av)
 			return (ft_print_error("Error: Operation file corrupted\n", 1));
 		scan_ret = fscanf(fd, "%d %d %c\n", &WIDTH, &HEIGHT, &BACKGROUND);
 		if (scan_ret == 3)
+		{
+			if ((WIDTH > 0 && WIDTH <= 300) && (HEIGHT > 0 && HEIGHT <= 300))
 			{
-				if ((WIDTH > 0 && WIDTH <= 300) && (HEIGHT > 0 && HEIGHT <= 300))
+				matrix = malloc(sizeof(char *) * HEIGHT + 1);
+				while (i < HEIGHT)
 				{
-					drawing = (char *)malloc(sizeof(char) * (WIDTH * HEIGHT) + 1);
-					if (!drawing)
-						return (1);
-					while (i < (WIDTH * HEIGHT))
+					matrix[i] = malloc(sizeof(char) * WIDTH + 1);
+					j = 0;
+					while (j < WIDTH)
 					{
-						drawing[i] = BACKGROUND;
-						i++;
+						matrix[i][j] = BACKGROUND;
+						j++;
 					}
-					drawing[i] = 0;
+					matrix[i][j] = '\0';
+					i++;
+				}
+				matrix[i] = NULL;
+			}
+			else
+				return (ft_print_error("Error: Operation file corrupted\n", 1));
+		}
+		else
+			return (ft_print_error("Error: Operation file corrupted\n", 1));
+	float	Y;
+	float	X;
+	float 	radius;
+	char  	c;
+	char  	stamp;
+	float 	appoggio;
+
+	while ((scan_ret = fscanf(fd, "%c %f %f %f %c\n", &c, &X, &Y, &radius, &stamp)) == 5)
+	{
+		i = 0;
+		while (i < HEIGHT)
+		{
+			j = 0;
+			while (j < WIDTH)
+			{
+				appoggio = sqrtf((X - j) * (X - j) + (Y - i) * (Y - i));
+				if ((c == 'c' || c == 'C') && radius > 0.00)
+				{
+					if (c == 'c' && radius - appoggio < 1.00 && radius - appoggio >= 0)
+						matrix[i][j] = stamp;
+					else if (c == 'C' && radius - appoggio >= 0 )
+						matrix[i][j] = stamp;
 				}
 				else
 					return (ft_print_error("Error: Operation file corrupted\n", 1));
+				j++;
 			}
-		else
-			return (ft_print_error("Error: Operation file corrupted\n", 1));
-		if (scan_ret == -1)
-		{
-			i = 0;
-			while (drawing[i])
-			{
-				if (i != 0 && (i % WIDTH == 0))
-					write(1, "\n", 1);
-				write(1, &drawing[i], 1);
-				i++;
-			}
+			i++;
 		}
+	}
+	if (scan_ret != -1)
+		return (ft_print_error("Error: Operation file corrupted\n", 1));
+	i = 0;
+	while (matrix[i])
+	{
+		printf("%s\n", matrix[i]);
+		i++;
+	}
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+	fclose(fd);
 	}
 	else
 		return (ft_print_error("Error: argument\n", 1));
-	free(drawing);
-	fclose(fd);
 	return (0);
 }
