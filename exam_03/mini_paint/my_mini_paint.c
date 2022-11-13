@@ -19,7 +19,6 @@ int main(int ac, char **av)
 	int		j;
 
 	matrix = NULL;
-	i = 0;
 	if (ac == 2)
 	{
 		if (!(fd = fopen(av[1], "r")))
@@ -30,6 +29,7 @@ int main(int ac, char **av)
 			if ((WIDTH > 0 && WIDTH <= 300) && (HEIGHT > 0 && HEIGHT <= 300))
 			{
 				matrix = malloc(sizeof(char *) * HEIGHT + 1);
+				i = 0;
 				while (i < HEIGHT)
 				{
 					matrix[i] = malloc(sizeof(char) * WIDTH + 1);
