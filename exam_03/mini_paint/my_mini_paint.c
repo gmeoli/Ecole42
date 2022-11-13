@@ -9,16 +9,13 @@ int ft_print_error(const char *str, int ret){write(1, str, ft_strlen(str));retur
 
 int main(int ac, char **av)
 {
-	int		WIDTH;
-	int		HEIGHT;
 	FILE	*fd;
-	char	**matrix;
+	int		WIDTH, HEIGHT;
 	char	BACKGROUND;
+	char	**matrix;
+	int		i, j;
 	int		scan_ret;
-	int		i;
-	int		j;
 
-	matrix = NULL;
 	if (ac == 2)
 	{
 		if (!(fd = fopen(av[1], "r")))
@@ -49,12 +46,9 @@ int main(int ac, char **av)
 		}
 		else
 			return (ft_print_error("Error: Operation file corrupted\n", 1));
-	float	Y;
-	float	X;
-	float 	radius;
-	char  	c;
-	char  	stamp;
-	float 	appoggio;
+	
+	float	Y, X, radius, appoggio;
+	char	c, stamp;
 
 	while ((scan_ret = fscanf(fd, "%c %f %f %f %c\n", &c, &X, &Y, &radius, &stamp)) == 5)
 	{
