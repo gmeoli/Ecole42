@@ -84,7 +84,9 @@ int main(int ac, char **av)
 	i = 0;
 	while (matrix[i])
 	{
-		printf("%s\n", matrix[i]);
+		if (i != 0 && j % WIDTH == 0)
+			write(1, "\n", 1);
+		write(1, matrix[i], ft_strlen(matrix[i]));
 		i++;
 	}
 	i = 0;
