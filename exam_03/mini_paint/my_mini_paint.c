@@ -97,8 +97,8 @@ int main(int ac, char **av)
 	}
 	free(matrix);
 	fclose(fd);
+	return (0);
 	}
 	else
 		return (ft_print_error("Error: argument\n", 1));
-	return (0);
 }
