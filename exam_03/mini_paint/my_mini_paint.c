@@ -9,15 +9,15 @@ int ft_print_error(const char *str, int ret){write(1, str, ft_strlen(str));retur
 
 int main(int ac, char **av)
 {
-	FILE	*fd;
-	int		WIDTH, HEIGHT;
-	char	BACKGROUND;
-	char	**matrix;
-	int		i, j;
-	int		scan_ret;
-
 	if (ac == 2)
 	{
+		FILE	*fd;
+		int		WIDTH, HEIGHT;
+		char	BACKGROUND;
+		char	**matrix;
+		int		i, j;
+		int		scan_ret;
+	
 		if (!(fd = fopen(av[1], "r")))
 			return (ft_print_error("Error: Operation file corrupted\n", 1));
 		scan_ret = fscanf(fd, "%d %d %c\n", &WIDTH, &HEIGHT, &BACKGROUND);
