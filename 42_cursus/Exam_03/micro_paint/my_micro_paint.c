@@ -1,85 +1,92 @@
-#include <unistd.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-int ft_strlen(char const *str) {int i = 0; while (str[i]) i++; return (i);}
+int ft_strlen(const char *str){int i = 0;while(str[i])i++;return(i);}
 
-int	str_error(char const *str, int ret){write(1, str, ft_strlen(str));return (ret);}
+int print_err(const char *str, int err){write(1, str, ft_strlen(str));return(err);}
 
-int main(int ac, char **av){
-	FILE	*fd;
-	char 	background;
-	int 	height = 0;
-	int 	width = 0;
-	int		scan_ret = 0;
-	int 	i = 0;
-	char	*drawing = NULL;
-	if (ac != 2)
-		return (str_error("Error: argument\n", 1));
-	if (!(fd = fopen(av[1], "r")))
-		return (str_error("Error: Operation file corrupted\n", 1));
-	scan_ret = fscanf(fd, "%d %d %c\n", &width, &height, &background);
-	if (scan_ret == 3)
+int main(int ac, char **av)
+{
+	if (ac == 2)
 	{
-		if (width > 0 && width <= 300 && height > 0 && height <= 300)
+		FILE *fd;
+		char **matrix, BACKGROUND;
+		int i, j, scan_ret, WIDTH, HEIGHT;
+
+		if (!(fd = fopen(av[1], "r")))
+			return (print_err("Error: Operation file corrupted\n", 1));
+		scan_ret = fscanf(fd, "%d %d %c\n", &WIDTH, &HEIGHT, &BACKGROUND);
+		if (scan_ret == 3)
 		{
-			drawing = (char *)malloc(sizeof(char) * (width * height) + 1);
-			if (!drawing)
-				return (1);
-			while (i < (width * height))
+			if ((WIDTH > 0 && WIDTH <= 300) && (HEIGHT > 0 && HEIGHT <= 300))
 			{
-				drawing[i] = background;
-				i++;
+				matrix = malloc(sizeof(char *) * HEIGHT + 1);
+				i = 0;
+				while (i < HEIGHT)
+				{
+					matrix[i] = malloc(sizeof(char) * WIDTH + 1);
+					j = 0;
+					while (j < WIDTH)
+					{
+						matrix[i][j] = BACKGROUND;
+						j++;
+					}
+					matrix[i][j] = '\0';
+					i++;
+				}
+				matrix[i] = NULL;
 			}
-			drawing[i] = '\0';
+			else
+				return (print_err("Error: Operation file corrupted\n", 1));
 		}
 		else
-			return (str_error("Error: Operation file corrupted\n", 1));
-	}
-	char	type;
-	float	Y;
-	float	X;
-	float	r_height;
-	float	r_width;
-	char	color;
-	int		x = 0;
-	int		y = 0;
-	scan_ret = fscanf(fd, "%c %f %f %f %f %c\n", &type, &X, &Y, &r_width, &r_height, &color);
-	if (((r_width <= 0.00000000) || (r_height <= 0.00000000) || ((type != 'R') && (type != 'r'))))
-		return (str_error("Error\n", 1));
-	while (scan_ret == 6)
-	{
-		y = 0;
-		while (y < height)
+			return (print_err("Error: Operation file corrupted\n", 1));
+		
+		float	Xl, Yl, width, height, Xr, Yr;
+		char	r, draw;
+
+		while ((scan_ret = fscanf(fd, "%c %f %f %f %f %c\n", &r, &Xl, &Yl, &width, &height, &draw)) == 6)
 		{
-			x = 0;
-			while (x < width)
+			if (r != 'r' && r != 'R')
+				return (print_err("Error: Operation file corrupted\n", 1));
+			Xr = (Xl + width);
+			Yr = (Yl + height);
+			i = -1;
+			while (++i < HEIGHT)
 			{
-				if ((X <= x && (x <= X + r_width)) && (Y <= y && (y <= Y + r_height)))
+				j = -1;
+				while (++j < WIDTH)
 				{
-					if ((x - X) < 1.00000000 || ((X + r_width) - x < 1.00000000) || (y - Y) < 1.00000000 || ((Y + r_height) - y < 1.00000000))
-						drawing[(y * width) + x] = color;
-					else if (type == 'R')
-						drawing[(y * width)] = color;
+					if (r == 'r' && (Xl + 1.00) <= j && j <= (Xr - 1.00) && (Yl + 1.00) <= i && i <= (Yr - 1.00))
+						continue ;
+					if (j < Xl || j > Xr || i < Yl || i > Yr)
+						continue ;
+					matrix[i][j] = draw;
 				}
-				x++;
 			}
-			y++;
 		}
-		scan_ret = fscanf(fd, "%c %f %f %f %f %c\n", &type, &X, &Y, &r_width, &r_height, &color);
-	}
-	if (scan_ret == -1)
-	{
+		if (scan_ret != -1)
+			return (print_err("Error: Operation file corrupted\n", 1));
 		i = 0;
-		while (drawing[i])
+		while (matrix[i])
 		{
-			if (i != 0 && i % width == 0)
-				write (1, "\n", 1);
-			write(1, &drawing[i], 1);
+			if (i != 0 && (j % WIDTH == 0))
+				write(1, "\n", 1);
+			write(1, matrix[i], ft_strlen(matrix[i]));
 			i++;
 		}
+		i = 0;
+		while (matrix[i])
+		{
+			free(matrix[i]);
+			i++;
+		}
+		free(matrix);
+		fclose(fd);
+		return (0);
 	}
-	free(drawing);
-	fclose(fd);
-	return (0);
+	else
+		return (print_err("Error: argument\n", 1));
 }
