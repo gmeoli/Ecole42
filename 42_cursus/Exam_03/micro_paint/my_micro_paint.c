@@ -23,10 +23,14 @@ int main(int ac, char **av)
 			if ((WIDTH > 0 && WIDTH <= 300) && (HEIGHT > 0 && HEIGHT <= 300))
 			{
 				matrix = malloc(sizeof(char *) * HEIGHT + 1);
+				if (!matrix)
+					return (print_err("Error: Operation file corrupted\n", 1));
 				i = 0;
 				while (i < HEIGHT)
 				{
 					matrix[i] = malloc(sizeof(char) * WIDTH + 1);
+					if (!matrix[i])
+						return (print_err("Error: Operation file corrupted\n", 1));
 					j = 0;
 					while (j < WIDTH)
 					{
