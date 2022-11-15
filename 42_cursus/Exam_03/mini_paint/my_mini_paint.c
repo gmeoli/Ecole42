@@ -26,10 +26,14 @@ int main(int ac, char **av)
 			if ((WIDTH > 0 && WIDTH <= 300) && (HEIGHT > 0 && HEIGHT <= 300))
 			{
 				matrix = malloc(sizeof(char *) * HEIGHT + 1);
+				if (!matrix)
+					return (ft_print_error("Error: Operation file corrupted\n", 1));
 				i = 0;
 				while (i < HEIGHT)
 				{
 					matrix[i] = malloc(sizeof(char) * WIDTH + 1);
+					if (!matrix[i])
+						return (ft_print_error("Error: Operation file corrupted\n", 1));
 					j = 0;
 					while (j < WIDTH)
 					{
@@ -59,11 +63,11 @@ int main(int ac, char **av)
 			while (j < WIDTH)
 			{
 				appoggio = sqrtf((X - j) * (X - j) + (Y - i) * (Y - i));
-				if ((c == 'c' || c == 'C') && radius > 0.00)
+				if ((c == 'c' || c == 'C') && radius > 0.00000000)
 				{
-					if (c == 'c' && radius - appoggio < 1.00 && radius - appoggio >= 0)
+					if (c == 'c' && radius - appoggio <= 1.00000000 && radius - appoggio >= 0.00000000)
 						matrix[i][j] = stamp;
-					else if (c == 'C' && radius - appoggio >= 0 )
+					else if (c == 'C' && radius - appoggio >= 0.00000000)
 						matrix[i][j] = stamp;
 				}
 				else
