@@ -59,7 +59,7 @@ int main(int ac, char **av)
 				j = -1;
 				while (++j < WIDTH)
 				{
-					if (r == 'r' && (Xl + 1.00) <= j && j <= (Xr - 1.00) && (Yl + 1.00) <= i && i <= (Yr - 1.00))
+					if (r == 'r' && (Xl + 1.00000000) <= j && j <= (Xr - 1.00000000) && (Yl + 1.00000000) <= i && i <= (Yr - 1.00000000))
 						continue ;
 					if (j < Xl || j > Xr || i < Yl || i > Yr)
 						continue ;
