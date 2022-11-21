@@ -62,7 +62,7 @@ int main(int ac, char **av)
 			j = 0;
 			while (j < WIDTH)
 			{
-				appoggio = sqrtf((X - j) * (X - j) + (Y - i) * (Y - i));
+				appoggio = sqrtf((X - (float)j) * (X - (float)j) + (Y - (float)i) * (Y - (float)i));
 				if ((c == 'c' || c == 'C') && radius > 0.00000000)
 				{
 					if (c == 'c' && radius - appoggio <= 1.00000000 && radius - appoggio >= 0.00000000)
