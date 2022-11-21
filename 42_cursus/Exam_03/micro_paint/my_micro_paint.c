@@ -53,7 +53,7 @@ int main(int ac, char **av)
 
 		while ((scan_ret = fscanf(fd, "%c %f %f %f %f %c\n", &r, &Xl, &Yl, &width, &height, &draw)) == 6)
 		{
-			if ((r != 'r' && r != 'R') || width <= 0 || height <= 0)
+			if ((r != 'r' && r != 'R') || width <= 0.00000000 || height <= 0.00000000)
 				return (print_err("Error: Operation file corrupted\n", 1));
 			Xr = (Xl + width);
 			Yr = (Yl + height);
