@@ -6,23 +6,28 @@
 #    By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 15:46:57 by gmeoli            #+#    #+#              #
-#    Updated: 2022/11/22 15:46:59 by gmeoli           ###   ########.fr        #
+#    Updated: 2022/11/23 14:04:22 by gmeoli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
-SRCS = megaphone.cpp
+NAME = phonebook
+SOURCE = PhoneBook.cpp
+OBJECT = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
-$(NAME): $(SRCS)
-		c++ $(FLAGS) $(SRCS) -o $(NAME)
+%.o: %.cpp
+	c++ $(FLAGS) -c $< -o $@
+
+$(NAME): $(OBJECT)
+	c++ $(FLAGS) $(OBJECT) -o $(NAME)
 
 clean:
+	@rm -f $(OBJECT)
 
 fclean: clean
-		rm -fr $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 

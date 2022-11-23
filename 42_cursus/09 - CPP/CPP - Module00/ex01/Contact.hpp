@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmeoli <gmeoli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 16:02:35 by gmeoli            #+#    #+#             */
-/*   Updated: 2022/11/23 15:04:13 by gmeoli           ###   ########.fr       */
+/*   Created: 2022/11/23 14:51:35 by gmeoli            #+#    #+#             */
+/*   Updated: 2022/11/23 14:52:41 by gmeoli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_H
-# define PHONEBOOK_H
+#ifndef CONTACT_H
+# define CONTACT_H
 
-class PhoneBook
+class Contact
 {
 private:
 	/* data */
 public:
-	PhoneBook(/* args */);
-	~PhoneBook();
+	Contact(/* args */);
+	~Contact();
 };
 
 #endif
