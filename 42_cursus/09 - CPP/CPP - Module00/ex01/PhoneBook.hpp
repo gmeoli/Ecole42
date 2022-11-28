@@ -7,13 +7,9 @@
 
 class PhoneBook
 {
-	private:
-	
 	public:
 		Contact	contact[8];
-
-		PhoneBook(void);
-		~PhoneBook(void);
+		int		index;
 };
 
 #endif
