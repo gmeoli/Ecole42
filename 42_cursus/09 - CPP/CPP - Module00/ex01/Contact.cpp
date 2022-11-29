@@ -1,25 +1,36 @@
 #include "Contact.hpp"
 
-void	Contact::addContact(){
-
+Contact::Contact(void){
+	info[0] = std::string("Nome");
+	info[1] = std::string("Cognome");
+	info[2] = std::string("Nickname");
+	info[3] = std::string("Numero telefono");
+	info[4] = std::string("Segno zodiacale");
+	return ;
 }
 
-std::string	Contact::getFirstName(){
-	return first_name;
+Contact::~Contact(void){
+	return ;
 }
 
-std::string	Contact::getLastName(){
-	return last_name;
+void	Contact::addInfo(void){
+	std::string	str;
+
+	std::cout << "\nRiempi il modulo!" << std::endl;
+	for (int i = 0; i < 5; i++)
+	{
+		str.clear();
+		while (str.size() == 0)
+		{
+			std::cout << "Inserire il " << info[i] << ": ";
+			getline(std::cin, str);
+			if (str.size() == 0)
+				std::cout << "Riempire con il " << info[i] << ": ";
+		}
+		info[i] = str;
+	}
 }
 
-std::string	Contact::getNickName(){
-	return nickname;
-}
-
-std::string	Contact::getPhoneNumber(){
-	return phone_number;
-}
-
-std::string	Contact::getDarkestSecret(){
-	return darkest_secret;
+std::string	Contact::getInfo(int index){
+	return (info[index]);
 }
