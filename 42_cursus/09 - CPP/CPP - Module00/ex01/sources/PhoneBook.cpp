@@ -11,7 +11,7 @@ PhoneBook::~PhoneBook(void){
 }
 
 void	PhoneBook::searchContact(void){
-	Contact user;
+	Contact	user;
 
 	if (index == 0)
 		std::cout << "Non ci sono contatti nella rubrica. Digita ADD per aggiungere." << std::endl;
@@ -29,9 +29,18 @@ void	PhoneBook::searchContact(void){
 			std::cout << std::endl;
 		}
 		std::cout << std::endl;
-	}
-	while (1){
-		std::cout << "Inserire l'indice del contatto da visualizzare (1 to "<< index <<") o premere 0 per tornare indietro" << std::endl;
+
+		int	indice;
+
+		while (1){
+			std::cout << "Inserire l'indice del contatto da visualizzare (1 to "<< index <<") o premere 0 per tornare indietro" << std::endl;
+			std::cin >> indice;
+			if (indice == '0')
+				return ;
+			else if (indice == index){
+				std::cout << "BELLA!\n";
+			}
+		}
 	}
 }
 
