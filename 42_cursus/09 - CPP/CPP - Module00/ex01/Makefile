@@ -1,5 +1,5 @@
 NAME = phonebook
-SOURCES = main.cpp Contact.cpp PhoneBook.cpp
+SOURCES = main.cpp ./sources/Contact.cpp ./sources/PhoneBook.cpp
 OBJECT = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
@@ -9,13 +9,13 @@ all: $(NAME)
 	c++ $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJECT)
-	c++ $(SOURCES) $(FLAGS) $(OBJECT) -o $(NAME)
+	@c++ $(SOURCES) $(FLAGS) $(OBJECT) -o $(NAME)
 
 clean:
 	@rm -f $(OBJECT)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

@@ -2,8 +2,9 @@
 # define PHONEBOOK_CLASS_HPP
 
 #include "Contact.hpp"
-#include <iostream>
 #include <algorithm>
+# include <cstring>
+# include <iomanip>
 
 class PhoneBook{
 	private:

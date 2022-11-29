@@ -1,4 +1,4 @@
-#include "Contact.hpp"
+#include "../include/Contact.hpp"
 
 Contact::Contact(void){
 	info[0] = std::string("Nome");
@@ -25,7 +25,7 @@ void	Contact::addInfo(void){
 			std::cout << "Inserire il " << info[i] << ": ";
 			getline(std::cin, str);
 			if (str.size() == 0)
-				std::cout << "Riempire con il " << info[i] << ": ";
+				continue;
 		}
 		info[i] = str;
 	}
