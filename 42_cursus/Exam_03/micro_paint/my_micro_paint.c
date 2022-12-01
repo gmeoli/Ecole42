@@ -74,7 +74,7 @@ char	*paint_background(t_zone *zone)
 	char	*drawing;
 	int		i;
 
-	if (!(drawing = (char*)malloc(sizeof(*drawing) * (zone->width * zone->height))))
+	if (!(drawing = malloc(sizeof(char *) * (zone->width * zone->height))))
 		return (NULL);
 	i = 0;
 	while (i < zone->width * zone->height)
