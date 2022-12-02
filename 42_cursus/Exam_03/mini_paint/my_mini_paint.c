@@ -17,7 +17,6 @@ typedef struct	s_shape
 	float	y;
 	float	radius;
 	char	color;
-	struct s_shape	*next;
 }				t_shape;
 
 int		str_error(void)
