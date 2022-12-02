@@ -89,8 +89,7 @@ void	draw_shape(char **drawing, t_shape *shape, t_zone *zone)
 		while (++j< zone->width)
 		{
 			ret = in_rectangle(j, i, shape);
-			if ((shape->type == 'r' && ret == 2)
-				|| (shape->type == 'R' && ret))
+			if ((shape->type == 'r' && ret == 2) || (shape->type == 'R' && ret))
 				(*drawing)[(i * zone->width) + j] = shape->color;
 		}
 	}
