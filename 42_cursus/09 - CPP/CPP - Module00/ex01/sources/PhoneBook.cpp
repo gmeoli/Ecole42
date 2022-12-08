@@ -1,8 +1,8 @@
 #include "../include/PhoneBook.hpp"
 
 PhoneBook::PhoneBook(void){
-	index = 0;
-	thelast = 0;
+	this->index = 0;
+	this->thelast = 0;
 	return ;
 }
 
@@ -12,33 +12,46 @@ PhoneBook::~PhoneBook(void){
 
 void	PhoneBook::searchContact(void){
 	Contact	user;
+	int i = -1, j = -1;
 
 	if (index == 0)
 		std::cout << "Non ci sono contatti nella rubrica. Digita ADD per aggiungere." << std::endl;
 	else{
 		std::cout << "|     Index|      Nome|   Cognome|  Nickname|" << std::endl;
-		for (int i = 0; i < index; i++){
-			std::cout << "|" << std::setw(10) << index << "|";
-			for (int j = 0; j < 3; j++)
-			{
-				if (contact[i].getInfo(j).size() < 10)
-					std::cout << std::setw(10) << contact[i].getInfo(j) << "|";
+		while (++i < index){
+			std::cout << "|         " << i + 1 << "|";
+			while (++j < 3){
+				if (contact[i].getInfo(j).size() > 10)
+					std::cout << contact[i].getInfo(j).substr(0, 9) << ".|";
 				else
-					std::cout << contact[i].getInfo(j).substr(0, 10) << ".|";
+					std::cout << std::setw(10) << contact[i].getInfo(j) << "|";
 			}
 			std::cout << std::endl;
+			j = -1;
 		}
-		std::cout << std::endl;
 
-		int	indice;
-
+		std::string	indice;
 		while (1){
 			std::cout << "Inserire l'indice del contatto da visualizzare (1 to "<< index <<") o premere 0 per tornare indietro" << std::endl;
-			std::cin >> indice;
-			if (indice == '0')
+			std::cout << "Comando --> ";
+			getline(std::cin, indice);
+			if (indice.size() == 0)
+				continue;
+			if (indice[0] == '0')
 				return ;
-			else if (indice == index){
-				std::cout << "BELLA!\n";
+			if (indice[0] >= '1' && indice[0] <= '8' && indice.size() == 1){
+				if (indice[0] - '0' <= index)
+				{
+					user = contact[indice[0] - '0' - 1];
+					std::cout << "\nNome: " << user.getInfo(0) << std::endl;
+					std::cout << "Cognome: " << user.getInfo(1) << std::endl;
+					std::cout << "Nickname: " << user.getInfo(2) << std::endl;
+					std::cout << "Numero Telefono: " << user.getInfo(3) << std::endl;
+					std::cout << "Segno Zodiacale: " << user.getInfo(4) << std::endl;
+					return ;
+				}
+				else
+					std::cout << "ERROR: Inserire un indice valido\n" << std::endl;
 			}
 		}
 	}
@@ -48,12 +61,12 @@ void	PhoneBook::addContact(void){
 	Contact user;
 
 	user.addInfo();
-	if (index == 8){
-		if (thelast == 8)
-			thelast = 0;
-		contact[thelast++] = user;
+	if (this->index == 8){
+		if (this->thelast == 8)
+			this->thelast = 0;
+		this->contact[this->thelast++] = user;
 	}
 	else
-		contact[index++] = user;
+		this->contact[this->index++] = user;
 	return ;
 }

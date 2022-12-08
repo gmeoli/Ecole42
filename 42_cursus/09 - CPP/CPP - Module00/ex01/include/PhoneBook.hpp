@@ -9,12 +9,12 @@
 class PhoneBook{
 	private:
 		Contact	contact[8];
-		int	index;
-		int	thelast;
 	public:
 		PhoneBook(void);
 		~PhoneBook(void);
 
+		int		thelast;
+		int		index;
 		void	searchContact(void);
 		void	addContact(void);
 };

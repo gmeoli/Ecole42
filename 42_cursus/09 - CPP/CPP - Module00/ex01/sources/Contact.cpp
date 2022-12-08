@@ -4,8 +4,8 @@ Contact::Contact(void){
 	info[0] = std::string("Nome");
 	info[1] = std::string("Cognome");
 	info[2] = std::string("Nickname");
-	info[3] = std::string("Numero telefono");
-	info[4] = std::string("Segno zodiacale");
+	info[3] = std::string("Numero Telefono");
+	info[4] = std::string("Segno Zodiacale");
 	return ;
 }
 
