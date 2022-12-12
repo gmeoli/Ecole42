@@ -1,7 +1,7 @@
-NAME = account
+NAME = report_accounts
 SOURCES = tests.cpp Account.cpp
 OBJECT = $(SOURCE:.cpp=.o)
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98 
 
 all: $(NAME)
 
