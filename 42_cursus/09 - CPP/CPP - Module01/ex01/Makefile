@@ -1,5 +1,5 @@
-NAME = report_accounts
-SOURCES = tests.cpp Account.cpp
+NAME = Moar_brainz!
+SOURCES = main.cpp Zombie.cpp zombieHorde.cpp
 OBJECT = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -std=c++98 
 

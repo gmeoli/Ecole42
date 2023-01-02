@@ -1,5 +1,5 @@
-NAME = report_accounts
-SOURCES = tests.cpp Account.cpp
+NAME = BraiiiiiiinnnzzzZ
+SOURCES = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 OBJECT = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -std=c++98 
 
