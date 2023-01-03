@@ -3,13 +3,16 @@
 
 int main(){
 
-	std::string STRING = "HI THIS IS BRAIN";
-	std::string *PTR;
-	std::string &REF;
+	std::string var = "HI THIS IS BRAIN";
+	std::string *stringPTR = &var;
+	std::string	&stringREF = var;
 
-	std::cout << "Memory address STRING: " << &STRING << std::endl;
-	std::cout << "Memory address PTR: " << &PTR << std::endl;
-	std::cout << "Memory address REF: " << &REF << std::endl; 
+	std::cout << "Memory address of string var: " << &var << std::endl;
+	std::cout << "Memory address held by stringPTR: " << &stringPTR << std::endl;
+	std::cout << "Memory address held by stringREF: " << &stringREF << std::endl;
+	std::cout << "Value of var: " << var << std::endl;
+	std::cout << "The value pointed to by stringPTR: " << *stringPTR << std::endl;
+	std::cout << "The value pointed to by stringREF: " << stringREF << std::endl;
 
     return 0;
 }
