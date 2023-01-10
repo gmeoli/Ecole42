@@ -10,7 +10,7 @@ int main(){
 	std::cout << "Memory address of string var: " << &var << std::endl;
 	std::cout << "Memory address held by stringPTR: " << &stringPTR << std::endl;
 	std::cout << "Memory address held by stringREF: " << &stringREF << std::endl;
-	std::cout << "Value of var: " << var << std::endl;
+	std::cout << "Value of string var: " << var << std::endl;
 	std::cout << "The value pointed to by stringPTR: " << *stringPTR << std::endl;
 	std::cout << "The value pointed to by stringREF: " << stringREF << std::endl;
 

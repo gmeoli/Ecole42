@@ -1,5 +1,5 @@
 NAME = Unnecessary_violence
-SOURCES = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SOURCES = main.cpp HumanA.cpp Weapon.cpp HumanB.cpp
 OBJECT = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -std=c++98 
 

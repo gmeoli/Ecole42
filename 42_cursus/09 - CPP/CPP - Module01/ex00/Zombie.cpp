@@ -1,9 +1,5 @@
 #include "Zombie.hpp"
 
-/*---- private ----*/
-
-// NONE
-
 /*---- public ----*/
 
 Zombie::Zombie(std::string name)

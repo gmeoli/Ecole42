@@ -1,39 +1,50 @@
 #include <iostream>
 #include <fstream>
+#include <thread>
 
-int main(int argc, char* argv[]) {
+void fac_replacestring(std::string &str, const std::string &s1, const std::string &s2) {
+	size_t i = 0, j = 0, end;
+	std::string new_str = "";
 
-	if (argc != 4) {
-		std::cerr << "Usage: " << argv[0] << " <filename> <s1> <s2>" << std::endl;
-		return 1;
-	}
-
-	std::string filename = argv[1];
-	std::string s1 = argv[2];
-	std::string s2 = argv[3];
-
-	std::ifstream input(filename);
-	if (!input) {
-		std::cerr << "Error: could not open file " << filename << std::endl;
-		return 1;
-	}
-
-	std::ofstream output(filename + ".replace");
-	if (!output) {
-		std::cerr << "Error: could not open file " << filename << ".replace" << std::endl;
-		return 1;
-	}
-
-	std::string line;
-	while (std::getline(input, line)) {
-		// Sostituisci ogni occorrenza di s1 con s2 nella stringa line
-		size_t pos = 0;
-		while ((pos = line.find(s1, pos)) != std::string::npos) {
-		line.replace(pos, s1.length(), s2);
-		pos += s2.length();
+	end = str.length();
+	while (j < end) {
+		i = str.find(s1, j);
+		if (i > end)
+		{
+			i = end;
+			new_str += str.substr(j, i - j);
 		}
-		output << line << std::endl;
+		else
+			new_str += str.substr(j, i - j) + s2;
+		j = i + s1.length();
 	}
+	str = new_str.substr(0, new_str.length());
+}
+ 
+int main(int ac, char **av) {
 
+	std::string line = "";
+
+	if (ac != 4) {
+		std::cerr << "Error arguments!\n";
+		return 1;
+	}
+	std::ifstream file(av[1]);
+	if (!file.is_open()) {
+		std::cerr << "File corrupted\n";
+		return 1;
+	}
+	std::ofstream oFile((std::string)av[1] + ".replace");
+	if (!oFile.is_open()) {
+		std::cerr << "oFile not created!\n";
+		return 1;
+	}
+	while (std::getline(file, line)) {
+		
+		fac_replacestring(line, av[2], av[3]);
+		oFile << line;
+	}
+	oFile.close();
+	file.close();
 	return 0;
 }
