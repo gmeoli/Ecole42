@@ -40,9 +40,9 @@ int main(int ac, char **av) {
 		return 1;
 	}
 	while (std::getline(file, line)) {
-		
+	
 		fac_replacestring(line, av[2], av[3]);
-		oFile << line;
+		oFile << line << std::endl;
 	}
 	oFile.close();
 	file.close();
