@@ -18,30 +18,23 @@ void Harl::error( void ) {
 }
 
 // PUBLIC
-void Harl::complain ( std::string str ) {	
-	if (!std::all_of(str.begin(), str.end(), ::isdigit)) {
-		std::cerr << "Invalid argument!\n";
-		return ;
-	}
+void Harl::complain ( std::string str ) {
+	std::unordered_map<std::string, int> level;
+	level.insert(std::pair<std::string, int>("DEBUG", 1));
+	level.insert(std::pair<std::string, int>("INFO", 2));
+	level.insert(std::pair<std::string, int>("WARNING", 3));
+	level.insert(std::pair<std::string, int>("ERROR", 4));
 
-	int	level = std::stoi(str);
+	void (Harl::*ptr[5])() = {
+		&Harl::debug,
+		&Harl::debug,
+		&Harl::info,
+		&Harl::warning,
+		&Harl::error
+	};
 
-	switch (level)
-	{
-	case 1:
-		this->debug();
-		break;
-	case 2:
-		this->info();
-		break;
-	case 3:
-		this->warning();
-		break;
-	case 4:
-		this->error();
-		break;
-	default:
-		std::cerr << "Input not correct!" << std::endl;
-		break;
-	}
+	if (level[str] > 0)
+		(this->*ptr[level[str]])();
+	else
+		std::cerr << "String not accepted!\n";
 }

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 
-void fac_replacestring(std::string &str, const std::string &s1, const std::string &s2) {
+void fac_replace_string(std::string &str, const std::string &s1, const std::string &s2) {
 	size_t i = 0, j = 0, end;
 	std::string new_str = "";
 
@@ -39,7 +39,7 @@ int main(int ac, char **av) {
 		return 1;
 	}
 	while (std::getline(file, line)) {
-		fac_replacestring(line, av[2], av[3]);
+		fac_replace_string(line, av[2], av[3]);
 		oFile << line << std::endl;
 	}
 	std::cout << line;
