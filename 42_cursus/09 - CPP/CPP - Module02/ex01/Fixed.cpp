@@ -26,3 +26,24 @@ int Fixed::getRawBits( void ) const {
 void Fixed::setRawBits( int const raw ) {
 	this->_m_value = raw;
 }
+
+Fixed::Fixed( const int _num_int ) {
+	this->_m_value = _num_int / this->_nbits;
+}
+
+Fixed::Fixed( const float _num_float ) {
+	this->_m_value = _num_float / this->_nbits;
+}
+
+float Fixed::toFloat( void ) const {
+	return ((float) this->_m_value);
+}
+	
+int Fixed::toInt( void ) const {
+	return (this->_m_value);
+}
+
+std::ostream &operator<<(std::ostream &os, const Fixed &f) {
+	os << f.toFloat();
+	return os;
+}
