@@ -1,4 +1,4 @@
-NAME = Now_we_are_talking
+NAME = BSP
 SOURCES = main.cpp Fixed.cpp
 OBJECT = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -std=c++98 
