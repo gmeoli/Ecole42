@@ -11,8 +11,11 @@ class Point {
 		Point();
 		Point(float const x, float const y);
 		Point(Point const &src);
-		Point &operator=(const Point &rhs);		
+		Point &operator=(const Point &rhs);
 		~Point();
+		bool operator==(Point const &rhs) const;
+		Fixed getX();
+		Fixed getY();
 };
 
 #endif

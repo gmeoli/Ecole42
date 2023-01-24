@@ -1,22 +1,21 @@
-NAME = Towards_a_more_useful_fixed-point_number_class
-SOURCES = main.cpp Fixed.cpp
-OBJECT = $(SOURCE:.cpp=.o)
-FLAGS = -Wall -Wextra -Werror -std=c++98 
+NAME 	=	Towards_a_more_useful_fixed-point_number_class
+CC		=	c++
+FLAGS	=	-Wall -Werror -Wextra -std=c++98
+SRCS	=	main.cpp \
+			Fixed.cpp
+OBJS	=	${SRCS:.cpp=.o}
 
-all: $(NAME)
+all	:	$(NAME)
 
-%.o: %.cpp
-	c++ $(FLAGS) -c $< -o $@
+$(NAME)	:	$(OBJS)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
-$(NAME): $(OBJECT)
-	@c++ $(SOURCES) $(FLAGS) $(OBJECT) -o $(NAME)
+clean	:
+	rm -f $(OBJS)
 
-clean:
-	@rm -f $(OBJECT)
+fclean	:	clean
+	rm -f $(NAME)
 
-fclean: clean
-	@rm -f $(NAME)
+re	:	clean all
 
-re: fclean all
-
-.PHONY: all clean fclean re
+.PHONY	:	all clean fclean re
