@@ -1,10 +1,8 @@
-NAME 	=	BSP
+NAME 	=	Aaaaaa.....OPEN!
 CC		=	c++
 FLAGS	=	-Wall -Werror -Wextra -std=c++98
 SRCS	=	main.cpp \
-			bsp.cpp \
-			Fixed.cpp \
-			Point.cpp
+			ClapTrap.cpp
 OBJS	=	${SRCS:.cpp=.o}
 
 all	:	$(NAME)
