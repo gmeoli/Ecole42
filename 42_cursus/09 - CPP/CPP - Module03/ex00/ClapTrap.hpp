@@ -7,12 +7,11 @@ class ClapTrap
 {
 	private:
 		std::string _name;
-		int const _hit_points;
-		int const _energy_points;
-		int const _attack_damage;
+		int _hit_points;
+		int _energy_points;
+		int _attack_damage;
 	public:
 		ClapTrap(std::string name);
-		ClapTrap();
 		ClapTrap(const ClapTrap &src);
 		ClapTrap &operator=(const ClapTrap &rhs);
 		~ClapTrap();
