@@ -6,6 +6,7 @@ int main() {
 	Point one(2, 0);
 	Point two(0, 3);
 	Point three(2, 2);
+
 	Point const four(2, 1);
 	std::cout << bsp(one, two, three, four) << std::endl;
 
