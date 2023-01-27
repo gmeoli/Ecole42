@@ -9,9 +9,13 @@ class ScavTrap : public ClapTrap
 		/* data */
 	public:
 		ScavTrap();
+		ScavTrap(std::string const name);
 		ScavTrap(ScavTrap const &copy);
-		ScavTrap &operator=(ScavTrap const &copy_over);
+		ScavTrap &operator=(ScavTrap const &rhs);
 		~ScavTrap();
+
+		void	attack(std::string const &target);
+		void	guardGate();
 };
 
 #endif

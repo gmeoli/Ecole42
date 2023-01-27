@@ -11,6 +11,7 @@ class ClapTrap
 		int			_energy_points;
 		int			_attack_dmg;
 	public:
+		ClapTrap();
 		ClapTrap(std::string name);
 		ClapTrap(ClapTrap const &rhs);
 		ClapTrap 	&operator=(ClapTrap const &rhs);
