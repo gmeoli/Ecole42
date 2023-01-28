@@ -2,6 +2,7 @@
 
 int main () {
 	{
+		// ScavTrap one("again")
 		ClapTrap	*bPtr = new ScavTrap("again");
 		ScavTrap sc4vtp("sc4vtp");
 		sc4vtp.attack("Handsome Jack");
