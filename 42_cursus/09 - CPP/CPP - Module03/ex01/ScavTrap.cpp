@@ -28,7 +28,7 @@ ScavTrap &ScavTrap::operator=(ScavTrap const &rhs) {
 	this->setHealth(rhs.getHealth());
 	this->setEnergy(rhs.getEnergy());
 	this->setAttackDamage(rhs.getAttackDamage());
-	std::cout << "Copy operator overloading ClapTrap " << this->getName() << " has been constructed!" << std::endl;
+	std::cout << "Copy operator overloading ScavTrap " << this->getName() << " has been constructed!" << std::endl;
 	return (*this);
 }
 

@@ -1,8 +1,8 @@
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main () {
-
-		ClapTrap bPtr = ScavTrap("fight");
+	{
 		ScavTrap scav("SCAVGTP");
 		scav.attack("Guido");
 		scav.takeDamage(5);
@@ -11,9 +11,9 @@ int main () {
 		scav.guardGate();
 		scav.beRepaired(8);
 		scav.takeDamage(15);
-
+	}
 		std::cout << std::endl;
-
+	{
 		ClapTrap clap("CLAPGTP");
 		clap.attack("Handsome Jack");
 		clap.takeDamage(6);
@@ -21,9 +21,15 @@ int main () {
 		clap.takeDamage(3);
 		clap.beRepaired(8);
 		clap.takeDamage(15);
-
+	}
 		std::cout << std::endl;
-
-
+	{
+		FragTrap frag("Forest");
+		frag.takeDamage(6);
+		frag.beRepaired(4);
+		frag.takeDamage(3);
+		frag.beRepaired(8);
+		frag.takeDamage(15);
+	}
 	return 0;
 }
