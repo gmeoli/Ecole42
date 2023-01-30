@@ -1,7 +1,7 @@
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap() {
-	this->setName("nameFrag");
+	this->setName("no_name");
 	this->setHealth(100);
 	this->setEnergy(100);
 	this->setAttackDamage(30);

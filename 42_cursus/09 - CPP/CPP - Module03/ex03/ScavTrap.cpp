@@ -1,7 +1,7 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap() {
-	this->setName("nameScav");
+	this->setName("no_name");
 	this->setHealth(100);
 	this->setEnergy(50);
 	this->setAttackDamage(20);
