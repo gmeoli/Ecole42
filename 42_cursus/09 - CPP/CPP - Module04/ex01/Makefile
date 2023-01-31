@@ -1,4 +1,4 @@
-NAME 	=	Aaaaaa.....OPEN!
+NAME 	=	I_don't_want_to_set_the_world_on_fire
 CC		=	c++
 FLAGS	=	-Wall -Werror -Wextra -std=c++98
 SRCS	=	main.cpp \
