@@ -13,7 +13,7 @@ class Animal
 		Animal &operator=(const Animal &rhs);
 		~Animal();
 
-		void	getType();
+		std::string	getType();
 };
 
 #endif
