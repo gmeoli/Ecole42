@@ -1,9 +1,10 @@
 #include "Dog.hpp"
 
-Dog::Dog() : Animal()
+Dog::Dog() : Animal(), Brain()
 {
 	std::cout << "DEFAULT constructor Dog created" << std::endl;
 	this->type = "Dog";
+	const Brain *tmp = new Brain();
 }
 
 Dog::Dog(const Dog &cpy) : Animal()
