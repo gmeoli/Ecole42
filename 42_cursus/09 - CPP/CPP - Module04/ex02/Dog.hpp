@@ -12,7 +12,7 @@ class Dog : public Animal
 		Dog();
 		Dog(const Dog &cpy);
 		Dog 	&operator=(const Dog &rhs);
-		~Dog();
+		virtual ~Dog();
 
 		void	makeSound() const;
 		Brain	*getBrain() const;
