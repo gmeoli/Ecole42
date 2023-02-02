@@ -13,10 +13,10 @@ class DiamondTrap : public ScavTrap, public FragTrap
 		DiamondTrap(std::string const name);
 		DiamondTrap(DiamondTrap const &copy);
 		DiamondTrap &operator=(DiamondTrap const &rhs);
-		~DiamondTrap();
+		virtual		~DiamondTrap();
 
-		using ScavTrap::attack;
-		void	whoAmI();
+		using 		ScavTrap::attack;
+		void		whoAmI();
 };
 
 #endif
