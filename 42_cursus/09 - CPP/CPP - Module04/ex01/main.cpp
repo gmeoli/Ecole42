@@ -2,28 +2,47 @@
 #include "Cat.hpp"
 #include "Brain.hpp"
 
-int main()
-{
-	Animal	*arr[50];
-	Dog		original;
-	original.getBrain()->setIdea("prova", 10);
-	Dog		copy(original);
+#define N_ANIMALS 4
 
-	int	i = -1;
-	while (++i < 50)
+int	main() {
 	{
-		if (!(i % 2))
-			arr[i] = new Dog();
-		else
-			arr[i] = new Cat();
+		std::cout << "------- ANIMALS -------" << std::endl;
+		const Animal *zoo[N_ANIMALS];
+
+		for (int i = 0; i < N_ANIMALS / 2; i++)
+			zoo[i] = new Cat();
+		for (int i = N_ANIMALS / 2; i < N_ANIMALS; i++)
+			zoo[i] = new Dog();
+		for (int i = 0; i < N_ANIMALS; i++)
+			zoo[i]->makeSound();
+		Cat* cat = new Cat();
+		cat->getBrain()->setIdea("Ideas on animals brain 1");
+		cat->getBrain()->setIdea("Ideas on animals brain 2");
+		cat->getBrain()->setIdea("Ideas on animals brain 3");
+		cat->getBrain()->setIdea("Ideas on animals brain 4");
+		cat->getBrain()->printIdeas();
+		// delete cat;
+		for (int i = 0; i < N_ANIMALS; i++)
+			delete zoo[i];
 	}
-	std::cout << "This is the original brain: " << std::endl;
-	original.printBrain();
-	std::cout << "This is the copy brain: " << std::endl;
-	copy.printBrain();
-	i = -1;
-	while (++i < 50)
-		delete arr[i];
-	
+	{
+		std::cout << "------- BRAIN -------" << std::endl;
+
+		Brain *normal = new Brain();
+
+		normal->setIdea("My name is AB");
+		normal->setIdea("I like watching movies");
+		normal->setIdea("My favourite is Frankenstein Junior");
+
+		normal->printIdeas();
+
+		Brain *abnormal = new Brain(*normal);
+
+		delete normal;
+
+		abnormal->printIdeas();
+
+		delete abnormal;
+	}
 	return 0;
 }

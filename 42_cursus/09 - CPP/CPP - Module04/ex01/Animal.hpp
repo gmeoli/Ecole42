@@ -10,8 +10,8 @@ class Animal
 	public:
 		Animal();
 		Animal(const Animal &cpy);
-		Animal &operator=(const Animal &rhs);
-		virtual ~Animal();
+		Animal	&operator=(const Animal &rhs);
+		virtual	~Animal();
 
 		std::string		getType() const;
 		virtual void	makeSound() const;

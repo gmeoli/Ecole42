@@ -2,20 +2,20 @@
 # define BRAIN_HPP
 
 #include <iostream>
-#include <array>
 
 class Brain
 {
 	private:
-		std::string _ideas[100];
+		std::string	_ideas[100];
+		int			_index;
 	public:
 		Brain();
 		Brain(const Brain &cpy);
-		Brain &operator=(const Brain &rhs);
-		virtual ~Brain();
+		Brain	&operator=(const Brain &rhs);
+		virtual	~Brain();
 
-		std::string	getIdea(int i) const;
-		void		setIdea(std::string s, int i);
+		void	printIdeas() const;
+		void	setIdea(const std::string &idea);
 };
 
 #endif
