@@ -8,11 +8,13 @@ class Animal
 	protected:
 		std::string	type;
 	public:
+		Animal();
+		Animal(const Animal &cpy);
 		Animal	&operator=(const Animal &rhs);
 		virtual	~Animal();
 
 		virtual std::string	getType() const;
-		virtual void		makeSound() const;
+		virtual void		makeSound() const = 0;
 };
 
 #endif

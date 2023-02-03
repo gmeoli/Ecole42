@@ -1,11 +1,7 @@
-NAME 	=	Abstract_class
+NAME 	=	Interface&Recap
 CC		=	c++
 FLAGS	=	-Wall -Werror -Wextra -std=c++98
 SRCS	=	main.cpp \
-			Animal.cpp \
-			Dog.cpp \
-			Cat.cpp \
-			Brain.cpp
 OBJS	=	${SRCS:.cpp=.o}
 
 all	:	$(NAME)
