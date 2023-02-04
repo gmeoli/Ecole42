@@ -1,5 +1,6 @@
 #include "Cure.hpp"
 #include "Ice.hpp"
+#include "Character.hpp"
 
 #define RED "\033[31m"
 #define NONE "\033[0m"
