@@ -20,8 +20,18 @@ int main () {
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
-
+	
 	std::cout << bro << std::endl;
+
+	Form doc( "doc", 100, 100 );
+
+	std::cout << doc << std::endl;
+
+	doc.beSigned( bro );
+
+	std::cout << doc << std::endl;
+
+	bro.signForm( doc );
 
 	return 0;
 }

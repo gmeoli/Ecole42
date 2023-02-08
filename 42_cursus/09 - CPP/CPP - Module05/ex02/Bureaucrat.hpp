@@ -1,10 +1,12 @@
 #pragma once
 
 #include <iostream>
+#include "Form.hpp"
 
-class Bureaucrat
-{
-	friend	std::ostream &operator<<( std::ostream &os, const Bureaucrat &rhs );
+class Form;
+
+class Bureaucrat {
+	friend	std::ostream &operator<<( std::ostream &os, const Bureaucrat &obj );
 	private:
 		std::string const	_name;
 		int					_grade;
@@ -24,8 +26,10 @@ class Bureaucrat
 
 		Bureaucrat	&operator=( const Bureaucrat &rhs );
 
-		std::string	getName( void ) const;
+		std::string getName( void ) const;
 		int			getGrade( void ) const;
 		void		decrementGrade( int decrement );
 		void		incrementGrade( int increment );
+
+		void		signForm( const Form &obj ) const ;
 };

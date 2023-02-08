@@ -66,6 +66,17 @@ void	Bureaucrat::incrementGrade( int increment )
 	_grade -= increment;
 }
 
+void	Bureaucrat::signForm( const Form &obj ) const
+{
+	if (obj.getSigned( ) == true)
+		std::cout << this->_name << " signed " <<  obj.getName( ) << std::endl;
+	else
+	{
+		std::cout << this->_name << " couldn't sign " <<  obj.getName( );
+		std::cout << " because he's grade is to low." << std::endl;
+	}
+}
+
 const	char *Bureaucrat::GradeTooHighException::what( void ) const _NOEXCEPT
 {
 	return "The grade is too high!";
