@@ -23,7 +23,7 @@ int main () {
 	
 	std::cout << bro << std::endl;
 
-	Form doc( "doc", 100, 100 );
+	AForm doc( "doc", 100, 100 );
 
 	std::cout << doc << std::endl;
 

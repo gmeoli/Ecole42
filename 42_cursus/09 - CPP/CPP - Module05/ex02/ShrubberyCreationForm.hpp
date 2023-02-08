@@ -1,12 +1,10 @@
 #pragma once
 
-#include "Bureaucrat.hpp"
+#include "AForm.hpp"
 
-class Bureaucrat;
-
-class Form
+class ShrubberyCreationForm
 {
-	friend	std::ostream &operator<<( std::ostream &os, const Form &rhs );
+	friend	std::ostream &operator<<( std::ostream &os, const ShrubberyCreationForm &rhs );
 	private:
 		std::string const	_name;
 		bool				_signed;
@@ -21,12 +19,12 @@ class Form
 			const char *what( void ) const _NOEXCEPT;
 		};
 	public:
-		Form( void );
-		Form( std::string const name, int gradeToSign, int gradeToExec );
-		Form( const Form &src );
-		~Form( void );
+		ShrubberyCreationForm( void );
+		ShrubberyCreationForm( std::string const name, int gradeToSign, int gradeToExec );
+		ShrubberyCreationForm( const ShrubberyCreationForm &src );
+		~ShrubberyCreationForm( void );
 
-		Form &operator=( const Form &rhs );
+		AForm &operator=( const AForm &rhs );
 
 		std::string	getName( void ) const;
 		bool		getSigned( void ) const;

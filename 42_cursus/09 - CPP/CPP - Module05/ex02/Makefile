@@ -3,7 +3,10 @@ CC		=	c++
 FLAGS	=	-Wall -Werror -Wextra -std=c++98
 SRCS	=	main.cpp \
 			Bureaucrat.cpp \
-			Form.cpp
+			AForm.cpp \
+			ShrubberyCreationForm.cpp \
+			RobotomyRequestForm.cpp \
+			PresidentialPardonForm.cpp
 OBJS	=	${SRCS:.cpp=.o}
 
 all	:	$(NAME)

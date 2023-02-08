@@ -5,7 +5,8 @@
 
 class Form;
 
-class Bureaucrat {
+class Bureaucrat
+{
 	friend	std::ostream &operator<<( std::ostream &os, const Bureaucrat &obj );
 	private:
 		std::string const	_name;
