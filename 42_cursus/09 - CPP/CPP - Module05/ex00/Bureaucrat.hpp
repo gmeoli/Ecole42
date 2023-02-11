@@ -9,23 +9,23 @@ class Bureaucrat
 		std::string const	_name;
 		int					_grade;
 
+	public:
+		Bureaucrat();
+		Bureaucrat(std::string const name, int grade );
+		Bureaucrat(const Bureaucrat &src );
+		Bureaucrat	&operator=( const Bureaucrat &rhs );
+		~Bureaucrat();
+
+		std::string	getName() const;
+		int			getGrade() const;
+		void		inc_grade();
+		void		dec_grade();
+
 		struct	GradeTooHighException : public std::exception {
-			const char *what( void ) const _NOEXCEPT;
+			virtual const char *what(void) const _NOEXCEPT;
 		};
 
 		struct	GradeTooLowException : public std::exception {
-			const char *what( void ) const _NOEXCEPT;
+			virtual const char *what(void) const _NOEXCEPT;
 		};
-	public:
-		Bureaucrat( void );
-		Bureaucrat( std::string const name, int grade );
-		Bureaucrat( const Bureaucrat &src );
-		~Bureaucrat( void );
-
-		Bureaucrat	&operator=( const Bureaucrat &rhs );
-
-		std::string	getName( void ) const;
-		int			getGrade( void ) const;
-		void		decrementGrade( int decrement );
-		void		incrementGrade( int increment );
 };

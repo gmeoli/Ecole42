@@ -2,23 +2,20 @@
 
 std::ostream &operator<<( std::ostream &os, const Bureaucrat &rhs )
 {
-	os << rhs.getName( ) << ", bureaucrat grade " << rhs.getGrade( ) << '.';
-	return os;
+	return (os << rhs.getName( ) << ", bureaucrat grade " << rhs.getGrade( ) << '.');
 }
 
-Bureaucrat::Bureaucrat( void ) : _name ("Mr. Burocrate")
+Bureaucrat::Bureaucrat( void ) : _name ("Mr. Burocrate"), _grade(150)
 {
-	_grade = 150;
 	std::cout << "Bureaucrat constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat( std::string name, int grade ) : _name (name)
+Bureaucrat::Bureaucrat( std::string name, int grade ) : _name (name), _grade(grade)
 {
 	if (grade > 150)
 		throw GradeTooLowException();
 	if (grade < 1)
 		throw GradeTooHighException();
-	this->_grade = grade;
 	std::cout << "Bureaucrat two-args constructor called" << std::endl;
 }
 
@@ -52,26 +49,42 @@ int	Bureaucrat::getGrade( void ) const
 	return ( this->_grade );
 }
 
-void	Bureaucrat::decrementGrade( int decrement )
+void Bureaucrat::inc_grade()
 {
-	if (_grade + decrement > 150)
-		throw GradeTooLowException();
-	_grade += decrement;
+	try
+	{
+		if (this->getGrade() < 1)
+			throw GradeTooHighException();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return;
+	}
+	this->_grade--;	
 }
 
-void	Bureaucrat::incrementGrade( int increment )
+void Bureaucrat::dec_grade()
 {
-	if (_grade - increment < 1)
-		throw GradeTooHighException();
-	_grade -= increment;
+	try
+	{
+		if (this->getGrade() > 150)
+			throw GradeTooLowException();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return;
+	}
+	this->_grade++;
 }
 
 const	char *Bureaucrat::GradeTooHighException::what( void ) const _NOEXCEPT
 {
-	return "The grade is too high!";
+	return ("The grade is too high!");
 }
 
 const	char *Bureaucrat::GradeTooLowException::what( void ) const _NOEXCEPT
 {
-	return "The grade is too low!";
+	return ("The grade is too low!");
 }
