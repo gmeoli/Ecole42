@@ -13,7 +13,7 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
+
 	try
 	{
 		std::cout << b;
