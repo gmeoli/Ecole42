@@ -1,103 +1,108 @@
 #include "AForm.hpp"
 
-std::ostream &operator<<(std::ostream &os, const Form &rhs)
+std::ostream &operator<<(std::ostream &os, const AForm &rhs)
 {
-	return (os << "FORM'S INFORMATIONS:" \
+	return (os << "AFORM'S INFORMATIONS:" \
 			<< "Name: " << rhs.getName() << std::endl \
 			<< "Status: " << rhs.getStatus() << std::endl \
 			<< "Grade to sign: " << rhs.getMinGradeToSign() << std::endl \
 			<< "Grade to execute: " << rhs.getMinGradeToExecute() << std::endl);
 }
 
-Form::Form() : _name("Form_name"), _signed(false), _minGradeToSign(150), _minGradeToExecute(150)
+AForm::AForm() : _name("AForm_name"), _signed(false), _minGradeToSign(150), _minGradeToExecute(150)
 {
 	if (this->_minGradeToExecute < 1 || this->_minGradeToSign < 1)
-		throw Form::GradeTooHighException();
+		throw AForm::GradeTooHighException();
 	if (this->_minGradeToExecute > 150 || this->_minGradeToSign > 150)
-		throw Form::GradeTooLowException();
-	std::cout << "Form constructor called" << std::endl;
+		throw AForm::GradeTooLowException();
+	std::cout << "AForm constructor called" << std::endl;
 }
 
-Form::Form(std::string const name, int minGradeToSign, int minGradeToExecute)
+AForm::AForm(std::string const name, int minGradeToSign, int minGradeToExecute)
 	: _name(name), _signed(false), _minGradeToExecute(minGradeToExecute), _minGradeToSign(minGradeToSign)
 {
 	if (this->_minGradeToExecute < 1 || this->_minGradeToSign < 1)
-		throw Form::GradeTooHighException();
+		throw AForm::GradeTooHighException();
 	if (this->_minGradeToExecute > 150 || this->_minGradeToSign > 150)
-		throw Form::GradeTooLowException();
-	std::cout << "Form three-args constructor called" << std::endl;
+		throw AForm::GradeTooLowException();
+	std::cout << "AForm three-args constructor called" << std::endl;
 }
 
 
-Form::Form(const Form &src)
+AForm::AForm(const AForm &src)
 	: _name(src.getName()), _signed(false), _minGradeToExecute(src.getMinGradeToExecute()), _minGradeToSign(src.getMinGradeToSign())
 {
 	if (this->_minGradeToExecute < 1 || this->_minGradeToSign < 1)
-		throw Form::GradeTooHighException();
+		throw AForm::GradeTooHighException();
 	if (this->_minGradeToExecute > 150 || this->_minGradeToSign > 150)
-		throw Form::GradeTooLowException();
-	std::cout << "Form copy constructor called" << std::endl;
+		throw AForm::GradeTooLowException();
+	std::cout << "AForm copy constructor called" << std::endl;
 }
 
-Form &Form::operator=(const Form &rhs)
+AForm &AForm::operator=(const AForm &rhs)
 {
-	std::cout << "Form assignement operator called" << std::endl;
+	std::cout << "AForm assignement operator called" << std::endl;
 	if (this == &rhs)
 		return (*this);
 	this->_signed = false;
 	if (this->_minGradeToExecute < 1 || this->_minGradeToSign < 1)
-		throw Form::GradeTooHighException();
+		throw AForm::GradeTooHighException();
 	if (this->_minGradeToExecute > 150 || this->_minGradeToSign > 150)
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	return (*this);
 }
 
-Form::~Form()
+AForm::~AForm()
 {
-	std::cout << "Form destructor called" << std::endl;
+	std::cout << "AForm destructor called" << std::endl;
 }
 
-std::string	Form::getName() const
+std::string	AForm::getName() const
 {
 	return (this->_name);
 }
 
-bool		Form::getStatus() const
+bool		AForm::getStatus() const
 {
 	return (this->_signed);
 }
 
-int			Form::getMinGradeToSign() const
+int			AForm::getMinGradeToSign() const
 {
 	return (this->_minGradeToSign);
 }
 
-int			Form::getMinGradeToExecute() const
+int			AForm::getMinGradeToExecute() const
 {
 	return (this->_minGradeToExecute);
 }
 
-void		Form::beSigned(Bureaucrat const &b)
+void		AForm::beSigned(Bureaucrat const &b)
 {
 	if (this->_signed == true)
-		throw Form::AlreadySignedException();
+		throw AForm::AlreadySignedException();
 	else if (b.getGrade() <= this->getMinGradeToSign())
 		this->_signed = true;
 	else
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 }
 
-const char *Form::GradeTooHighException::what() const _NOEXCEPT
+const char *AForm::GradeTooHighException::what() const _NOEXCEPT
 {
-	return ("Form Exception: the grade is too high!");
+	return ("AForm Exception: the grade is too high!");
 }
 
-const char *Form::GradeTooLowException::what() const _NOEXCEPT
+const char *AForm::GradeTooLowException::what() const _NOEXCEPT
 {
-	return ("Form Exception: the grade is too low!");
+	return ("AForm Exception: the grade is too low!");
 }
 
-const char *Form::AlreadySignedException::what() const _NOEXCEPT
+const char *AForm::AlreadySignedException::what() const _NOEXCEPT
 {
-	return ("Bureaucrat Exception: grade too high!");
+	return ("AForm Exception: form is already signed!");
+}
+
+const char *AForm::NotSignedYet::what() const _NOEXCEPT
+{
+	return ("AForm Exception: form is not yet signed. You can't execute!");
 }
