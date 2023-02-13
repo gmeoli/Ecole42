@@ -1,7 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int	main()
 {
@@ -15,7 +13,7 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
-
+	
 	try
 	{
 		std::cout << b;
@@ -49,6 +47,7 @@ int	main()
 	}
 
 	Bureaucrat	z("Renato", 150);
+
 	try
 	{
 		PresidentialPardonForm	p("offeso");
@@ -59,7 +58,7 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
+
 	try
 	{
 		PresidentialPardonForm	p2("molto offeso");
@@ -70,6 +69,22 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
+
+	try
+	{
+		Intern	l;
+		AForm*	n;
+		n = l.makeForm("ShrubberyCreationForm", "my target");
+		std::cout << n->getName() << std::endl;
+		std::cout << n->getTarget() << std::endl;
+		delete n;
+		n = l.makeForm("Non-existent", "my target");
+		delete n;
+	}
+	catch(const std::exception &e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
 	return (0);
 }
