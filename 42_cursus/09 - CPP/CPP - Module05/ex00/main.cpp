@@ -1,63 +1,34 @@
 #include "Bureaucrat.hpp"
 
 int main () {
-	Bureaucrat a;
-	Bureaucrat b;
-	Bureaucrat c;
-	Bureaucrat d;
+	Bureaucrat	b("Carlo", 1);
 
-	std::cout << std::endl;
 	try
 	{
-		Bureaucrat Luca("Luca", 150);
-		a = Luca;
+		b.inc_grade(1);
 	}
-	catch(const std::exception& e)
+	catch (std::exception &e)
 	{
-		std::cerr << e.what() << std::endl;
-	}
-	try
-	{
-		Bureaucrat Francesco("Francesco", 1);
-		b = Francesco;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << e.what() << '\n';
 	}
 	try
 	{
-		Bureaucrat Antonio("Antonio", -80);
-		c = Antonio;
+		std::cout << b;
+		Bureaucrat	c(Bureaucrat("Stefano", 155));
 	}
-	catch(const std::exception& e)
+	catch (std::exception &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << e.what() << '\n';
 	}
 	try
 	{
-		Bureaucrat Federico("Federico", 180);
-		d = Federico;
+		Bureaucrat	c = b;
+		std::cout << c;
 	}
-	catch(const std::exception& e)
+	catch (std::exception &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << e.what() << '\n';
 	}
-
-	std::cout << std::endl;
-
-	std::cout << a;
-	std::cout << b;
-	std::cout << c;
-	std::cout << d;
-	for (int i = 0; i < 150; i++)
-		a.inc_grade();
-	for (int i = 0; i < 150; i++)
-		b.dec_grade();
 	
-	std::cout << a;
-	std::cout << b;
-	std::cout << std::endl;
-
-	return 0;
+	return (0);
 }

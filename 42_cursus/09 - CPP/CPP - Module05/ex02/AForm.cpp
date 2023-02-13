@@ -1,4 +1,4 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
 std::ostream &operator<<(std::ostream &os, const Form &rhs)
 {
