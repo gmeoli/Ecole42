@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+# include <fstream>
+# include <cstdlib>
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;

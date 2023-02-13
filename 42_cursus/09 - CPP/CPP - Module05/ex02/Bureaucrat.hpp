@@ -21,15 +21,16 @@ class Bureaucrat
 		int			getGrade() const;
 		void		inc_grade(int amount);
 		void		dec_grade(int amount);
-		void		signForm(Form &f);
+		void		signForm(AForm &f);
+		void		executeForm(AForm &f);
 
 		struct	GradeTooHighException : public std::exception {
 			public:
-				virtual const char *what(void) const _NOEXCEPT;
+				virtual const char *what() const _NOEXCEPT;
 		};
 
 		struct	GradeTooLowException : public std::exception {
 			public:
-				virtual const char *what(void) const _NOEXCEPT;
+				virtual const char *what() const _NOEXCEPT;
 		};
 };
