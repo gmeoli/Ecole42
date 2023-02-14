@@ -8,9 +8,9 @@ std::string const ShrubberyCreationForm::_trees[3] =
     "   /  |  \\\n"
     "  /   |   \\\n"
     " /____|____\\\n"
-    "    /     \\ \n"
-    "   /       \\\n"
-    "  /_________\\\n"
+    "  /     \\ \n"
+    " /       \\\n"
+    "/_________\\\n"
 };
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 147, 137), _target("no target")
@@ -51,8 +51,6 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	if (executor.getGrade() > this->getMinGradeToExecute())
 		throw AForm::GradeTooLowException();
-	if (executor.getGrade() < this->getMinGradeToExecute())
-		throw AForm::GradeTooHighException();
 	if (!this->getStatus())
 		throw AForm::NotSignedYet();
 
@@ -65,6 +63,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 		output << ShrubberyCreationForm::_trees[i];
 	}
 	output.close();
+	std::cout << executor.getName() << " has executed " << this->getName() << std::endl;
 }
 
 const char *ShrubberyCreationForm::OpenFileError::what() const _NOEXCEPT

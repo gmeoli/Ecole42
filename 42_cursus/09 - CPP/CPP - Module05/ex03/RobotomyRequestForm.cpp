@@ -38,12 +38,10 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	int random = rand() % 2;
 
-	if (!this-getStatus())
+	if (!this->getStatus())
 		throw AForm::NotSignedYet();
 	if (executor.getGrade() > this->getMinGradeToExecute())
 		throw AForm::GradeTooLowException();
-	if (executor.getGrade() < this->getMinGradeToExecute())
-		throw AForm::GradeTooHighException();
 	std::cout << "Beeepbeepbzbzbzztzb... robotizing in progress.. ZBZ" << std::endl;
 	if (random)
 		std::cout << this->_target << " has been robotized successfully!" << std::endl;

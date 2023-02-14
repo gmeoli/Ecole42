@@ -3,6 +3,8 @@
 #include <iostream>
 #include "AForm.hpp"
 
+class AForm;
+
 class Bureaucrat
 {
 	friend	std::ostream &operator<<(std::ostream &os, const Bureaucrat &rhs);
