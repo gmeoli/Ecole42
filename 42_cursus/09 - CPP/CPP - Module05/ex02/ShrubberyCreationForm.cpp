@@ -59,7 +59,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	std::string const filename = this->_target + "_shrubbery";
 	std::ofstream output;
 	output.open(filename.c_str(), std::ios_base::out);
-	if (!output.isopen() || output.bad())
+	if (!output.is_open() || output.bad())
 		throw ShrubberyCreationForm::OpenFileError();
 	for (int i = 0; i < 3; i++) {
 		output << ShrubberyCreationForm::_trees[i];

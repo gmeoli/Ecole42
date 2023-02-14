@@ -21,4 +21,4 @@ class ShrubberyCreationForm : public AForm
 			public:
 				virtual const char *what() const _NOEXCEPT;
 		};
-}
+};

@@ -1,6 +1,7 @@
 #include "Bureaucrat.hpp"
 
 int main () {
+
 	Bureaucrat	b("Carlo", 1);
 
 	try

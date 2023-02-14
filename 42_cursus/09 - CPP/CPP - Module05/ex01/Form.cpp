@@ -2,7 +2,7 @@
 
 std::ostream &operator<<(std::ostream &os, const Form &rhs)
 {
-	return (os << "FORM'S INFORMATIONS:" \
+	return (os << std::endl << "FORM'S INFORMATIONS:" << std::endl \
 			<< "Name: " << rhs.getName() << std::endl \
 			<< "Status: " << rhs.getStatus() << std::endl \
 			<< "Grade to sign: " << rhs.getMinGradeToSign() << std::endl \
