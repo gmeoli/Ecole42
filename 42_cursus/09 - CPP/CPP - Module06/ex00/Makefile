@@ -1,4 +1,4 @@
-NAME 	=	a.out
+NAME 	=	convert
 CC		=	c++
 FLAGS	=	-Wall -Werror -Wextra -std=c++98
 SRCS	=	main.cpp
