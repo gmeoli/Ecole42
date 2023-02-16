@@ -1,7 +1,8 @@
 NAME 	=	a.out
 CC		=	c++
 FLAGS	=	-Wall -Werror -Wextra -std=c++98
-SRCS	=	main.cpp
+SRCS	=	main.cpp \
+			Data.cpp
 OBJS	=	${SRCS:.cpp=.o}
 
 all	:	$(NAME)
