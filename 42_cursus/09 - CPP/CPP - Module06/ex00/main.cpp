@@ -13,7 +13,7 @@ static bool isNumber(const std::string &s) {
 }
 
 static bool checkSpecial(std::string s[5], std::string input) {
-	for(int i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 		if (!input.compare(s[i]))
 			return true;
 	return false;
