@@ -1,71 +1,21 @@
-#include <iostream>
-#include <cstdlib>
-#include <cstring>
-#include <iomanip>
+#include "whatever.hpp"
 
-static bool isNumber(const std::string &s) {
-  try {
-    std::stoi(s);
-    return true;
-  } catch (const std::invalid_argument&) {
-    return false;
-  }
-}
+int main( void ) {
+	int a = 2;
+	int b = 3;
 
-static bool checkSpecial(std::string s[5], std::string input) {
-	for (int i = 0; i < 5; i++)
-		if (!input.compare(s[i]))
-			return true;
-	return false;
-}
+	::swap( a, b );
+	std::cout << "a = " << a << ", b = " << b << std::endl;
+	std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
+	std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
 
-static void convert(std::string s) {
-	int			n;
-	float		f;
-	double		d;
-	char		c;
+	std::string c = "chaine1";
+	std::string d = "chaine2";
 
-	try {
-		n = std::stoi(s);
-		f = std::stof(s);
-		d = std::stod(s);
-	}
-	catch (const std::invalid_argument&) {
-		n = static_cast<int>(s[0]);
-		f = static_cast<float>(n);
-		d = static_cast<double>(n);
-	}
-	c = static_cast<char>(n);
-	c = n;
-	if (c >= 32 && c != 127)
-		std::cout << "char: '" << c << "'" << std::endl;
-	else
-		std::cout << "char: Non displayable" << std::endl;
-	std::cout << "int: " << n << "\nfloat: " << std::fixed << std::setprecision(1) << f << "f\ndouble: " << d << std::endl;
-}
-
-int main(int ac, char **av) {
-	if (ac != 2) {
-		std::cerr << "Error\nInsert ./convert [char or number]" << std::endl;
-		return 1;
-	}
-
-	std::string	s = av[1];
-	std::string type[5] = { "-inff", "+inff", "-inf", "+inf", "nan"};
-	if (checkSpecial(type, s))
-	{
-		std::cout << "char: impossible\nint: impossible" << std::endl;
-		if (!s.compare(type[0]) || !s.compare(type[1]))
-			std::cout << "float: nanf\ndouble: nan" << std::endl;
-		else
-			std::cout << "float: " << s << "\ndouble: " << s << std::endl;
-	}
-	else if (!isNumber(s) && s.length() != 1) {
-		std::cerr << "Error\nInput is not a char/number" << std::endl;
-		return 1;
-	}
-	else
-		convert(s);
+	::swap(c, d);
+	std::cout << "c = " << c << ", d = " << d << std::endl;
+	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
+	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
 
 	return 0;
 }
