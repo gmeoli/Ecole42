@@ -62,7 +62,7 @@ template <typename T>
 Array<T>::~Array()
 {
 	if (this->_n)
-		delete this->_array;
+		delete[] this->_array;
 }
 
 template <typename T>
