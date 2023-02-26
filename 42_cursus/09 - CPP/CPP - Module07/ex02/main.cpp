@@ -1,7 +1,7 @@
 #include "Array.hpp"
 
 int main() {
-	int	i;
+	int 			i;
 	Array<int>		tab(5);
 	Array<char>		tab_char(3);
 	Array<char>		tab_char2(3);
