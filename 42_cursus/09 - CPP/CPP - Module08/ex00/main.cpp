@@ -1,56 +1,34 @@
 #include "easyfind.hpp"
 
-int	main()
-{
-	{
-		std::cout << "Code with LIST" << std::endl;
-		std::list<int>	arr;
+#define CONTAINER_SIZE 100
+#define TO_FIND 42
 
-		arr.push_back(2);
-		arr.push_back(13);
-		arr.push_back(17);
-		arr.push_back(23);
-		arr.push_back(5);
-		arr.push_back(26);
-		arr.push_back(94);
-		arr.push_back(-23);
+static int	rand_int( int rand_lim ) {
+	return ( std::pow(-1, rand() % 2) * ( rand() % ( rand_lim + 1 ) ) );
+}
 
-		try
-		{
-			std::cout << *(::easyfind(arr, 5)) << std::endl;
-			std::cout << *(::easyfind(arr, 26)) << std::endl;
-			std::cout << *(::easyfind(arr, -1)) << std::endl;
-		}
-		catch (std::runtime_error& e)
-		{
-			std::cerr << "Error: " << e.what() << std::endl;
-		}
+int main() {
+	std::vector<int>			v(CONTAINER_SIZE);
+	std::vector<int>::iterator	start = v.begin();
+	std::vector<int>::iterator	end = v.end();
+
+	srand(time(NULL));
+
+	s_elRandom<int>	randomer = s_elRandom<int>(42, &rand_int);
+	std::for_each(start, end, randomer);
+	
+	std::cout << "Vector is:" << std::endl;
+	std::for_each(start, end, print_el<int>);
+	std::cout << std::endl;
+	
+	std::cout << "Finding number: " << TO_FIND << std::endl;
+	try {
+		std::cout << easyfind(v, TO_FIND) << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << std::endl;
 	}
 	std::cout << std::endl;
-	{
-		std::cout << "Code with VECTOR" << std::endl;
-		std::vector<int>	arr2;
-
-		arr2.push_back(2);
-		arr2.push_back(13);
-		arr2.push_back(17);
-		arr2.push_back(23);
-		arr2.push_back(5);
-		arr2.push_back(26);
-		arr2.push_back(94);
-		arr2.push_back(-23);
-
-		try
-		{
-			std::cout << *(::easyfind(arr2, 5)) << std::endl;
-			std::cout << *(::easyfind(arr2, 94)) << std::endl;
-			std::cout << *(::easyfind(arr2, -1)) << std::endl;
-		}
-		catch (std::runtime_error& e)
-		{
-			std::cerr << "Error: " << e.what() << std::endl;
-		}
-	}
-
+	
 	return 0;
 }
