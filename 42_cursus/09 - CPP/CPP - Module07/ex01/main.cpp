@@ -13,7 +13,7 @@ void printToUpper(const char &c)
 
 void printPlusTwo(const size_t &n)
 {
-	std::cout << n + 2 << std::endl;
+	std::cout << "My value is: " << n + 2 << std::endl;
 }
 
 int	main()
@@ -27,15 +27,21 @@ int	main()
 		"cinque", "quattro", "tre", "due", "uno"
 	};
 	
-	std::cout << "First attempt started" << std::endl;
-	iter(arr, 7, printInfo);
-	std::cout << "First attempt finished\n" << std::endl;
-	std::cout << "Second attempt started" << std::endl;
-	iter(arr, 7, printPlusTwo);
-	std::cout << "Second attempt finished\n" << std::endl;
-	std::cout << "Third attempt started" << std::endl;
-	iter("ciao, sto facendo un test per vedere cose...\n", 46, printToUpper);
-	std::cout << "Third attempt finished" << std::endl;
+	{
+		std::cout << "First attempt started" << std::endl;
+		iter(arr, 7, printInfo);
+		std::cout << "First attempt finished\n" << std::endl;
+	}
+	{
+		std::cout << "Second attempt started" << std::endl;
+		iter(arr, 7, printPlusTwo);
+		std::cout << "Second attempt finished\n" << std::endl;
+	}
+	{
+		std::cout << "Third attempt started" << std::endl;
+		iter("ciao, sto facendo un test per vedere cose...\n", 46, printToUpper);
+		std::cout << "Third attempt finished" << std::endl;
+	}
 
 	return (0);
 }

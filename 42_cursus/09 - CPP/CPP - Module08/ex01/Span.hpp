@@ -1,11 +1,14 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 class Span
 {
 	private:
-		unsigned int	_N;
+		std::vector<int>	_vector;
+		unsigned int		_max_N;
 	public:
 		Span();
 		Span(Span const &cpy);
@@ -13,7 +16,8 @@ class Span
 		~Span();
 
 		Span(unsigned int max);
-		void	addNumber(int add);
-		int		shortestSpan();
-		int		longestSpan();
+		void				addNumber(int add);
+		int					shortestSpan();
+		int					longestSpan();
+		std::vector<int>	&getVector();
 };
