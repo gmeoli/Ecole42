@@ -7,8 +7,9 @@ int main() {
 	try {
 		for (unsigned int i = 0; i < 20; i++)
 			sp.addNumber(std::rand()); // Riempie il vettore con numeri casuali
-		for (size_t num : sp.getVector()) // Ciclo "for-range" che stampa i numeri del vettore
-        	std::cout << num << " ";
+		std::vector<int> &vec = sp.getVector();
+		for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it) // Ciclo che stampa i numeri del vettore
+			std::cout << *it << " ";
 		std::cout << std::endl;
 		// sp.addNumber(6);
 		// sp.addNumber(6);
