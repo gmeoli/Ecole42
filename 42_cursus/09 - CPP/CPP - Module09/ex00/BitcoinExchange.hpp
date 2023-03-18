@@ -7,12 +7,12 @@
 class BitcoinExchange
 {
 	private:
-		std::vector<BitcoinPrice> m_data;
+		std::vector<std::pair<std::string, float> >	_input_file;
+		std::vector<std::pair<std::string, float> >	_database;
+		typedef std::vector<std::pair<std::string, float> >::iterator	iterator;
 
-		struct BitcoinPrice {
-			std::string	date;
-			double		value;
-		}
+		std::vector<std::pair<std::string, float> >	getVectorInput() const;
+		std::vector<std::pair<std::string, float> >	getVectorDatabase() const;
 	public:
 		BitcoinExchange();
 		BitcoinExchange(BitcoinExchange const &copy);
@@ -20,6 +20,6 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		BitcoinExchange(const std::string &filename);
-		double	getValue(const std::string &date) const;
-    	void	setValue(const std::string &date, double value);
+		void	setVectorInput();
+		void	setVectorDatabase();
 };
