@@ -2,13 +2,15 @@
 
 int main(int ac, char **av) {
 
-	if (ac != 2) {
-		std::cerr << "Error: could not open file." << std::endl;
+	(void)ac;
+	try {
+		BitcoinExchange	btc("data.csv");
+		btc.exchange(av[1]);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
 		return 1;
 	}
 
-	BitcoinExchange bit(av[1]);
-		
-	// BitcoinExchange BE(av[1]);
 	return 0;
 }
