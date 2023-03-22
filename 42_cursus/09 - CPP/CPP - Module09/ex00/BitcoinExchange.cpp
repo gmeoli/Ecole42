@@ -32,8 +32,7 @@ BitcoinExchange::BitcoinExchange(char const *file_input)
 		throw std::runtime_error("Error: could not open file.");
 
 	std::getline(db, line);
-	if (line.length() != 18)
-	if(line.compare(0, 4, "date") || line.compare(5, 13, "exchange_rate")) {
+	if (line.length() != 18 || line.compare(0, 4, "date") || line.compare(5, 13, "exchange_rate")) {
 		db.close();
 		throw std::runtime_error("Error: bad file format.");
 	}
@@ -88,19 +87,20 @@ int	BitcoinExchange::checkFormat(std::string const &date, std::string const &val
 	return 0;
 }
 
-void BitcoinExchange::exchange(char const *file_input) {
+void	BitcoinExchange::exchange(char const *file_input) {
 	std::ifstream	db(file_input);
 	std::string		line;
-	std::string		date;
-	std::string		value;
 	int				ret;
 	double			n;
 
 	if (!db.is_open())
 		throw std::runtime_error("Error: could not open file.");
-	while (std::getline(db,line)) {
+
+	while (std::getline(db, line)) {
 		if (line == "date | value")
-			continue ;
+			continue;
+
+		std::string	date, value;
 		if (line.length() < 13 || line.substr(10, 3) != " | ")
 			ret = 1;
 		else {
@@ -109,8 +109,8 @@ void BitcoinExchange::exchange(char const *file_input) {
 			std::replace(value.begin(), value.end(), ',', '.');
 			ret = checkFormat(date, value);
 		}
-	}
-	switch (ret) {
+
+		switch (ret) {
 		case 1:
 			std::cout << "Error: bad input => " << line << std::endl;
 			break;
@@ -128,5 +128,7 @@ void BitcoinExchange::exchange(char const *file_input) {
 				it--;
 			std::istringstream(value) >> n;
 			std::cout << date << " => " << n << " = " << n * it->second << std::endl;
+			break;
+		}
 	}
 }
