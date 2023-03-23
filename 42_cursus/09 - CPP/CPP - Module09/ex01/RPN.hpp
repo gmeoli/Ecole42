@@ -8,7 +8,7 @@ class RPN {
 	private:
 		std::stack<int>	_stack;
 		std::string		_expression;
-		bool			_hasError;
+		bool			evaluate(const std::string &expression);
 	public:
 		RPN();
 		RPN(RPN const &copy);
@@ -16,5 +16,4 @@ class RPN {
 		~RPN();
 		
 		RPN(const std::string &expression);
-		bool evaluate(int &result);
 };

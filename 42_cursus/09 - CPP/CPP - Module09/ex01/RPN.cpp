@@ -5,21 +5,34 @@ RPN::RPN() {
 }
 
 RPN::RPN(RPN const &copy) {
+	this->_expression = copy._expression;
+	this->_stack = copy._stack;
 	*this = copy;
 }
 
 RPN &RPN::operator=(RPN const &rhs) {
 	if (this == &rhs)
 		return *this;
+	this->_expression = rhs._expression;
+	this->_stack = rhs._stack;
 	return *this;
 }
 
-RPN::~RPN() {}
-
-RPN::RPN(const std::string &expression) {
-
+RPN::~RPN() {
+	if (!_stack.empty())
+		while (_stack.empty())
+			_stack.pop();
 }
 
-bool RPN::evaluate(int &result) {
-	return true;
+RPN::RPN(const std::string &expression) {
+	if (!evaluate(expression))
+		throw std::runtime_error("Error");
+}
+
+bool RPN::evaluate(const std::string &expression) {
+	if (expression.find_first_not_of("0123456789-+/* "))
+		return true;
+	for (int i = 0; expression[i]; i++) {
+	}
+	return false;
 }

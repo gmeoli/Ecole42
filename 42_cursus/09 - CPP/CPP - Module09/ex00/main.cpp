@@ -4,6 +4,8 @@ int main(int ac, char **av) {
 
 	(void)ac;
 	try {
+		if (av[2])
+			throw std::runtime_error("Error\nArgument not valid");
 		BitcoinExchange	btc("data.csv");
 		btc.exchange(av[1]);
 	}
