@@ -96,6 +96,12 @@ void	BitcoinExchange::exchange(char const *file_input) {
 	if (!db.is_open())
 		throw std::runtime_error("Error: could not open file.");
 
+	std::getline(db,line);
+	if (line.length() != 12) {
+		db.close();
+		throw std::runtime_error("Error: bad file format.");
+		}
+
 	while (std::getline(db, line)) {
 		if (line == "date | value")
 			continue;
