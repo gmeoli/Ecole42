@@ -7,13 +7,12 @@
 class RPN {
 	private:
 		std::stack<int>	_stack;
-		std::string		_expression;
-		bool			evaluate(const std::string &expression);
+		bool			risolve_expression(const std::string &str);
 	public:
 		RPN();
 		RPN(RPN const &copy);
 		RPN &operator=(RPN const &rhs);
 		~RPN();
 		
-		RPN(const std::string &expression);
+		RPN(const std::string &str);
 };

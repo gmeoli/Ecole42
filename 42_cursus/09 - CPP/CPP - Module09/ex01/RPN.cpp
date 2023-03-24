@@ -5,7 +5,6 @@ RPN::RPN() {
 }
 
 RPN::RPN(RPN const &copy) {
-	this->_expression = copy._expression;
 	this->_stack = copy._stack;
 	*this = copy;
 }
@@ -13,7 +12,6 @@ RPN::RPN(RPN const &copy) {
 RPN &RPN::operator=(RPN const &rhs) {
 	if (this == &rhs)
 		return *this;
-	this->_expression = rhs._expression;
 	this->_stack = rhs._stack;
 	return *this;
 }
@@ -24,15 +22,25 @@ RPN::~RPN() {
 			_stack.pop();
 }
 
-RPN::RPN(const std::string &expression) {
-	if (!evaluate(expression))
+RPN::RPN(const std::string &str) {
+	if (!risolve_expression(str))
 		throw std::runtime_error("Error");
 }
 
-bool RPN::evaluate(const std::string &expression) {
-	if (expression.find_first_not_of("0123456789-+/* "))
-		return true;
-	for (int i = 0; expression[i]; i++) {
+bool RPN::risolve_expression(const std::string &str) {
+	int i = 0;
+	int sum;
+	int next;
+	while(str[i] == ' ')
+		i++;
+	sum = str[i++] - '0';
+	while(str[i] == ' ')
+		i++;
+	next = str[i++] - '0';
+	str.find_first_of("*-+/");
+	while (i < str.length()) {
+		i++;
 	}
+	std::cout << sum << next << std::endl;
 	return false;
 }
