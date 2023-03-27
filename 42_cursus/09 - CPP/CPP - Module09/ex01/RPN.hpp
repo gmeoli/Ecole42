@@ -8,7 +8,6 @@
 class RPN {
 	private:
 		std::stack<int>		_stack;
-		std::queue<char>	_queue;
 	public:
 		RPN();
 		RPN(RPN const &copy);
@@ -16,4 +15,5 @@ class RPN {
 		~RPN();
 		
 		RPN(const std::string &str);
+		bool	isOperator(char c);
 };
