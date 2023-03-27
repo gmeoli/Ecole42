@@ -41,10 +41,13 @@ RPN::RPN(const std::string &str) {
 	// std::cout << sum * next << std::endl; // debugger print
 	// if (risolve_expression(str))
 	// 	throw std::runtime_error("Error");
-	int i = 0;
+	int i = 0, p;
 
 	while (i < str.size()) {
-		_stack.push(str[i]);
+		p = atoi(str[i]);
+		_stack.push(p);
 		i++;
 	}
+	while (!_stack.empty())
+		std::cout << _stack.top() << std::endl;
 }
