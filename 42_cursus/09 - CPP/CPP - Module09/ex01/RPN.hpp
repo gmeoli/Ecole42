@@ -3,11 +3,12 @@
 #include <iostream>
 #include <stack>
 #include <string>
+#include <queue>
 
 class RPN {
 	private:
-		std::stack<int>	_stack;
-		bool			risolve_expression(const std::string &str);
+		std::stack<int>		_stack;
+		std::queue<char>	_queue;
 	public:
 		RPN();
 		RPN(RPN const &copy);
