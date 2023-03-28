@@ -23,9 +23,8 @@ BitcoinExchange::~BitcoinExchange() {
 BitcoinExchange::BitcoinExchange(char const *file_input)
 {
 	std::ifstream	db(file_input);
-	std::string		line;
+	std::string		line, date;
 	char			sep;
-	std::string		date;
 	double			value;
 	
 	if (!db.is_open())
