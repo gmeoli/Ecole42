@@ -47,7 +47,7 @@ BitcoinExchange::BitcoinExchange(char const *file_input)
 			db.close();
 			throw std::runtime_error("Error: bad file format.");
 		}
-		_exchangeRate.push_back(std::make_pair(date, value));
+		_exchangeRate.insert(std::pair<std::string, double>(date, value));
 	}
 	db.close();
 }
@@ -120,7 +120,7 @@ void	BitcoinExchange::exchange(char const *file_input) {
 			std::cout << "Error: too large a number." << std::endl;
 			break;
 		default:
-			std::vector<std::pair<std::string, double> >::iterator it = _exchangeRate.begin();
+			std::map<std::string, double>::iterator it = _exchangeRate.begin();
 			while (it != _exchangeRate.end() && it->first < date)
 				it++;
 			if (it == _exchangeRate.begin() || (it != _exchangeRate.end() && it->first != date))

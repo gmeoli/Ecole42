@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <vector>
+#include <map>
 #include <sstream>
 #include <cstdlib>
 #include <algorithm>
@@ -11,9 +11,9 @@
 class BitcoinExchange
 {
 	private:
-		std::vector<std::pair<std::string, double> >	_exchangeRate;
+		std::map<std::string, double>	_exchangeRate;
 	public:
-		typedef std::vector<std::pair<std::string, double> >::iterator	iterator;
+		typedef std::map<std::string, double>::iterator	iterator;
 
 		BitcoinExchange();
 		BitcoinExchange(BitcoinExchange const &copy);
