@@ -123,7 +123,7 @@ void	BitcoinExchange::exchange(char const *file_input) {
 			std::map<std::string, double>::iterator it = _exchangeRate.begin();
 			while (it != _exchangeRate.end() && it->first < date)
 				it++;
-			if (it == _exchangeRate.begin() || (it != _exchangeRate.end() && it->first != date))
+			if (it != _exchangeRate.begin() && (it != _exchangeRate.end() && it->first != date))
 				it--;
 			std::istringstream(value) >> n;
 			std::cout << date << " => " << n << " = " << n * it->second << std::endl;

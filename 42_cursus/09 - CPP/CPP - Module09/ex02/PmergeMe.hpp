@@ -18,6 +18,7 @@ class PmergeMe {
 		std::vector<int>	_parseArgsVector(int argc, char **argv);
 		std::deque<int>		_parseArgsDeque(int argc, char **argv);
 		void				_verifyDuplicates();
+		void				_printBeforeAndAfter();
 	public:
 		PmergeMe();
 		PmergeMe(PmergeMe const &copy);
