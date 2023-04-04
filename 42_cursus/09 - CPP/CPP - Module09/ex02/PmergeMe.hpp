@@ -3,6 +3,7 @@
 #include <iostream>
 #include <deque>
 #include <vector>
+#include <iomanip>
 #include <set>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -15,10 +16,17 @@ class PmergeMe {
 		bool				_sorted;
 		double				_deltaTimeVector;
 		double				_deltaTimeDeque;
-		std::vector<int>	_parseArgsVector(int argc, char **argv);
-		std::deque<int>		_parseArgsDeque(int argc, char **argv);
+		std::vector<int>	_parseArgsVector(int ac, char **av);
+		std::deque<int>		_parseArgsDeque(int ac, char **av);
 		void				_verifyDuplicates();
 		void				_printBeforeAndAfter();
+		void				_printTime(std::string container) const;
+
+		template <typename T>
+		void				_mergeInsertSort(T &container);
+
+		double				_getTime();
+		double				_deltaTime(long long time);
 	public:
 		PmergeMe();
 		PmergeMe(PmergeMe const &copy);
@@ -26,5 +34,8 @@ class PmergeMe {
 		~PmergeMe();
 
 		PmergeMe(int ac, char **av);
-		bool	checkString(std::string const str);
+		double	getVectorDeltaTime() const;
+		double	getDequeDeltaTime() const;
 };
+
+std::ostream	&operator<<(std::ostream &o, const PmergeMe &i);
