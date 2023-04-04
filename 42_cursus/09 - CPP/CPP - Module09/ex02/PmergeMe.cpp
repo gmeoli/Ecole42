@@ -58,8 +58,8 @@ std::vector<int> PmergeMe::_parseArgsVector(int ac, char **av) {
 	for (size_t i = 1; i < ac; i++) {
 		std::string str = av[i];
 		int value = atoi(str.c_str());
-		if (value <= 0)
-			std::runtime_error("Error\nInvalid argument");
+		if (str.find_first_not_of("0123456789 ") != std::string::npos)
+			throw std::runtime_error("Error\nInvalid argument");
 		args.push_back(value);
 	}
 	return args;
@@ -71,8 +71,8 @@ std::deque<int> PmergeMe::_parseArgsDeque(int ac, char **av) {
 	for (size_t i = 1; i < ac; i++) {
 		std::string str = av[i];
 		int value = atoi(str.c_str());
-		if (value <= 0)
-			std::runtime_error("Error\nInvalid argument");
+		if (str.find_first_not_of("0123456789 ") != std::string::npos)
+			throw std::runtime_error("Error\nInvalid argument");
 		args.push_back(value);
 	}
 	return args;
