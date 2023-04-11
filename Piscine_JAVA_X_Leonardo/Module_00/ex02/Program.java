@@ -9,7 +9,6 @@ public class Program {
 		return 0;
 	}
 	public static void main(String[] args) {
-		
 		int temp = 0, iter = 0, sqrt = 0, j = 1, input2 = 0;
 
 		while (true) {
@@ -45,7 +44,6 @@ public class Program {
 					break;
 				j++;
 			}
-
 			iter += isPrime(sqrt, input2);
 		}
 	}
