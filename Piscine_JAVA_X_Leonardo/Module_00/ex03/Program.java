@@ -14,7 +14,9 @@ public class Program {
 				nWeek = scanner.nextInt();
 				if (nWeek == i) {
 					System.out.println("cewa");
+				}
 			}
 		}
+		scanner.close();
 	}
 }
