@@ -1,0 +1,4 @@
+1. Container NGINX:
+	Certificato SSL/TLS: Sono entrambi necessari per abilitare la comunicazione sicura e crittografata
+	tra il server NGINX e i client tramite HTTPS. Il certificato viene utilizzato per autenticare il server e
+	stabilire una connessione sicura, mentre la chiave privata viene utilizzata per decriptare i dati crittografati.
