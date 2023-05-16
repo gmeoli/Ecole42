@@ -1,16 +1,17 @@
 all:
-	./srcs/requirements/tools/configure.sh
-	sudo docker-compose -f srcs/docker-compose.yaml up --build
+	@docker compose -f ./scrs/docker-compose.yml up -d --build
 
-stop:
-	sudo docker-compose -f srcs/docker-compose.yaml down
+down:
+	@docker compose -f ./scrs/docker-compose.yml down
+
+re:
+	@docker compose -f scrs/docker-compose.yml up -d --build
 
 clean:
-	sudo docker-compose -f srcs/docker-compose.yaml down --volumes
+	@docker stop $$(docker ps -qa);\
+	docker rm $$(docker ps -qa);\
+	docker rmi -f $$(docker images -qa);\
+	docker volume rm $$(docker volume ls -q);\
+	docker network rm $$(docker network ls -q);\
 
-prune: clean
-	sudo docker system prune -a
-
-re: prune all
-
-.PHONY: all stop clean prune re
+.PHONY: all re down clean
