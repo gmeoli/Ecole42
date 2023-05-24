@@ -1,24 +1,30 @@
-# Utilizza l'immagine base Debian Buster
-FROM debian:buster
+# Utilizza l'immagine Alpine Linux
+FROM	alpine:3.13
 
-# Aggiorna il sistema operativo e installa i pacchetti necessari per NGINX e OPENSSL
-RUN apt-get update && apt-get install -y nginx && apt-get update && apt-get install -y openssl
+# Aggiorna il sistema operativo e installa i pacchetti necessari per NGINX e OPENSSL senza memorizzare la cache dei pacchetti
+RUN	apk update && apk upgrade && apk add --no-cache nginx openssl
 
-# Crea la cartella e genera i certificati SSL/TLS e la chiave privata
-RUN mkdir /etc/nginx/ssl
-RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
-       -out /etc/nginx/ssl/gmeoli.crt \
-       -keyout /etc/nginx/ssl/gmeoli.key \
-       -subj "/C=IT/ST=Italy/L=Rome/O=42 School/OU=gmeoli/CN=gmeoli/"
+# Crea la cartella all'interno del container per archiviare i certificati SSL
+RUN	mkdir -p /etc/nginx/ssl 
 
-# Copia il file di configurazione NGINX all'interno del container
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+# Crea la cartella all'interno del container per archiviare i file temporanei di NGINX
+RUN	mkdir -p /run/nginx
 
-# Esponi la porta 443 per comunicare con Internet
-EXPOSE 443
+# Crea la cartella all'interno del container che sarà la directory radice dei file del sito web servito da NGINX
+RUN	mkdir -p /var/www/html
 
-# Archiviare i file di log, i file temporanei e altre informazioni necessarie per il funzionamento del server
-RUN mkdir -p /run/nginx
+# Copia il file di configurazione principale per NGINX
+COPY	conf/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Start NGINX
-CMD ["nginx", "-g", "daemon off;"]
+# Utilizzando Openssl, viene generato un certificato SSL autofirmato con paramentri predefiniti, specificando dove salvarlo ed il nome utente intestatario
+RUN	openssl req -newkey rsa:2048 \
+	-x509 \
+	-sha256 \
+	-days 365 \
+	-nodes \
+	-keyout /etc/nginx/ssl/gmeoli.key \
+	-out /etc/nginx/ssl/gmeoli.pem \
+	-subj "/C=IT/ST=Italy/L=Rome/O=42Rome/OU=$gmeoli/CN=$gmeoli"
+
+# Imposta l'entrypoint, quindi il comando predefinito quando si avvia il container
+ENTRYPOINT	[ "nginx", "-g", "daemon off;" ]

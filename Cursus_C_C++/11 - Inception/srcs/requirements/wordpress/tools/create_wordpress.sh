@@ -8,7 +8,7 @@ else
 
 ####### MANDATORY #########
 
-	#Scarica WordPress e i file di configurazione
+	# Scarica WordPress e i file di configurazione
 	wget http://wordpress.org/latest.tar.gz
 	tar xfz latest.tar.gz
 	mv wordpress/* .
