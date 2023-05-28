@@ -2,3 +2,10 @@
 	Certificato SSL/TLS: Sono entrambi necessari per abilitare la comunicazione sicura e crittografata
 	tra il server NGINX e i client tramite HTTPS. Il certificato viene utilizzato per autenticare il server e
 	stabilire una connessione sicura, mentre la chiave privata viene utilizzata per decriptare i dati crittografati.
+
+2. WordPress e PHP-FPM:
+	In termini semplici, WordPress è una piattaforma di gestione dei contenuti (CMS) che richiede un server web e un interprete PHP per funzionare correttamente. Il server web gestisce le richieste dei client (i visitatori del sito) e invia le pagine web richieste, mentre PHP è il linguaggio di scripting utilizzato da WordPress per elaborare le richieste e generare le pagine dinamiche.
+
+	PHP-FPM è una delle opzioni per eseguire i processi PHP in modo efficiente e veloce. Tuttavia, non è l'unico modo per far funzionare WordPress. Puoi anche utilizzare altre configurazioni, ad esempio l'integrazione di PHP direttamente nel server web (come Apache o Nginx) o l'utilizzo di altri gestori di processi PHP.
+
+3.
