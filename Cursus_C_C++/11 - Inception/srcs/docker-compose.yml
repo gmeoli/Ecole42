@@ -1,0 +1,68 @@
+version: "3.5"
+
+volumes:
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      device: /Users/gmeoli/Desktop/inception/wordpress
+      o: bind
+      type: none
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      device: /Users/gmeoli/Desktop/inception/mariadb
+      o: bind
+      type: none
+
+networks:
+  inception:
+    name: inception
+
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx/.
+    image: nginx:42
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress 
+    
+    volumes:
+      - wordpress:/var/www/html
+    
+    networks:
+      - inception
+    
+    restart: always
+    
+    env_file:
+      - .env
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
+    env_file:
+      - .env
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/.
+    image: wordpress:42
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    restart: always
+    env_file:
+      - .env
