@@ -1,5 +1,5 @@
 # Utilizza l'immagine Alpine Linux
-FROM	alpine:3.13
+FROM	alpine:latest
 
 # Aggiorna il sistema operativo e installa i pacchetti necessari per WordPress e PHP-FPM senza memorizzare la cache dei pacchetti
 RUN	apk update && apk upgrade && apk add --no-cache \
@@ -68,7 +68,7 @@ COPY	conf/www.conf		/etc/php7/php-fpm.d/www.conf
 RUN	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
 # Imposta la directory di lavoro all'interno del container in cui saranno posizionati i file del servizio WordPress
-WORKDIR	/var/www/html/wordpress
+WORKDIR	/var/www/html
 
 # Copia il file configure.sh nella directory temporanea /tmp all'interno del container
 COPY	tools/configure.sh /tmp/configure.sh

@@ -1,5 +1,5 @@
 # Utilizza l'immagine di Alpine Linux
-FROM	alpine:3.13
+FROM	alpine:latest
 
 # Aggiorna il sistema, installa le dipendenze necessarie senza memorizzare la cache dei pacchetti
 RUN	apk update && apk upgrade && apk add --no-cache \

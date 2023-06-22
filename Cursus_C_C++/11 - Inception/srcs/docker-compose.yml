@@ -1,4 +1,54 @@
-version: "3.5"
+version: "3"
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx/
+    image: nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - mariadb 
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    restart: always
+    env_file:
+      - .env
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb/
+    image: mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
+    env_file:
+      - .env
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/
+    image: wordpress
+    ports:
+      - "9000:9000"
+    depends_on:
+      - nginx
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    restart: always
+    env_file:
+      - .env
+
+networks:
+  inception:
 
 volumes:
   wordpress:
@@ -15,54 +65,3 @@ volumes:
       device: /Users/gmeoli/Desktop/inception/mariadb
       o: bind
       type: none
-
-networks:
-  inception:
-    name: inception
-
-
-services:
-  nginx:
-    container_name: nginx
-    build: ./requirements/nginx/.
-    image: nginx:42
-    ports:
-      - "443:443"
-    depends_on:
-      - wordpress 
-    
-    volumes:
-      - wordpress:/var/www/html
-    
-    networks:
-      - inception
-    
-    restart: always
-    
-    env_file:
-      - .env
-
-  mariadb:
-    container_name: mariadb
-    build: ./requirements/mariadb
-    volumes:
-      - mariadb:/var/lib/mysql
-    networks:
-      - inception
-    restart: always
-    env_file:
-      - .env
-
-  wordpress:
-    container_name: wordpress
-    build: ./requirements/wordpress/.
-    image: wordpress:42
-    depends_on:
-      - mariadb
-    volumes:
-      - wordpress:/var/www/html
-    networks:
-      - inception
-    restart: always
-    env_file:
-      - .env

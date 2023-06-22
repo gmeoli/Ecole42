@@ -1,14 +1,14 @@
 #!/bin/sh
 
 # Aspetta MariaDB, quindi si connette con le credenziali
-# Questo loop assicura che lo script non proceda oltre finché MariaDB non è pronto per accettare le connessioni
+# Questo loop assicura che lo script non proceda finché MariaDB non è pronto per accettare le connessioni
 while ! mariadb -h$DB_HOSTNAME -u$DB_ADMIN -p$DB_ADMIN_PWD $DB_NAME &>/dev/null;
 do
     sleep 3
 done
 
-# Se il file esiste (WordPress non installato), non vengono eseguite le istruzioni
-if [ ! -f "/var/www/html/wordpress/index.php" ];
+# Installazione WordPress
+if [ ! -f "/var/www/html/index.php" ];
 then
 	# Scarica la versione più recente di WordPress nella directory corrente
 	wp core download --allow-root
