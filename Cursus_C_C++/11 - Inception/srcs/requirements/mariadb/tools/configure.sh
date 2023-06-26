@@ -1,46 +1,41 @@
-# !/bin/sh
+#!/bin/sh
 
-# Verifica se la directory esiste. Se non esiste, la crea e imposta i permessi di proprietà per l'utente mysql
-if [ ! -d "/run/mysqld" ];
-then
-    mkdir -p /run/mysqld
-    chown -R mysql:mysql /run/mysqld
+# Inizializza il database MariaDB
+mysql_install_db
+
+# Avvia il servizio MariaDB
+/etc/init.d/mysql start
+
+# Controlla se già esiste il database $DB_NAME, altrimenti esegue lo script
+if [ -d "/var/lib/mysql/$DB_NAME" ]
+then 
+	echo "Database already exists!"
+else
+
+# Imposta la password di root, rimuove gli utenti anonimi, disabilita il login remoto per l'utente root e ricarica i privilegi per rendere effettive le modifiche
+mysql_secure_installation << _EOF_
+
+Y
+root1234
+root1234
+Y
+n
+Y
+Y
+_EOF_
+
+# Crea un utente di root con privilegi di accesso da qualsiasi host, specifica la pswd e garantisce che le modifiche ai privilegi abbiano effetto immediato
+echo "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$DB_ROOT_PASSWORD'; FLUSH PRIVILEGES;" | mysql -uroot
+
+# Crea il database specificato, concede tutti i privilegi all'utente specificato con la relativa pswd e garantisce che le modifiche ai privilegi abbiano effetto immediato
+echo "CREATE DATABASE IF NOT EXISTS $DB_NAME; GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD'; FLUSH PRIVILEGES;" | mysql -u root
+
+# Importa il file wordpress.sql nel database spcificato. Il file contiene le istruzioni SQL per creare le tabelle e i dati necessari per il funzionamento di WordPress
+mysql -uroot -p$DB_ROOT_PASSWORD $DB_DATABASE < /usr/local/bin/wordpress.sql
+
 fi
 
-# Verifica se la directory esiste
-if [ ! -d "/var/lib/mysql/$DB_NAME" ];
-then
-    chown -R mysql:mysql /var/lib/mysql
-	# Inizializza database
-    mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm > /dev/null
+echo "WordPress starting..."
+/etc/init.d/mysql stop
 
-    tmp=`mktemp`
-    if [ ! -f "$tmp" ];
-    then
-        return 1
-    fi
-    cat << EOF > $tmp
-
-USE mysql;
-FLUSH PRIVILEGES;
-DELETE FROM mysql.user WHERE User='';
-DROP DATABASE test;
-DELETE FROM mysql.db WHERE Db='test';
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '0.0.0.0', '::1');
-ALTER USER 'root'@'localhost' IDENTIFIED BY '12345';
-CREATE DATABASE $DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;
-CREATE USER '$DB_ADMIN'@'%' IDENTIFIED BY '$DB_ADMIN_PWD';
-GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_ADMIN'@'%';
-FLUSH PRIVILEGES;
-EOF
-
-    /usr/bin/mysqld --user=mysql --bootstrap < $tmp
-    rm -f $tmp 
-fi
-
-sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
-sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
-
-echo "MariaDB starting..."
-
-exec /usr/bin/mysqld --user=mysql --console
+exec "$@"

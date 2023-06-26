@@ -1,5 +1,5 @@
-# Utilizza l'immagine Alpine Linux
-FROM	alpine:latest
+# Utilizza la penultima immagine di Alpine Linux
+FROM	alpine:3.17
 
 # Aggiorna il sistema operativo e installa i pacchetti necessari per NGINX e OPENSSL senza memorizzare la cache dei pacchetti
 RUN	apk update && apk upgrade && apk add --no-cache nginx openssl
