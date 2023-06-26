@@ -15,7 +15,7 @@ RUN	mkdir -p /var/run/mysqld \
 # Copia i file di configurazione ed imposta i permessi di esecuzione
 COPY	./tools/configure.sh /usr/local/bin/
 COPY	./conf/wordpress.sql /usr/local/bin/
-RUN	chmod +x /usr/local/bin/mariadb.sh
+RUN	chmod +x /usr/local/bin/configure.sh
 RUN	chmod +x /usr/local/bin/wordpress.sql
 
 # Apre la porta per consentire la connessione
