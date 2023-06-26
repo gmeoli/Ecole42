@@ -49,6 +49,7 @@ services:
 
 networks:
   inception:
+    - inception
 
 volumes:
   wordpress:
