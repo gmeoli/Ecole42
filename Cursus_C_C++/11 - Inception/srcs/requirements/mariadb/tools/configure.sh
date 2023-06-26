@@ -35,7 +35,6 @@ FLUSH PRIVILEGES;
 EOF
 
     /usr/bin/mysqld --user=mysql --bootstrap < $tmp
-	echo "MariaDB first launch 2: OK"
     rm -f $tmp 
 fi
 

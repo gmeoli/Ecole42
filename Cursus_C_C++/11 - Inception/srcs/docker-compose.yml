@@ -8,7 +8,7 @@ services:
     ports:
       - "443:443"
     depends_on:
-      - mariadb 
+      - mariadb
     volumes:
       - wordpress:/var/www/html
     networks:
@@ -55,13 +55,13 @@ volumes:
     name: wordpress
     driver: local
     driver_opts:
-      device: /Users/gmeoli/Desktop/inception/wordpress
+      device: /home/gmeoli/data
       o: bind
       type: none
   mariadb:
     name: mariadb
     driver: local
     driver_opts:
-      device: /Users/gmeoli/Desktop/inception/mariadb
+      device: /home/gmeoli/data
       o: bind
       type: none
