@@ -1,5 +1,5 @@
 all:
-	@docker compose -f ./srcs/docker-compose.yml up -d
+	@docker compose -f ./srcs/docker-compose.yml up -d --build
 
 start:
 	@docker compose -f ./srcs/docker-compose.yml start
@@ -12,6 +12,6 @@ clean:
 	docker rm $$(docker ps -qa);\
 	docker rmi -f $$(docker images -qa);\
 	docker volume rm $$(docker volumes ls -q);\
-	docker network rm $$(docker network ls -q) 2>/dev/null;\
+	docker network rm $$(docker network ls -q);\
 
 .PHONY: all start stop clean
