@@ -1,57 +1,60 @@
 version: '3'
 
 services:
-  nginx:
-    container_name: nginx
-    build: ./requirements/nginx
-    depends_on:
-      - wordpress
-    ports:
-      - 443:443
-    volumes:
-      - wordpress:/var/www/html
-    restart: always
-    networks:
-      - inception
-
   mariadb:
+    build: requirements/mariadb
+    image: mariadb
     container_name: mariadb
-    build: ./requirements/mariadb
     volumes:
-      - mariadb:/var/lib/mysql
+      - db-data:/var/lib/mysql
+    restart: always
     networks:
       - inception
-    restart: always
     env_file:
       - .env
 
   wordpress:
+    build: requirements/wordpress/
+    image: wordpress
+    volumes:
+      - wordpress-data:/var/www/html
     container_name: wordpress
     depends_on:
       - mariadb
-    build: ./requirements/wordpress
+    networks:
+      - inception
     restart: always
     env_file:
       - .env
+
+  nginx:
+    build: requirements/nginx/
+    image: nginx
+    container_name: nginx
     volumes:
-      - wordpress:/var/www/html
+      - wordpress-data:/var/www/html
+    ports:
+      - 443:443
+    depends_on:
+      - wordpress
     networks:
       - inception
-
-volumes:
-  mariadb:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/gmeoli/data/mysql
-      o: bind
-  wordpress:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/gmeoli/data/wordpress
-      o: bind
-
+    restart: always
+    env_file:
+      - .env
+      
 networks:
   inception:
     driver: bridge
+
+volumes:
+  db-data:
+    driver_opts:
+      type: none
+      device: ${HOME}/data/db-data
+      o: bind
+  wordpress-data:
+    driver_opts:
+      type: none
+      device: ${HOME}/data/wordpress-data
+      o: bind
