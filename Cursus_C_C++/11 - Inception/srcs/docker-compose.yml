@@ -9,7 +9,7 @@ services:
     ports:
       - 443:443
     volumes:
-      - wordpress_data:/var/www/html
+      - wordpress:/var/www/html
     restart: always
     networks:
       - inception
@@ -18,7 +18,7 @@ services:
     container_name: mariadb
     build: ./requirements/mariadb
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     networks:
       - inception
     restart: always
@@ -34,7 +34,7 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress_data:/var/www/html
+      - wordpress:/var/www/html
     networks:
       - inception
 
