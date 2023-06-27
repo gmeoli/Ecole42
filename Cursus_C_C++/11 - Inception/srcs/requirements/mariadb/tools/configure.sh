@@ -1,41 +1,30 @@
 #!/bin/sh
 
-# Inizializza il database MariaDB
-mysql_install_db
+# Inizializzazione e creazione database
+if [ ! -f "/var/lib/mysql/ib_buffer_pool" ];
+then
+	/etc/init.d/mariadb setup
+	rc-service mariadb start
+	
+	# Crea un nuovo database se non esiste
+	echo "DROP DATABASE test;" | mysql -u root
+	echo "CREATE DATABASE IF NOT EXISTS ${DB_NAME};" | mysql -u root
 
-# Avvia il servizio MariaDB
-/etc/init.d/mysql start
-
-# Controlla se già esiste il database $DB_NAME, altrimenti esegue lo script
-if [ -d "/var/lib/mysql/$DB_NAME" ]
-then 
-	echo "Database already exists!"
-else
-
-# Imposta la password di root, rimuove gli utenti anonimi, disabilita il login remoto per l'utente root e ricarica i privilegi per rendere effettive le modifiche
-mysql_secure_installation << _EOF_
-
-Y
-root1234
-root1234
-Y
-n
-Y
-Y
-_EOF_
-
-# Crea un utente di root con privilegi di accesso da qualsiasi host, specifica la pswd e garantisce che le modifiche ai privilegi abbiano effetto immediato
-echo "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$DB_ROOT_PASSWORD'; FLUSH PRIVILEGES;" | mysql -uroot
-
-# Crea il database specificato, concede tutti i privilegi all'utente specificato con la relativa pswd e garantisce che le modifiche ai privilegi abbiano effetto immediato
-echo "CREATE DATABASE IF NOT EXISTS $DB_NAME; GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD'; FLUSH PRIVILEGES;" | mysql -u root
-
-# Importa il file wordpress.sql nel database spcificato. Il file contiene le istruzioni SQL per creare le tabelle e i dati necessari per il funzionamento di WordPress
-mysql -uroot -p$DB_ROOT_PASSWORD $DB_DATABASE < /usr/local/bin/wordpress.sql
-
+	# Crea un nuovo utente e assegna tutti i privilegi
+	echo "CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASSWORD}';" | mysql -u root
+	echo "GRANT ALL PRIVILEGES ON wordpress.* TO '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASSWORD}';" | mysql -u root
+	echo "FLUSH PRIVILEGES;" | mysql -u ${DB_ROOT_PASSWORD}
+	
+	# Cambia la pswd per l'utente root
+    mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASS}';"
 fi
 
-echo "WordPress starting..."
-/etc/init.d/mysql stop
+# Comment skip-networking
+sed -i 's/skip-networking/# skip-networking/g' /etc/my.cnf.d/mariadb-server.cnf
+sed -i 's/#bind-address=0.0.0.0/bind-address=0.0.0.0/g' /etc/my.cnf.d/mariadb-server.cnf
 
-exec "$@"
+rc-service mariadb restart
+rc-service mariadb stop
+
+# Esegue queto comando "/usr/bin/mariadbd" per lasciarlo in foreground
+/usr/bin/mariadbd --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib/mariadb/plugin --user=mysql --pid-file=/run/mysqld/mariadb.pid
