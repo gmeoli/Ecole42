@@ -1,60 +1,139 @@
-version: '3'
-
-services:
-  mariadb:
-    build: requirements/mariadb
-    image: mariadb
-    container_name: mariadb
-    volumes:
-      - db-data:/var/lib/mysql
-    restart: always
-    networks:
-      - inception
-    env_file:
-      - .env
-
-  wordpress:
-    build: requirements/wordpress/
-    image: wordpress
-    volumes:
-      - wordpress-data:/var/www/html
-    container_name: wordpress
-    depends_on:
-      - mariadb
-    networks:
-      - inception
-    restart: always
-    env_file:
-      - .env
-
-  nginx:
-    build: requirements/nginx/
-    image: nginx
-    container_name: nginx
-    volumes:
-      - wordpress-data:/var/www/html
-    ports:
-      - 443:443
-    depends_on:
-      - wordpress
-    networks:
-      - inception
-    restart: always
-    env_file:
-      - .env
-      
-networks:
-  inception:
-    driver: bridge
+version: '3.5'
 
 volumes:
-  db-data:
-    driver_opts:
-      type: none
-      device: ${HOME}/data/db-data
-      o: bind
-  wordpress-data:
-    driver_opts:
-      type: none
-      device: ${HOME}/data/wordpress-data
-      o: bind
+        wordpress:
+                name: wordpress
+                driver: local
+                driver_opts:
+                        device: /home/gmeoliata/wordpress
+                        o: bind
+                        type: none
+        mariadb:
+                name: mariadb
+                driver: local
+                driver_opts:
+                        device: /home/gmeoli/data/mariadb
+                        o: bind
+                        type: none
+networks:
+  inception:
+    name: inception
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    image: nginx:42
+    depends_on:
+      - adminer
+      - redis
+    ports:
+      - 443:443
+    volumes:
+      - wordpress:/var/www/html
+    restart: always
+    networks:
+      - inception
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    image: wordpress:42
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:/var/www/html
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: always
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb/.
+    image: mariadb:42
+    volumes:
+      - mariadb:/var/lib/mysql
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: always
+
+  # bonus
+
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer/.
+    image: adminer:42
+    depends_on:
+      - mariadb
+    ports:
+      - "600:80"
+    expose:
+      - "9000"
+    networks:
+      - inception
+    restart: always
+
+  ftp:
+    container_name: ftp
+    build: ./requirements/bonus/ftp/.
+    image: ftp:42
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/home/gmeoli/ftp/files
+    env_file:
+      - .env
+    ports:
+      - "21:21"
+      - "20:20"
+      - "21100-21110:21100-21110"
+    networks:
+      - inception
+    restart: always
+
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis/.
+    image: redis:42
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - wordpress
+    ports:
+     - '6379:6379'
+    networks:
+      - inception
+    restart: always
+
+  cadvisor:
+    container_name: cadvisor
+    build: ./requirements/bonus/cadvisor/.
+    image: cadvisor:42
+    ports:
+      - "8080:8080"
+    networks:
+      - inception
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro 
+      - /sys:/sys:ro 
+      - /var/lib/docker/:/var/lib/docker:ro
+    restart: always
+
+  site:
+    container_name: site
+    build: ./requirements/bonus/site/.
+    image: site:42
+    ports:
+      - "1111:1111"
+    networks:
+      - inception
+    depends_on:
+      - nginx
+    restart: always

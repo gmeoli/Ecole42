@@ -1,20 +1,24 @@
-# Utilizza la penultima immagine di Alpine Linux
-FROM	alpine:3.17
+FROM	debian:buster
 
-# Aggiorna il sistema operativo e installa i pacchetti necessari per NGINX e OPENSSL senza memorizzare la cache dei pacchetti
-RUN	apk update && apk upgrade && apk add --no-cache nginx openssl
+#install all the program
+RUN		apt-get update
+RUN		apt-get install -y nginx \
+                openssl
 
-# Crea la cartella all'interno del container che sarà la directory radice dei file del sito web servito da NGINX
-RUN	mkdir -p /var/www/html
+# nginx SSL
+RUN mkdir /etc/nginx/ssl
+RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
+       -out /etc/nginx/ssl/mruizzo.crt \
+       -keyout /etc/nginx/ssl/mruizzo.key \
+       -subj "/C=IT/ST=Rome/L=Rome/O=42 School/OU=mruizzo/CN=mruizzo/"
 
-# Copia il file di configurazione principale per NGINX
-COPY	conf/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./conf/nginx.conf /etc/nginx/conf.d
 
-COPY	tools/configure.sh /
-RUN	chmod +x /configure.sh
+# nginx config
+RUN mkdir -p /run/nginx
 
-# Apre l'unica porta consentita
+#the only port allowed
 EXPOSE	443
 
-# Imposta l'entrypoint, quindi avvia il file di configurazione
-ENTRYPOINT	["sh", "./tools/configure.sh"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
