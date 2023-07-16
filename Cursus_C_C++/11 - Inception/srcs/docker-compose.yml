@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: '3.5'
 
 volumes:
@@ -15,13 +16,48 @@ volumes:
                   device: /home/gmeoli/data/mariadb
                   o: bind
                   type: none
+=======
+version: "3"
+
+volumes:
+  wordpress-volume:
+    name: wordpress-volume
+    driver: local
+    driver_opts:
+      device: /home/gmeoli/Desktop/inception/wordpress
+      o: bind
+      type: volume
+  mariadb-volume:
+    name: mariadb-volume
+    driver: local
+    driver_opts:
+      device: /home/gmeoli/Desktop/inception/mariadb
+      o: bind
+      type: volume
+
+>>>>>>> inception
 networks:
   inception:
     name: inception
 
 services:
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    build: ./requirements/mariadb
+    volumes:
+      - mariadb-volume:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - inception
+    restart: always
+    env_file:
+      - .env
+
   nginx:
     container_name: nginx
+<<<<<<< HEAD
     build: ./requirements/nginx
     image: nginx:42
     depends_on:
@@ -46,6 +82,31 @@ services:
       - wordpress:/var/www/html
     env_file:
       - .env
+=======
+    build: ./requirements/nginx/.
+    image: nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress 
+    volumes:
+      - wordpress-volume:/var/www/html
+    networks:
+      - inception
+    restart: always
+    env_file:
+      - .env
+
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/.
+    image: wordpress
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress-volume:/var/www/html
+>>>>>>> inception
     networks:
       - inception
     restart: always

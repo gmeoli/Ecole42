@@ -6,6 +6,7 @@ RUN apt-get install -y mariadb-server \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
+<<<<<<< HEAD
 # Allow to run the daemon of mysql
 # Purge and re-create /var/lib/mysql with appropriate ownership
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
@@ -31,3 +32,12 @@ ENTRYPOINT [ "/usr/local/bin/mariadb.sh" ]
 
 #Command to launch mariadb and enable the database to listen globally - also can be put on mysqldump.cnf file
 CMD ["mysqld", "--bind-address=0.0.0.0"]
+=======
+# EXPOSE	3306
+
+# Copia il file di configurazione per MariaDB nella directory corrente
+COPY	tools/configure.sh /tmp/configure.sh
+
+# Imposta l'entrypoint, quindi il comando predefinito quando si avvia il container
+ENTRYPOINT	[ "sh", "/tmp/configure.sh" ]
+>>>>>>> inception
