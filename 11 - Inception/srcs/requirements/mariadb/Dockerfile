@@ -1,43 +1,12 @@
-FROM debian:buster
+# Utilizza l'immagine di Alpine Linux
+FROM alpine:3.13
 
-RUN apt-get update
-RUN apt-get install -y mariadb-server \
-    mariadb-client \
-    vim \
-    && rm -rf /var/lib/apt/lists/*
-
-<<<<<<< HEAD
-# Allow to run the daemon of mysql
-# Purge and re-create /var/lib/mysql with appropriate ownership
-# ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
-RUN mkdir -p /var/run/mysqld \
-&& chown -R mysql:mysql /var/run/mysqld \
-&& chmod 777 /var/run/mysqld
-
-EXPOSE 3306
-
-#COPY		./conf/mysqld.conf ~/my.cnf
-#COPY		./conf/mysqld.conf /etc/mysql/my.cnf
-#COPY		./conf/mysqld.conf /etc/my.cnf
-
-
-#Copy of the .sh and .sql in the /bin of the container to be able to run the program
-# Give the right to execute + launch the .sh
-COPY ./tools/mariadb.sh /usr/local/bin/
-COPY ./conf/wordpress.sql /usr/local/bin/
-RUN chmod +x /usr/local/bin/mariadb.sh
-RUN chmod +x /usr/local/bin/wordpress.sql
-
-ENTRYPOINT [ "/usr/local/bin/mariadb.sh" ]
-
-#Command to launch mariadb and enable the database to listen globally - also can be put on mysqldump.cnf file
-CMD ["mysqld", "--bind-address=0.0.0.0"]
-=======
-# EXPOSE	3306
+# Aggiorna il sistema, installa le dipendenze necessarie senza memorizzare la cache dei pacchetti
+RUN apk update && apk upgrade && \
+    apk add --no-cache mariadb mariadb-client
 
 # Copia il file di configurazione per MariaDB nella directory corrente
-COPY	tools/configure.sh /tmp/configure.sh
+COPY tools/configure.sh /tmp/configure.sh
 
 # Imposta l'entrypoint, quindi il comando predefinito quando si avvia il container
-ENTRYPOINT	[ "sh", "/tmp/configure.sh" ]
->>>>>>> inception
+ENTRYPOINT [ "sh", "/tmp/configure.sh" ]
