@@ -22,7 +22,7 @@ SRC = so_long.c \
 		
 FLAGS = -Wall -Werror -Wextra 
 LIBFT = libft/libft.a
-MLX_FLAG = -l mlx -framework openGL -framework AppKit
+MLX_FLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 $(NAME):
 			make re  -C libft
